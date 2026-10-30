@@ -105,7 +105,9 @@ body[data-theme=light] figcaption{color:#2B3750}
 .nav{flex:none;display:flex;align-items:center;gap:8px;padding:4px 12px 8px;min-height:48px}
 .nav .bk{width:44px;height:44px;display:grid;place-items:center;border-radius:12px}
 .nav h2{font:600 17px var(--fd);flex:1}
-.nav.big{padding:4px 24px 8px}.nav.big h2{font-size:34px;letter-spacing:-.03em;line-height:1.1;font-weight:700}
+.nav.big{padding:4px 24px 8px}.nav.big .shbtn{background:var(--ib);color:var(--t);flex:none}
+.opts{display:flex;flex-direction:column;gap:8px}.opt{height:50px;border-radius:var(--br);background:var(--ib);color:var(--t);font-weight:600;font-size:16px;text-align:left;padding:0 16px;border:2px solid transparent}.opt.on{border-color:var(--a)}
+.nav.big h2{font-size:34px;letter-spacing:-.03em;line-height:1.1;font-weight:700}
 .body{flex:1;overflow:hidden;padding:4px 20px 20px;display:flex;flex-direction:column;gap:12px}
 .phone.scroll .body{overflow-y:auto}
 .ic{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round;flex:none}
@@ -234,14 +236,15 @@ const PW=()=>x('La contraseña se guarda cifrada; la llave queda en tu router y 
 const I=(n,c='')=>`<svg class="ic ${c}" aria-hidden="true"><use href="#i-${n}"/></svg>`;
 const orro=(s,n=48,b=1)=>`<img class="orro${b?' bob':''}" src="${A['orro-'+s]||''}" width="${n}" height="${n}" alt="">`;
 const sb=()=>`<div class="sb"><span>9:41</span><span>5G ▮▮▮</span></div>`;
-const nav=(t,big)=>big?`<div class="nav big"><h2>${t}</h2></div>`:`<div class="nav"><button class="bk" aria-label="${x('Atrás','Back')}">${I('back')}</button><h2>${t}</h2></div>`;
+const nav=(t,big,right='')=>big?`<div class="nav big"><h2>${t}</h2>${right}</div>`:`<div class="nav"><button class="bk" aria-label="${x('Atrás','Back')}">${I('back')}</button><h2>${t}</h2></div>`;
 const tabs=()=>`<div class="tabs"><div>${I('home')}${x('Inicio','Home')}</div><div class="on">${I('wifi')}${x('Servicios','Services')}</div><div>${I('bubble')}${x('Mi gestor','My manager')}</div><div>${I('doc')}${x('Facturas','Bills')}</div><div>${I('person')}${x('Perfil','Profile')}</div></div>`;
 const sw=(on,l)=>`<button class="sw ${on?'on':''}" role="switch" aria-checked="${on}" aria-label="${l}" onclick="this.classList.toggle('on');this.setAttribute('aria-checked',this.classList.contains('on'))"></button>`;
 const phone=(cap,inner,cls='',id='')=>`<figure${id?` id="${id}"`:''}><div class="phone ${cls}">${inner}</div><figcaption>${cap}</figcaption></figure>`;
-const screen=(t,body,o={})=>sb()+nav(t,o.big)+`<div class="body">${body}</div>`+(o.tabs?tabs():'');
+const screen=(t,body,o={})=>sb()+nav(t,o.big,o.right)+`<div class="body">${body}</div>`+(o.tabs?tabs():'');
 const gate=t=>`<div class="gate" role="note">${I('alert','s')}${t}</div>`;
 const gateLS=()=>gate(x('Pendiente: Legal + Security','Pending: Legal + Security'));
 const gateL=()=>gate(x('Pendiente: Legal','Pending: Legal'));
+const goPause=()=>{const e=document.getElementById('f-pause');e&&e.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth',block:'center'})};
 const goState=()=>{const e=document.getElementById('f-state');e&&e.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth',block:'center'})};
 const notify=`this.textContent=this.dataset.on;this.disabled=true`;
 const remind=()=>`<button class="btn sm" data-on="${x('Te avisaré','I will let you know')}" onclick="${notify}">${I('bell','s')}${x('Avísame','Remind me')}</button>`;
@@ -273,7 +276,9 @@ const status=(off,away)=>{const reason=off||away?x('Último dato','Last data'):x
  <button class="scorebtn" onclick="goState()" aria-label="Wi-Fi 6 ${x('de','out of')} 10. ${reason}. ${x('Ver estado de la red','See network status')}">${orro(off?'error':away?'sleepy':'content',44)}<span class="sp"><span class="hud">Wi-Fi</span><span class="score sm2 ${off||away?'m':''}"><b>6</b><span>${x('de 10','out of 10')}</span></span><span class="cap m" style="display:block">${reason}</span></span><span class="ch" aria-hidden="true">›</span></button></div>`;};
 const opRow=()=>`<button class="card row" style="text-align:left;min-height:56px;width:100%"><div class="tile">${I('doc')}</div><div class="sp"><div>${x('Tu operador','Your operator')}</div><div class="cap m">${x('Ventanilla única · cuenta y averías','One window · account and faults')}</div></div><span class="m">›</span></button>`;
 
-const acts=dis=>`<div class="acts">${[['pause',x('Pausa','Pause')],['power',x('Reiniciar','Restart')],['signal',x('Canal','Channel')],['wifi','Wi-Fi']].map(a=>`<button class="act" ${dis?'disabled aria-disabled="true"':''}>${I(a[0])}${a[1]}</button>`).join('')}</div>${dis?`<div class="cap m" style="text-align:center;margin-top:-4px">${x('Disponible cuando estés en casa','Available when you are home')}</div>`:''}`;
+const acts=dis=>`<div class="acts">${[['pause',x('Pausa','Pause')],['power',x('Reiniciar','Restart')],['signal',x('Canal','Channel')],['wifi','Wi-Fi']].map(a=>`<button class="act" ${dis?'disabled aria-disabled="true"':''}${a[0]==='pause'&&!dis?' onclick="goPause()"':''}>${I(a[0])}${a[1]}</button>`).join('')}</div>${dis?`<div class="cap m" style="text-align:center;margin-top:-4px">${x('Disponible cuando estés en casa','Available when you are home')}</div>`:''}`;
+const shieldBtn=()=>`<button class="bk shbtn" aria-label="${x('Seguridad','Security')}">${I('shield')}</button>`;
+const pauseSheet=()=>`<div class="scrim"></div><div class="sheet" role="dialog" aria-label="${x('Pausar internet','Pause internet')}"><div class="grab"></div><h2 style="font:700 20px var(--fd)">${x('Pausar internet','Pause internet')}</h2><p class="t2 sm">${x('Pausa todo el internet de la red de casa, no solo un dispositivo. Se reanuda solo al terminar.','Pauses internet for the whole home network, not just one device. It resumes by itself when the time is up.')}</p><div class="opts" role="radiogroup" aria-label="${x('Duración','Duration')}">${[[x('30 min','30 min'),1],['1 h',0],[x('Hasta mañana','Until tomorrow'),0]].map(o=>`<button class="opt ${o[1]?'on':''}" role="radio" aria-checked="${!!o[1]}" onclick="[...this.parentNode.children].forEach(c=>{c.classList.remove('on');c.setAttribute('aria-checked','false')});this.classList.add('on');this.setAttribute('aria-checked','true')">${o[0]}</button>`).join('')}</div><button class="btn">${I('pause')}${x('Pausar','Pause')}</button><button class="btn g">${x('Cancelar','Cancel')}</button></div>`;
 const main=mode=>{
  const off=mode==='off',ld=mode==='load',away=mode==='away';
  let list;
@@ -282,7 +287,7 @@ const main=mode=>{
  const sk=`<div class="card"><div class="row">${orro('thinking',48)}<div class="sp"><b>${x('Estoy mirando tu red…','I am looking at your network…')}</b><span class="sk" style="width:70%;height:10px;margin-top:8px"></span></div></div></div>`;
  return screen(x('Mi red','My network'),
   (ld?sk:status(off,away))+(away?awayBn():hdr(off))+(away?'':'')+acts(away)+((off||away)?'':sum(ld))+(ld?'':opRow())+
-  `<div class="row"><span class="hud sp">${x('Dispositivos','Devices')}${ld?'':x(' · 9 en línea',' · 9 online')}</span></div><div class="card" style="padding:4px 16px;flex:1;overflow:hidden"><div class="list">${list}</div></div>`,{big:1,tabs:1});
+  `<div class="row"><span class="hud sp">${x('Dispositivos','Devices')}${ld?'':x(' · 9 en línea',' · 9 online')}</span></div><div class="card" style="padding:4px 16px;flex:1;overflow:hidden"><div class="list">${list}</div></div>`,{big:1,tabs:1,right:shieldBtn()})+(mode==='pause'?pauseSheet():'');
 };
 
 const detail=()=>screen(x('Dispositivo','Device'),`
@@ -330,7 +335,7 @@ const stScreen=v=>{
  ${v==='away'?`<div class="card"><div class="row"><div class="sp"><b>${x('Estaré listo cuando vuelvas a casa','I will be ready when you are back home')}</b><div class="cap m">${x('Te aviso o lo hago solo al volver.','I will remind you, or do it myself, when you are back.')}</div></div>${remind()}</div></div>`:''}
  <div class="card" style="padding:4px 16px">${factorRows(v==='done')}</div>
  <div style="flex:1"></div>
- <button class="btn" ${dis?'disabled aria-disabled="true"':''}>${I(v==='busy'?'retry':'bolt')}${v==='busy'?x('Mejorando…','Improving…'):x('Mejorar','Improve')}</button>
+ ${v==='done'?`<button class="btn">${I('check')}${x('Listo','Done')}</button>`:`<button class="btn" ${dis?'disabled aria-disabled="true"':''}>${I(v==='busy'?'retry':'bolt')}${v==='busy'?x('Mejorando…','Improving…'):x('Mejorar','Improve')}</button>`}
  <div class="cap m" style="text-align:center">${v==='away'?x('Disponible cuando estés en casa','Available when you are home'):v==='done'?x('Orro revisa los canales cada noche','Orro checks the channels every night'):v==='busy'?x('No apagues el router.','Do not switch the router off.'):x('Un toque: OrroFi cambia el canal y el ancho en tu router.','One tap: OrroFi changes the channel and width on your router.')}</div>`);};
 
 /* Ocupación de canales por vecinos (ficticio): [canal, redes vecinas] */
@@ -362,7 +367,7 @@ const hist=()=>`${sb()}${nav(x('Historial y reinicio','History and restart'))}<d
   <div class="w"><div>${x('Wi-Fi inestable · 6 min','Unstable Wi-Fi · 6 min')}</div><div class="cap m">${x('Lun 14 dic, 19:40 · interferencias en 2,4 GHz','Mon 14 Dec, 19:40 · interference on 2.4 GHz')}</div><button class="lnk">${x('Ver detalles','See details')}</button></div>
   <div><div>${x('Router reiniciado','Router restarted')}</div><div class="cap m">${x('Dom 13 dic, 10:05 · desde la app','Sun 13 Dec, 10:05 · from the app')}</div></div>
  </div></div>
- <div class="card"><div class="row"><div class="tile">${I('power')}</div><div class="sp"><div>${x('Reiniciar router','Restart router')}</div><div class="cap m">${x('Tarda unos 2 minutos','Takes about 2 minutes')}</div></div></div></div>
+ <div class="card"><div class="row"><div class="tile">${I('power')}</div><div class="sp"><div>${x('Reiniciar router','Restart router')}</div><div class="cap m">${x('Tarda unos 2 minutos','Takes about 2 minutes')}</div></div></div><button class="btn" style="margin-top:14px">${I('power')}${x('Reiniciar','Restart router')}</button></div>
  </div><div class="scrim"></div>
  <div class="sheet" role="dialog" aria-label="${x('Confirmar reinicio','Confirm restart')}"><div class="grab"></div><h2 style="font:700 20px var(--fd)">${x('¿Reiniciar el router?','Restart the router?')}</h2><p class="t2 sm">${x('Te quedarás sin internet ni Wi-Fi unos 2 minutos. Las llamadas y las videollamadas se cortarán.','You will have no internet or Wi-Fi for about 2 minutes. Calls and video calls will drop.')}</p><button class="btn d">${I('power')}${x('Reiniciar ahora','Restart now')}</button><button class="btn g">${x('Cancelar','Cancel')}</button></div>`;
 
@@ -457,7 +462,7 @@ const opScr=done=>screen(x('Tu operador','Your operator'),gateL()+(done?`
 
 const buildSet=()=>[
  [x('0a · Conecta tu router','0a · Connect your router'),found()],[x('0b · Contraseña de la pegatina','0b · Sticker password'),pwScreen('')],[x('0c · Contraseña incorrecta','0c · Wrong password'),pwScreen('err')],[x('0d · Router conectado','0d · Router connected'),okScr()],[x('0e · Protege tu router','0e · Protect your router'),protectScr()],[x('0f · Router protegido','0f · Router protected'),protectOk()],
- [x('1 · Mi red','1 · My network'),main()],[x('1b · Cargando (esqueleto)','1b · Loading (skeleton)'),main('load')],[x('1c · Router sin conexión','1c · Router offline'),main('off')],[x('1d · Estás fuera de casa','1d · You are away from home'),main('away')],
+ [x('1 · Mi red','1 · My network'),main()],[x('1b · Cargando (esqueleto)','1b · Loading (skeleton)'),main('load')],[x('1c · Router sin conexión','1c · Router offline'),main('off')],[x('1d · Estás fuera de casa','1d · You are away from home'),main('away')],[x('1e · Pausa','1e · Pause'),main('pause'),'','f-pause'],
  [x('2 · Dispositivo','2 · Device'),detail()],[x('3 · Aviso en bloqueo','3 · Lock-screen alert'),lock(),'lock'],[x('3b · Es mío / Bloquear','3b · It is mine / Block'),react()],
  [x('4 · Estado de la red (6 de 10)','4 · Network status (6 out of 10)'),stScreen('idle'),'','f-state'],[x('4b · Mejorando…','4b · Improving…'),stScreen('busy')],[x('4c · Antes 6 → Ahora 9','4c · Before 6 → Now 9'),stScreen('done')],[x('4d · Mejorar fuera de casa','4d · Improve while away'),stScreen('away')],[x('5 · Canal y vecinos','5 · Channel and neighbours'),chans()],[x('6 · Seguridad','6 · Security'),sec(),'scroll'],
  [x('7 · Historial y reinicio','7 · History and restart'),hist()],[x('8 · Wi-Fi','8 · Wi-Fi'),wifi()],[x('9 · Red de invitados','9 · Guest network'),guest(),'ovx'],[x('10 · Wi-Fi OrroFi (opt-in, apagado)','10 · Wi-Fi OrroFi (opt-in, off)'),gho()],[x('12 · Tu operador (consentimiento)','12 · Your operator (consent)'),opScr(false)],[x('12b · Tu operador (tras firmar)','12b · Your operator (after signing)'),opScr(true)],[x('11 · Mapa de puntos','11 · Points map'),mapS()]];
