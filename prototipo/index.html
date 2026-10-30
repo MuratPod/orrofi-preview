@@ -1,0 +1,872 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>OrroFi · Mi red — prototipo clicable</title>
+<style>
+/* OrroFi design tokens v5.1 — generado de design-tokens.json. Dos temas: .v1/[data-theme=dark] y .v2/[data-theme=light]. */
+:root{--fd:Inter,-apple-system,system-ui,sans-serif;--fn:'JetBrains Mono',ui-monospace,monospace;--tr:-.03em;--sp-xs:4px;--sp-s:6px;--sp-m:8px;--sp-l:10px;--sp-xl:12px;--sp-xxl:16px;--sp-xxxl:20px;--sp-screen:24px;--touch-min:44px;--ease-fast:120ms ease;--icon-stroke:1.4;}
+.v1,[data-theme=dark]{
+  --bg:#050507;
+  --c:rgba(18,19,22,.86);
+  --c-solid:#121316;
+  --t:#EDEEF0;
+  --t2:#B9BCC4;
+  --m:#8A8E98;
+  --a:#FFA566;
+  --ao:#050507;
+  --ib:rgba(255,255,255,.05);
+  --sep:rgba(255,255,255,.07);
+  --sep2:#3A3D45;
+  --ln:rgba(255,165,102,.14);
+  --cb-color:rgba(255,165,102,.12);
+  --ok:#FFA566;
+  --okb:rgba(255,165,102,.1);
+  --w:#FFB13B;
+  --wb:rgba(255,177,59,.12);
+  --er:#FF6B6B;
+  --erb:rgba(255,107,107,.12);
+  --bub:rgba(255,255,255,.06);
+  --bu:#FFA566;
+  --buo:#050507;
+  --sg:rgba(255,255,255,.05);
+  --sgo:rgba(255,165,102,.14);
+  --gl:rgba(255,165,102,.06);
+  --gl2:rgba(255,165,102,.18);
+  --rt:rgba(255,255,255,.08);
+  --tinv:#050507;
+  --r:18px;
+  --br:14px;
+  --rs:14px;
+}
+.v2,[data-theme=light]{
+  --bg:#F4F5F2;
+  --c:#FFFFFF;
+  --c-solid:#FFFFFF;
+  --t:#0D0E10;
+  --t2:#3A3D42;
+  --m:#696C73;
+  --a:#B5500F;
+  --ao:#0D0E10;
+  --ib:#F0F1EC;
+  --sep:#E6E7E2;
+  --sep2:#BFC1BA;
+  --ln:#E1E2DC;
+  --cb-color:#E1E2DC;
+  --ok:#3F7A00;
+  --okb:#EEF8C8;
+  --w:#9A5A00;
+  --wb:#FFF0D6;
+  --er:#C0261D;
+  --erb:#FDE8E6;
+  --bub:#FFFFFF;
+  --bu:#0D0E10;
+  --buo:#FFFFFF;
+  --sg:#E9EAE4;
+  --sgo:#FFFFFF;
+  --gl:rgba(13,14,16,.05);
+  --gl2:rgba(13,14,16,.14);
+  --rt:#E6E7E1;
+  --tinv:#FFFFFF;
+  --r:12px;
+  --br:10px;
+  --rs:10px;
+}
+@media (prefers-color-scheme:dark){[data-theme=system]{color-scheme:dark}}
+
+/* Brandbook OrroFi v5: sustituye los acentos antiguos (sin amarillo ácido). Fuente: la del sistema. */
+:root{--fd:Nunito,-apple-system,system-ui,'Segoe UI',sans-serif}
+[data-theme=dark]{--bg:#13254A;--phbg:linear-gradient(135deg,#1C3A78 0%,#13254A 45%,#0A0E14 100%);--c:rgba(17,26,44,.92);--c-solid:#111A2C;--t:#F6F4EE;--t2:#CBD3E4;--m:#B1BBD0;--a:#FFA566;--ao:#0D1526;--ib:rgba(246,244,238,.07);--sep:rgba(246,244,238,.1);--sep2:#3C4D70;--ln:rgba(156,189,255,.2);--ok:#9CBDFF;--okb:rgba(156,189,255,.08);--w:#FFA566;--wb:rgba(255,165,102,.14);--er:#FF9A9F;--erb:rgba(180,35,44,.3);--sgo:rgba(255,165,102,.2);--rt:rgba(246,244,238,.12);--tinv:#0D1526;--r:18px;--br:14px}
+[data-theme=light]{--bg:#F6F4EE;--phbg:#F6F4EE;--c:#FFFFFF;--c-solid:#FFFFFF;--t:#0D1526;--t2:#2B3750;--m:#4F5B70;--a:#B5500F;--ao:#F6F4EE;--ib:#ECE9E0;--sep:#E4E0D5;--sep2:#BDB8AA;--ln:#E0DCCF;--ok:#2F5FB3;--okb:#E3EBF8;--w:#9A430C;--wb:#FBE8D8;--er:#B4232C;--erb:#FBE3E4;--sgo:#FFFFFF;--rt:#E4E0D5;--tinv:#F6F4EE;--r:14px;--br:12px}
+*{box-sizing:border-box;margin:0}
+body{font:400 15px/1.4 var(--fd);background:#0A0E14;color:#F6F4EE;padding:24px}
+body[data-theme=light]{background:#E6E2D6}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+.top{display:flex;gap:16px;align-items:center;flex-wrap:wrap;max-width:1700px;margin:0 auto 24px}
+.top h1{font:600 20px var(--fd);flex:1;min-width:240px;color:#F6F4EE}
+body[data-theme=light] .top h1,body[data-theme=light] .top p{color:#0D1526}
+.top p{font-size:13px;color:#CBD3E4;flex-basis:100%}
+body[data-theme=light] .top p{color:#2B3750}
+.wm{height:36px;width:auto;display:block}
+.wm.l{display:none}body[data-theme=light] .wm.d{display:none}body[data-theme=light] .wm.l{display:block}
+.tg{height:44px;padding:0 18px;border-radius:999px;background:#F6F4EE;color:#0D1526;font-weight:600}
+body[data-theme=light] .tg{background:#0D1526;color:#F6F4EE}
+.lg{display:flex;background:rgba(246,244,238,.12);border-radius:999px;padding:3px;gap:3px}
+body[data-theme=light] .lg{background:rgba(13,21,38,.1)}
+.lg button{height:38px;min-width:48px;padding:0 14px;border-radius:999px;font-weight:600;color:#F6F4EE}
+body[data-theme=light] .lg button{color:#0D1526}
+.lg button[aria-pressed=true]{background:#FFA566;color:#0D1526}
+body[data-theme=light] .lg button[aria-pressed=true]{background:#B5500F;color:#F6F4EE}
+.grid{display:flex;flex-wrap:wrap;gap:40px;justify-content:center;max-width:1700px;margin:0 auto}
+figure{display:flex;flex-direction:column;gap:14px;align-items:center}
+figcaption{font:400 12px 'JetBrains Mono',ui-monospace,monospace;letter-spacing:.08em;text-transform:uppercase;color:#CBD3E4}
+body[data-theme=light] figcaption{color:#2B3750}
+.phone{width:393px;height:852px;border-radius:52px;overflow:hidden;position:relative;flex:none;background:var(--bg);background:var(--phbg);color:var(--t);box-shadow:0 0 0 10px #111,0 0 0 11px #333,0 30px 80px rgba(0,0,0,.35);display:flex;flex-direction:column}
+.sb{height:54px;flex:none;display:flex;justify-content:space-between;align-items:flex-end;padding:0 32px 8px;font:600 15px var(--fd)}
+.sb span:last-child{font-size:12px;letter-spacing:.04em}
+.nav{flex:none;display:flex;align-items:center;gap:8px;padding:4px 12px 8px;min-height:48px}
+.nav .bk{width:44px;height:44px;display:grid;place-items:center;border-radius:12px}
+.nav h2{font:600 17px var(--fd);flex:1}
+.nav.big{padding:4px 24px 8px}.nav.big h2{font-size:34px;letter-spacing:-.03em;line-height:1.1;font-weight:700}
+.body{flex:1;overflow:hidden;padding:4px 20px 20px;display:flex;flex-direction:column;gap:12px}
+.phone.scroll .body{overflow-y:auto}
+.ic{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.ic.s{width:18px;height:18px}.ic.l{width:28px;height:28px}
+.card{background:var(--c);border:1px solid var(--ln);border-radius:var(--r);padding:16px}
+.hud{font:400 10px 'JetBrains Mono',ui-monospace,monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--m)}
+.sec{font-size:13px;color:var(--m)}
+.t2{color:var(--t2)}.m{color:var(--m)}.sm{font-size:13px}.cap{font-size:12px}
+.mono{font-family:'JetBrains Mono',ui-monospace,monospace;letter-spacing:-.02em}
+.row{display:flex;align-items:center;gap:12px}.sp{flex:1;min-width:0}
+.tile{width:40px;height:40px;border-radius:12px;background:var(--ib);display:grid;place-items:center;flex:none;color:var(--t)}
+.tile.a{background:var(--a);color:var(--ao)}
+.btn{height:50px;border-radius:var(--br);width:100%;font-weight:600;font-size:16px;display:flex;align-items:center;justify-content:center;gap:8px;background:var(--a);color:var(--ao)}
+.btn.g{background:var(--ib);color:var(--t)}
+.btn.d{background:var(--erb);color:var(--er)}
+.btn.sm{height:44px;font-size:15px;width:auto;padding:0 18px}
+.pill{display:inline-flex;align-items:center;gap:6px;height:26px;padding:0 10px;border-radius:999px;font-size:12px;background:var(--ib);color:var(--t2);white-space:nowrap}
+.pill.ok{background:var(--okb);color:var(--ok)}.pill.w{background:var(--wb);color:var(--w)}.pill.er{background:var(--erb);color:var(--er)}
+.dot{width:7px;height:7px;border-radius:50%;background:currentColor}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.stat{background:var(--c);border:1px solid var(--ln);border-radius:var(--br);padding:12px 10px}
+.stat b{display:block;font:500 22px 'JetBrains Mono',ui-monospace,monospace;letter-spacing:-.04em;margin-top:4px}
+.stat b small{font-size:11px;color:var(--m);font-weight:400;letter-spacing:0}
+.list{display:flex;flex-direction:column}
+.li{display:flex;align-items:center;gap:12px;min-height:60px;padding:8px 0;border-top:1px solid var(--sep)}
+.li:first-child{border-top:0}
+.li .nm{font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.li.off .tile{opacity:.6}.li.off .nm{color:var(--t2)}
+.rt{text-align:right;flex:none}
+.sw{width:51px;height:31px;border-radius:999px;background:var(--sep2);position:relative;flex:none;transition:.12s}
+.sw::after{content:"";position:absolute;top:2px;left:2px;width:27px;height:27px;border-radius:50%;background:#fff;transition:.12s}
+.sw.on{background:var(--a)}.sw.on::after{left:22px;background:var(--ao)}
+body[data-theme=light] .sw.on::after{background:#fff}
+.tabs{flex:none;display:flex;border-top:1px solid var(--sep);padding:6px 4px 26px;background:var(--c-solid)}
+.tabs div{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:11px;color:var(--m);min-height:44px;justify-content:center}
+.tabs .on{color:var(--t)}
+.banner{display:flex;gap:10px;align-items:flex-start;padding:12px 14px;border-radius:var(--br);font-size:14px}
+.banner.w{background:var(--wb);color:var(--w)}.banner.er{background:var(--erb);color:var(--er)}.banner.ok{background:var(--okb);color:var(--ok)}
+.banner.in{background:var(--c);border:1px solid var(--ln);color:var(--t)}
+.banner b{font-weight:700}
+.sk{background:var(--ib);border-radius:8px;display:block}
+.seg{display:flex;background:var(--ib);border-radius:var(--br);padding:3px;gap:3px}
+.seg>*{flex:1;height:38px;display:grid;place-items:center;border-radius:calc(var(--br) - 3px);font-size:14px;color:var(--t2)}
+.seg .on{background:var(--sgo);color:var(--t);font-weight:700}
+body[data-theme=light] .seg .on{box-shadow:0 1px 2px rgba(13,21,38,.15)}
+.fm{height:50px;border-radius:var(--br);background:var(--ib);padding:0 14px;display:flex;align-items:center;justify-content:space-between;font-size:16px;width:100%;text-align:left}
+.lbl{font-size:13px;color:var(--m);margin:0 0 6px 2px;display:block}
+.bar{height:8px;border-radius:4px;background:var(--rt);overflow:hidden}.bar i{display:block;height:100%;background:var(--a);border-radius:4px}
+.sheet{position:absolute;left:0;right:0;bottom:0;background:var(--c-solid);border-radius:28px 28px 0 0;padding:12px 20px 34px;display:flex;flex-direction:column;gap:12px;box-shadow:0 -20px 60px rgba(0,0,0,.4);border-top:1px solid var(--ln);z-index:5}
+.scrim{position:absolute;inset:0;background:rgba(0,0,0,.5);z-index:4}
+.phone.ovx .ov{display:none}
+.sheet .grab{width:40px;height:5px;border-radius:3px;background:var(--sep2);align-self:center}
+.lock{background:linear-gradient(160deg,#1C3A78,#0A0E14 65%);color:#F6F4EE}
+.lock .clock{text-align:center;margin-top:40px}.lock .clock b{display:block;font:300 88px/1 var(--fd);letter-spacing:-.04em}
+.notif{margin:0 14px;background:rgba(40,52,78,.82);backdrop-filter:blur(20px);border-radius:22px;padding:14px;display:flex;flex-direction:column;gap:12px;color:#F6F4EE}
+.notif .nt{display:flex;gap:12px}
+.notif .ap{width:40px;height:40px;border-radius:10px;background:#13254A;border:1px solid rgba(156,189,255,.35);display:grid;place-items:center;flex:none}
+.notif .ap img{width:28px;height:28px;display:block}
+.notif p{font-size:13px;color:#E4E8F1}
+.nacts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.nacts button{height:44px;border-radius:12px;background:rgba(246,244,238,.16);font-weight:600;color:#F6F4EE}
+.nacts button.b{background:rgba(255,154,159,.22);color:#FFC4C7}
+.qr{width:200px;height:200px;margin:4px auto;background:#fff;padding:14px;border-radius:16px}
+.qr svg{width:100%;height:100%;display:block}
+.map{background:var(--c);border:1px solid var(--ln);border-radius:var(--r);height:330px;position:relative;overflow:hidden;flex:none}
+.map svg{width:100%;height:100%;display:block}
+.chan{display:flex;align-items:flex-end;gap:6px;height:120px;padding-top:8px}
+.chan div{flex:1;background:var(--rt);border-radius:3px 3px 0 0;position:relative;min-height:4px}
+.chan div.me{background:var(--a)}.chan div.nb{background:var(--sep2)}
+.chan-x{display:flex;gap:6px;margin-top:4px}.chan-x span{flex:1;text-align:center;font:400 10px 'JetBrains Mono',monospace;color:var(--m)}
+.chan-x span.me{color:var(--t);font-weight:700}
+.hist{border-left:2px solid var(--sep2);margin-left:6px;padding-left:16px;display:flex;flex-direction:column;gap:14px}
+.hist>div{position:relative}.hist>div::before{content:"";position:absolute;left:-23px;top:5px;width:10px;height:10px;border-radius:50%;background:var(--sep2);border:2px solid var(--bg)}
+.hist>div.w::before{background:var(--w)}.hist>div.er::before{background:var(--er)}
+.lnk{display:inline-flex;align-items:center;min-height:44px;margin:-8px 0 -12px;font-size:13px;color:var(--a);text-decoration:underline;text-underline-offset:3px}
+.sticker{background:#F6F4EE;color:#0D1526;border-radius:14px;padding:14px 16px;transform:rotate(-1.5deg);box-shadow:0 2px 0 rgba(0,0,0,.2);font:400 12px/1.5 'JetBrains Mono',ui-monospace,monospace}
+.sticker .k{display:block;color:#4F5B70;font-size:10px;letter-spacing:.08em;text-transform:uppercase;margin-top:6px}
+.sticker .pw{display:inline-block;margin-top:2px;padding:2px 6px;border:1.5px solid #0D1526;border-radius:6px;font-weight:500;font-size:14px}
+.score{display:flex;align-items:baseline;gap:6px;font-family:'JetBrains Mono',ui-monospace,monospace;letter-spacing:-.05em}
+.score b{font-weight:500;font-size:56px;line-height:1}.score span{font-size:16px;color:var(--m);letter-spacing:0}
+.score.sm2 b{font-size:30px}.score.sm2 span{font-size:13px}
+.scorebtn{display:flex;align-items:center;gap:12px;width:100%;text-align:left;margin-top:12px;padding:10px 12px;min-height:64px;border-radius:var(--br);background:var(--ib)}
+.scorebtn .ch{font-size:22px;color:var(--m)}
+.chk{width:28px;height:28px;border-radius:8px;border:1.5px solid var(--sep2);display:grid;place-items:center;flex:none}
+.chk.on{background:var(--a);border-color:var(--a);color:var(--ao)}
+.sigbox{height:72px;border-radius:var(--br);border:1px solid var(--sep2);display:grid;place-items:center;font:italic 400 26px Georgia,serif}
+.btn:disabled{opacity:.55;cursor:not-allowed}
+.acts{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.act{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;min-height:64px;border-radius:var(--br);background:var(--ib);color:var(--t);font-size:12px}
+.act:disabled,.act[aria-disabled=true]{opacity:.55;cursor:not-allowed}
+.fm.err{box-shadow:inset 0 0 0 1.5px var(--er)}
+.tg:focus-visible,.lg button:focus-visible,.sw:focus-visible,button:focus-visible{outline:2px solid #FFA566;outline-offset:2px}
+body[data-theme=light] button:focus-visible{outline-color:#2F5FB3}
+/* Orro */
+.orro{display:block;flex:none;object-fit:contain}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-2px)}}
+.orro.bob{animation:bob 3.2s ease-in-out infinite}
+/* Pasos de «Mejorando» */
+.steps{display:flex;align-items:flex-start;gap:4px;margin-top:12px}
+.step{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;font-size:12px;color:var(--m);position:relative}
+.step::before{content:"";position:absolute;top:13px;right:50%;width:100%;height:2px;background:var(--sep2)}
+.step:first-child::before{display:none}
+.step i{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font:600 13px var(--fd);font-style:normal;background:var(--ib);color:var(--t2);position:relative;z-index:1}
+.step.done i{background:var(--okb);color:var(--ok)}.step.done::before,.step.cur::before{background:var(--ok)}
+.step.cur i{background:var(--a);color:var(--ao)}.step.cur{color:var(--t);font-weight:700}
+/* Etiqueta de pantallas pendientes de revisión */
+.gate{align-self:flex-start;display:inline-flex;align-items:center;gap:6px;height:26px;padding:0 10px;border-radius:999px;font-size:12px;font-weight:700;background:var(--wb);color:var(--w);border:1px solid currentColor}
+.ph{border:1.5px dashed var(--w);border-radius:var(--br);padding:10px 12px;color:var(--w);font-size:13px;font-weight:700}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+/* ===== Prototipo: shell ===== */
+html,body{height:100%}
+body{padding:0;overflow:hidden;display:flex;flex-direction:column;background:linear-gradient(135deg,#1C3A78 0%,#13254A 45%,#0A0E14 100%);color:#F6F4EE}
+body[data-theme=light]{background:#F6F4EE;color:#0D1526}
+[hidden]{display:none!important}
+.pbar{flex:none;display:flex;align-items:center;gap:10px 14px;padding:10px 16px;background:rgba(17,26,44,.88);border-bottom:1px solid rgba(156,189,255,.18);flex-wrap:wrap}
+body[data-theme=light] .pbar,body[data-theme=light] .bot{background:#FFFFFF;border-color:#E0DCCF}
+.pbar .wm{height:28px}
+.ttl{flex:1;min-width:160px;font:600 15px/1.25 var(--fd);color:#F6F4EE;overflow:hidden}
+.ttl #ttl{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ttl small{display:block;font:400 11px 'JetBrains Mono',ui-monospace,monospace;color:#9CBDFF;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+body[data-theme=light] .ttl{color:#0D1526}body[data-theme=light] .ttl small{color:#2F5FB3}
+.tools{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.pb{height:40px;padding:0 14px;border-radius:999px;background:rgba(246,244,238,.1);color:#F6F4EE;font-weight:600;font-size:14px;white-space:nowrap;display:inline-flex;align-items:center;gap:6px}
+.pb .ic{width:18px;height:18px}
+.pb:hover{background:rgba(246,244,238,.18)}
+.pb.pri{background:#FFA566;color:#0D1526}.pb.pri:hover{background:#FFB57F}
+.pb[aria-pressed=true]{box-shadow:inset 0 0 0 2px #9CBDFF}
+.pb:disabled{opacity:.4;cursor:default}
+body[data-theme=light] .pb{background:#ECE9E0;color:#0D1526}
+body[data-theme=light] .pb:hover{background:#E4E0D5}
+body[data-theme=light] .pb.pri{background:#B5500F;color:#F6F4EE}
+body[data-theme=light] .pb[aria-pressed=true]{box-shadow:inset 0 0 0 2px #2F5FB3}
+.lg button{height:34px}
+.stage{flex:1;min-height:0;position:relative;overflow:hidden}
+.pwrap{position:absolute;left:50%;top:50%;width:393px;height:852px;transform-origin:center center}
+.pwrap .phone{display:none;box-shadow:0 30px 80px rgba(0,0,0,.5),0 0 0 10px #0A0E14,0 0 0 11px #3C4D70}
+body[data-theme=light] .pwrap .phone{box-shadow:0 30px 70px rgba(13,21,38,.22),0 0 0 10px #0D1526,0 0 0 11px #4F5B70}
+.pwrap .phone.cur{display:flex}
+.pwrap .phone .body{overflow-y:auto;scrollbar-width:none}
+.pwrap .phone .body::-webkit-scrollbar{display:none}
+.pwrap .phone .body > .card[style*="flex:1"]{overflow-y:auto!important;scrollbar-width:none}
+.bot{flex:none;display:flex;align-items:center;justify-content:center;gap:12px;padding:10px 16px 12px;background:rgba(17,26,44,.88);border-top:1px solid rgba(156,189,255,.18);flex-wrap:wrap}
+.cnt{font:500 13px 'JetBrains Mono',ui-monospace,monospace;color:#CBD3E4;min-width:64px;text-align:center}
+body[data-theme=light] .cnt{color:#2B3750}
+.hint2{font-size:12px;color:#B1BBD0}body[data-theme=light] .hint2{color:#4F5B70}
+@media (max-width:700px){.hint2{display:none}.pb .lbl2{display:none}.pb{padding:0 12px}.pbar{padding:8px 10px;gap:8px}.ttl{min-width:0;flex-basis:calc(100% - 110px)}.tools{width:100%;justify-content:space-between}.bot{padding:8px 10px}}
+/* toast dentro del teléfono */
+.ptoast{position:absolute;left:50%;top:12px;transform:translateX(-50%);max-width:340px;width:max-content;background:#F6F4EE;color:#0D1526;padding:10px 16px;border-radius:16px;font:600 14px/1.3 var(--fd);opacity:0;transition:opacity .2s;pointer-events:none;z-index:30;box-shadow:0 10px 30px rgba(0,0,0,.35);text-align:center}
+body[data-theme=light] .ptoast{background:#0D1526;color:#F6F4EE}
+.ptoast.on{opacity:1}
+/* elementos añadidos por el prototipo */
+.navic{width:44px;height:44px;border-radius:14px;background:var(--ib);display:grid;place-items:center;color:var(--t);flex:none}
+.lirow{width:100%;text-align:left;color:inherit}
+.li.blk .rt .cap:last-child{color:var(--er)}
+.pin{flex:1;min-width:0;height:100%;background:none;border:0;color:var(--t);font:inherit;font-size:16px}
+.pin::placeholder{color:var(--m)}
+input.fm{border:0;color:var(--t);font:inherit;font-size:16px}
+input.fm.err{box-shadow:inset 0 0 0 1.5px var(--er)}
+.peek{display:inline-flex;align-items:center;gap:4px;min-height:44px;min-width:44px;justify-content:flex-end;color:var(--m);font-size:12px}
+.sht{font:700 20px var(--fd)}
+.sheet .seg button{height:38px}
+.psh.sheet{max-height:86%;overflow-y:auto}
+.prog{margin-top:12px;display:flex;flex-direction:column;gap:8px}
+.prog .bar i{transition:width .1s linear}
+.sepx{margin-top:12px;display:flex;flex-direction:column;gap:8px}
+.chk:not(.on) .ic{opacity:0}
+.sigbox{position:relative;overflow:hidden}
+.sigc{position:absolute;inset:0;width:100%;height:100%;touch-action:none;cursor:crosshair;border-radius:var(--br)}
+.sigph{font:400 13px var(--fd);color:var(--m);pointer-events:none;font-style:normal}
+.sigbox.done .sigph{display:none}
+.sigrow{display:flex;justify-content:space-between;align-items:center;margin-top:2px}
+.fid{width:64px;height:64px;border-radius:18px;border:2px solid var(--a);display:grid;place-items:center;margin:4px auto;color:var(--a)}
+input:focus-visible,canvas:focus-visible,[tabindex]:focus-visible{outline:2px solid #FFA566;outline-offset:2px}
+body[data-theme=light] input:focus-visible,body[data-theme=light] canvas:focus-visible{outline-color:#2F5FB3}
+/* resaltar zonas táctiles */
+body.showlinks .pwrap .phone.cur button:not(:disabled),body.showlinks .pwrap .phone.cur input,body.showlinks .pwrap .phone.cur canvas{outline:2px dashed #FFA566;outline-offset:-2px}
+body.showlinks[data-theme=light] .pwrap .phone.cur button:not(:disabled),body.showlinks[data-theme=light] .pwrap .phone.cur input,body.showlinks[data-theme=light] .pwrap .phone.cur canvas{outline-color:#2F5FB3}
+/* cuadrícula «Todas las pantallas» */
+.toc{position:fixed;inset:0;z-index:50;overflow:auto;padding:20px 24px 40px;background:rgba(10,14,20,.94)}
+body[data-theme=light] .toc{background:rgba(246,244,238,.97)}
+.tochd{display:flex;gap:16px;align-items:flex-start;justify-content:space-between;position:sticky;top:-20px;padding:20px 0 12px;margin-top:-20px;background:inherit;z-index:2}
+.toc h2{font:700 22px var(--fd);color:#F6F4EE}
+.toc .sub{color:#CBD3E4;font-size:13px;margin-top:4px}
+body[data-theme=light] .toc h2{color:#0D1526}body[data-theme=light] .toc .sub{color:#2B3750}
+.toc .grp{font:500 11px 'JetBrains Mono',ui-monospace,monospace;letter-spacing:.1em;text-transform:uppercase;color:#9CBDFF;margin:22px 0 10px}
+body[data-theme=light] .toc .grp{color:#2F5FB3}
+.cells{display:flex;flex-wrap:wrap;gap:14px}
+.cell{width:142px;display:flex;flex-direction:column;gap:8px;padding:8px;border-radius:16px;background:#111A2C;border:1px solid rgba(156,189,255,.16);color:#F6F4EE;text-align:left;font-size:13px;line-height:1.3}
+.cell:hover{border-color:#FFA566}
+.cell.cur{border-color:#FFA566;box-shadow:0 0 0 2px #FFA566}
+body[data-theme=light] .cell{background:#FFFFFF;border-color:#E0DCCF;color:#0D1526}
+body[data-theme=light] .cell:hover,body[data-theme=light] .cell.cur{border-color:#B5500F}
+body[data-theme=light] .cell.cur{box-shadow:0 0 0 2px #B5500F}
+.cell small{display:block;font:600 11px 'JetBrains Mono',ui-monospace,monospace;color:#FFA566;margin-bottom:2px}
+body[data-theme=light] .cell small{color:#B5500F}
+.th{display:block;width:126px;height:273px;border-radius:16px;overflow:hidden;position:relative;flex:none;pointer-events:none}
+.thi{position:absolute;left:0;top:0;width:393px;height:852px;transform:scale(.3206);transform-origin:0 0}
+.thi .phone{display:flex;box-shadow:none;border-radius:52px}
+@media (max-width:700px){.toc{padding:12px}.cell{width:calc(50% - 7px)}.th{width:100%;height:auto;aspect-ratio:393/852}.thi{transform:scale(var(--ts,.3206))}}
+</style></head>
+<body data-theme="dark">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 3.5 2.8 19.5h18.4z"/><path d="M12 10v4.5M12 17.2v.1"/></symbol><symbol id="i-ant" viewBox="0 0 24 24"><path d="M12 11v10M8.5 21h7M7 4.5a7 7 0 0 0 0 10M17 4.5a7 7 0 0 1 0 10M9.5 7a3.5 3.5 0 0 0 0 5M14.5 7a3.5 3.5 0 0 1 0 5"/><circle cx="12" cy="9.5" r="1.2"/></symbol><symbol id="i-back" viewBox="0 0 24 24"><path d="m15 5-7 7 7 7"/></symbol><symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 16.5V11a6 6 0 1 1 12 0v5.5l1.5 1.5h-15zM10 21h4"/></symbol><symbol id="i-bld" viewBox="0 0 24 24"><path d="M4 21V5l8-2v18M12 8h8v13M8 8h.01M8 12h.01M8 16h.01M16 12h.01M16 16h.01"/></symbol><symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></symbol><symbol id="i-book" viewBox="0 0 24 24"><path d="M5 4h10a4 4 0 0 1 4 4v12H9a4 4 0 0 1-4-4z"/></symbol><symbol id="i-bot" viewBox="0 0 24 24"><rect x="5" y="8" width="14" height="11" rx="3"/><path d="M12 4v4M9 13h.01M15 13h.01"/></symbol><symbol id="i-bubble" viewBox="0 0 24 24"><path d="M20 12c0 4.4-3.6 8-8 8-1.3 0-2.6-.3-3.7-.9L4 20l1-4.1A8 8 0 1 1 20 12z"/></symbol><symbol id="i-cal" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4"/></symbol><symbol id="i-camera" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="12" rx="2.5"/><circle cx="12" cy="13" r="3.2"/><path d="M8 7l1.2-2h5.6L16 7"/></symbol><symbol id="i-card" viewBox="0 0 24 24"><rect x="2.5" y="5.5" width="19" height="13" rx="3"/><path d="M2.5 10h19"/></symbol><symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></symbol><symbol id="i-chev" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></symbol><symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5.5l3.5 2"/></symbol><symbol id="i-dev" viewBox="0 0 24 24"><rect x="2.5" y="4.5" width="13" height="10" rx="2"/><path d="M5.5 18.5h7M18 8h3.5v12H18z"/></symbol><symbol id="i-dl" viewBox="0 0 24 24"><path d="M12 4v11M7 10.5l5 5 5-5M5 20h14"/></symbol><symbol id="i-doc" viewBox="0 0 24 24"><path d="M6 3h9l4 4v13a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/><path d="M14 3v5h5M8.5 13h7M8.5 17h5"/></symbol><symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></symbol><symbol id="i-fiber" viewBox="0 0 24 24"><path d="M3 12h5l2-5 4 10 2-5h5"/></symbol><symbol id="i-file" viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/></symbol><symbol id="i-gauge" viewBox="0 0 24 24"><path d="M3.5 16a8.5 8.5 0 1 1 17 0"/><path d="m12 16 4-5"/></symbol><symbol id="i-gift" viewBox="0 0 24 24"><rect x="3.5" y="9" width="17" height="11.5" rx="2"/><path d="M2.5 9h19M12 9v11.5M12 9c-1.5-4-6-4-5.5-1S12 9 12 9zM12 9c1.5-4 6-4 5.5-1S12 9 12 9z"/></symbol><symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.2 3 14.8 0 18M12 3c-3 3.2-3 14.8 0 18"/></symbol><symbol id="i-grid" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="7" height="7" rx="2"/><rect x="13.5" y="3.5" width="7" height="7" rx="2"/><rect x="3.5" y="13.5" width="7" height="7" rx="2"/><rect x="13.5" y="13.5" width="7" height="7" rx="2"/></symbol><symbol id="i-home" viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/></symbol><symbol id="i-human" viewBox="0 0 24 24"><path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM4 20c1.5-3.5 4.5-5 8-5s6.5 1.5 8 5"/></symbol><symbol id="i-inbox" viewBox="0 0 24 24"><path d="M3.5 13.5 6 5.5h12l2.5 8"/><path d="M3.5 13.5v5a1 1 0 0 0 1 1h15a1 1 0 0 0 1-1v-5h-5l-1.5 2.5h-4L8.5 13.5z"/></symbol><symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5.5M12 7.8v.1"/></symbol><symbol id="i-key" viewBox="0 0 24 24"><circle cx="8" cy="15" r="4"/><path d="M11 12l9-9M16 7l3 3M14 9l2 2"/></symbol><symbol id="i-lamp" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0-3.5 10.9V15h7v-1.1A6 6 0 0 0 12 3zM9.5 18h5M10.5 21h3"/></symbol><symbol id="i-laptop" viewBox="0 0 24 24"><rect x="5" y="5" width="14" height="10" rx="1.8"/><path d="M2.5 19h19"/></symbol><symbol id="i-list" viewBox="0 0 24 24"><path d="M8 6h12M8 12h12M8 18h12M4 6h.01M4 12h.01M4 18h.01"/></symbol><symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="10.5" width="14" height="10" rx="2.5"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></symbol><symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5.5" width="18" height="13" rx="3"/><path d="m3.5 7.5 8.5 6 8.5-6"/></symbol><symbol id="i-map" viewBox="0 0 24 24"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2zM9 4v14M15 6v14"/></symbol><symbol id="i-mic" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11.5a6.5 6.5 0 0 0 13 0M12 18v3"/></symbol><symbol id="i-mobile" viewBox="0 0 24 24"><rect x="7" y="2.5" width="10" height="19" rx="2.5"/><path d="M10.5 18.5h3"/></symbol><symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z"/></symbol><symbol id="i-pause" viewBox="0 0 24 24"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></symbol><symbol id="i-person" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.2-4 4.3-6 8-6s6.8 2 8 6"/></symbol><symbol id="i-phone" viewBox="0 0 24 24"><rect x="6.5" y="2.5" width="11" height="19" rx="3"/><path d="M10.5 18.5h3"/></symbol><symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21.5s-7-6.2-7-11.5a7 7 0 1 1 14 0c0 5.3-7 11.5-7 11.5z"/><circle cx="12" cy="10" r="2.5"/></symbol><symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol><symbol id="i-power" viewBox="0 0 24 24"><path d="M7.5 6.3a8 8 0 1 0 9 0M12 3v8"/></symbol><symbol id="i-qr" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><path d="M14 14h3v3h-3zM21 14v.01M17.5 21H21v-3.5M14 21v.01"/></symbol><symbol id="i-retry" viewBox="0 0 24 24"><path d="M20 11a8 8 0 1 0-2.3 5.7"/><path d="M20 4.5V11h-6.5"/></symbol><symbol id="i-router" viewBox="0 0 24 24"><rect x="3" y="13" width="18" height="6.5" rx="2"/><path d="M7 13V8.5M17 13V8.5M7 16.25h.01M11 16.25h.01"/></symbol><symbol id="i-send" viewBox="0 0 24 24"><path d="M12 19V5M6 11l6-6 6 6"/></symbol><symbol id="i-settop" viewBox="0 0 24 24"><rect x="3" y="9" width="18" height="8" rx="2"/><path d="M7 13h4M17 13h.01M7 20h.01M17 20h.01"/></symbol><symbol id="i-share" viewBox="0 0 24 24"><path d="M12 15V4M8 8l4-4 4 4M5 13v6.5h14V13"/></symbol><symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3 4.5 6v6c0 4.5 3.2 8 7.5 9 4.3-1 7.5-4.5 7.5-9V6z"/><path d="m9 12 2 2 4-4"/></symbol><symbol id="i-signal" viewBox="0 0 24 24"><path d="M5 20v-4M10 20v-8M15 20V8M20 20V4"/></symbol><symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3v3M12 18v3M3 12h3M18 12h3M6 6l2 2M16 16l2 2M6 18l2-2M16 8l2-2"/><circle cx="12" cy="12" r="3"/></symbol><symbol id="i-speaker" viewBox="0 0 24 24"><rect x="6" y="3" width="12" height="18" rx="3"/><circle cx="12" cy="14.2" r="3.2"/><path d="M12 7.5h.01"/></symbol><symbol id="i-ticket" viewBox="0 0 24 24"><path d="M3 8a2 2 0 0 0 0 4v0a2 2 0 0 1 0 4v2h18v-2a2 2 0 0 1 0-4 2 2 0 0 1 0-4V6H3z"/><path d="M14 6v12" stroke-dasharray="2 2"/></symbol><symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 7h16M9 7V4.5h6V7M6.5 7l.8 12.5a1 1 0 0 0 1 .9h7.4a1 1 0 0 0 1-.9L17.5 7M10 11v5M14 11v5"/></symbol><symbol id="i-tv" viewBox="0 0 24 24"><rect x="2.5" y="5" width="19" height="12.5" rx="2.5"/><path d="M8 21h8"/></symbol><symbol id="i-unknown" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.6 9.6a2.5 2.5 0 1 1 3.5 2.3c-.7.4-1.1.9-1.1 1.7M12 17h.01"/></symbol><symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c1-3 3.5-4.5 6.5-4.5s5.5 1.5 6.5 4.5M16 4.5a3.5 3.5 0 0 1 0 7M18 15.5c2 .6 3 2 3.5 4.5"/></symbol><symbol id="i-wifi" viewBox="0 0 24 24"><path d="M2 8.8a15 15 0 0 1 20 0M5.5 12.4a10 10 0 0 1 13 0M9 16a5 5 0 0 1 6 0"/><circle cx="12" cy="19.5" r="1.1" fill="currentColor" stroke="none"/></symbol><symbol id="i-wifioff" viewBox="0 0 24 24"><path d="M3 3l18 18"/><path d="M2 8.8a15 15 0 0 1 5-3M22 8.8a15 15 0 0 0-8.6-3.7M5.5 12.4a10 10 0 0 1 3.4-2M18.5 12.4a10 10 0 0 0-3-1.8M9 16a5 5 0 0 1 6 0"/><circle cx="12" cy="19.5" r="1.1" fill="currentColor" stroke="none"/></symbol><symbol id="i-wrench" viewBox="0 0 24 24"><path d="M14.5 6.5a4 4 0 0 0 5 5l-9 9a2.1 2.1 0 0 1-3-3l9-9a4 4 0 0 1-2-2z"/></symbol><symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol></svg>
+<header class="pbar">
+ <img class="wm d" id="wmd" alt="OrroFi" height="28"><img class="wm l" id="wml" alt="OrroFi" height="28">
+ <div class="ttl"><span id="ttl"></span><small id="code"></small></div>
+ <div class="tools">
+  <div class="lg" role="group" aria-label="Idioma / Language"><button id="l-es" aria-pressed="true">ES</button><button id="l-en" aria-pressed="false">EN</button></div>
+  <button class="pb" id="tg" aria-pressed="false"></button>
+  <button class="pb" id="lk" aria-pressed="false"></button>
+  <button class="pb pri" id="tocb" aria-haspopup="dialog"></button>
+ </div>
+</header>
+<main class="stage" id="stage"><div class="pwrap" id="pw"><div id="phones"></div><div class="ptoast" id="toast" role="status" aria-live="polite"></div></div></main>
+<footer class="bot">
+ <button class="pb" id="prev"></button><span class="cnt" id="cnt" aria-live="polite"></span><button class="pb pri" id="next"></button>
+ <span class="hint2" id="hint"></span>
+</footer>
+<div class="toc" id="toc" role="dialog" aria-modal="true" aria-labelledby="toch" hidden>
+ <div class="tochd"><div><h2 id="toch"></h2><p class="sub" id="tocsub"></p></div><button class="pb" id="tocx"></button></div>
+ <div id="cells"></div>
+</div>
+<script>
+const A={"orro-angry": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiB2aWV3Qm94PSIwIDAgMTAwIDEwMCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJvZzk5IiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAiIHkxPSIyOCIgeDI9IjAiIHkyPSI4NCI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjMTMyNTRBIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjMTExQTJDIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMCAwLjAwKSByb3RhdGUoMC4wMCA1MCA2MCkiPjxyZWN0IHg9IjExIiB5PSI0NSIgd2lkdGg9IjkiIGhlaWdodD0iMTkiIHJ4PSI0LjUiIGZpbGw9IiNGRkE1NjYiLz48cmVjdCB4PSI4MCIgeT0iNDUiIHdpZHRoPSI5IiBoZWlnaHQ9IjE5IiByeD0iNC41IiBmaWxsPSIjOUNCREZGIi8+PGcgdHJhbnNmb3JtPSJyb3RhdGUoLTUuNTAgNTAgMjgpIj48cGF0aCBkPSJNNTAsMjggTDUwLDE4IiBmaWxsPSJub25lIiBzdHJva2U9IiM5Q0JERkYiIHN0cm9rZS13aWR0aD0iMy4yIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIC8+PGcgb3BhY2l0eT0iMSI+PHBhdGggZD0iTTQ1LjQwLDE2Ljg2IEE2LDYgMCAwIDEgNDUuNDAsOS4xNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjRkZBNTY2IiBzdHJva2Utd2lkdGg9IjMuMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiAvPjxwYXRoIGQ9Ik01NC42MCw5LjE0IEE2LDYgMCAwIDEgNTQuNjAsMTYuODYiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzlDQkRGRiIgc3Ryb2tlLXdpZHRoPSIzLjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgLz48L2c+PGcgb3BhY2l0eT0iMSI+PHBhdGggZD0iTTQxLjU3LDIwLjA3IEExMSwxMSAwIDAgMSA0MS41Nyw1LjkzIiBmaWxsPSJub25lIiBzdHJva2U9IiNGRkE1NjYiIHN0cm9rZS13aWR0aD0iMy4yIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIC8+PHBhdGggZD0iTTU4LjQzLDUuOTMgQTExLDExIDAgMCAxIDU4LjQzLDIwLjA3IiBmaWxsPSJub25lIiBzdHJva2U9IiM5Q0JERkYiIHN0cm9rZS13aWR0aD0iMy4yIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIC8+PC9nPjxjaXJjbGUgY3g9IjUwIiBjeT0iMTMiIHI9IjMuNiIgZmlsbD0iI0Y2RjRFRSIgc3Ryb2tlPSIjOUNCREZGIiBzdHJva2Utd2lkdGg9IjEuMiIvPjwvZz48cmVjdCB4PSIxOCIgeT0iMjgiIHdpZHRoPSI2NCIgaGVpZ2h0PSI1NiIgcng9IjIwIiBmaWxsPSJ1cmwoI29nOTkpIiBzdHJva2U9IiM5Q0JERkYiIHN0cm9rZS13aWR0aD0iMyIvPjxyZWN0IHg9IjI2IiB5PSIzOC41IiB3aWR0aD0iNDgiIGhlaWdodD0iMzEiIHJ4PSIxMyIgZmlsbD0iIzBBMEUxNCIvPjxyZWN0IHg9IjI2IiB5PSIzOC41IiB3aWR0aD0iNDgiIGhlaWdodD0iMzEiIHJ4PSIxMyIgZmlsbD0iI0I0MjMyQyIgb3BhY2l0eT0iMC4xMDAiLz48cGF0aCBkPSJNMzAsNDQgUTMxLDQxIDM1LDQxIEw0OCw0MSIgc3Ryb2tlPSIjRjZGNEVFIiBzdHJva2Utd2lkdGg9IjEuNiIgZmlsbD0ibm9uZSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBvcGFjaXR5PSIwLjMiLz48cmVjdCB4PSIzNi42IiB5PSI0OS41IiB3aWR0aD0iNi44IiBoZWlnaHQ9IjEwLjAwIiByeD0iMy40IiBmaWxsPSIjOUNCREZGIi8+PHBhdGggZD0iTTM1LDQ1IEw0NSw0NSBMNDUsNTIuNDAgTDM1LDQ5LjIwIFoiIGZpbGw9IiMwQTBFMTQiLz48cmVjdCB4PSI1Ni42IiB5PSI0OS41IiB3aWR0aD0iNi44IiBoZWlnaHQ9IjEwLjAwIiByeD0iMy40IiBmaWxsPSIjOUNCREZGIi8+PHBhdGggZD0iTTU1LDQ1IEw2NSw0NSBMNjUsNDkuMjAgTDU1LDUyLjQwIFoiIGZpbGw9IiMwQTBFMTQiLz48cGF0aCBkPSJNNDYsNzguNiBRNTAsNzUuNTYgNTQsNzguNiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjRkZBNTY2IiBzdHJva2Utd2lkdGg9IjIuMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiAvPjwvZz48L3N2Zz4K", "orro-celebrating": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiB2aWV3Qm94PSIwIDAgMTAwIDEwMCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJvZzg1IiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAiIHkxPSIyOCIgeDI9IjAiIHkyPSI4NCI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjMTMyNTRBIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjMTExQTJDIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMCAtNS4wMCkgcm90YXRlKDYuMDAgNTAgNjApIj48cmVjdCB4PSIxMSIgeT0iNDUiIHdpZHRoPSI5IiBoZWlnaHQ9IjE5IiByeD0iNC41IiBmaWxsPSIjRkZBNTY2Ii8+PHJlY3QgeD0iODAiIHk9IjQ1IiB3aWR0aD0iOSIgaGVpZ2h0PSIxOSIgcng9IjQuNSIgZmlsbD0iIzlDQkRGRiIvPjxnIHRyYW5zZm9ybT0icm90YXRlKC04LjAwIDUwIDI4KSI+PHBhdGggZD0iTTUwLDI4IEw1MCwxOCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjOUNCREZGIiBzdHJva2Utd2lkdGg9IjMuMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiAvPjxnIG9wYWNpdHk9IjEiPjxwYXRoIGQ9Ik00NS40MCwxNi44NiBBNiw2IDAgMCAxIDQ1LjQwLDkuMTQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0ZGQTU2NiIgc3Ryb2tlLXdpZHRoPSIzLjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgLz48cGF0aCBkPSJNNTQuNjAsOS4xNCBBNiw2IDAgMCAxIDU0LjYwLDE2Ljg2IiBmaWxsPSJub25lIiBzdHJva2U9IiM5Q0JERkYiIHN0cm9rZS13aWR0aD0iMy4yIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIC8+PC9nPjxnIG9wYWNpdHk9IjEiPjxwYXRoIGQ9Ik00MS41NywyMC4wNyBBMTEsMTEgMCAwIDEgNDEuNTcsNS45MyIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjRkZBNTY2IiBzdHJva2Utd2lkdGg9IjMuMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiAvPjxwYXRoIGQ9Ik01OC40Myw1LjkzIEExMSwxMSAwIDAgMSA1OC40MywyMC4wNyIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjOUNCREZGIiBzdHJva2Utd2lkdGg9IjMuMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiAvPjwvZz48ZyBvcGFjaXR5PSIwLjUwMCI+PHBhdGggZD0iTTM4Ljg5LDIyLjMyIEExNC41LDE0LjUgMCAwIDEgMzguODksMy42OCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjRkZBNTY2IiBzdHJva2Utd2lkdGg9IjIuNiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiAvPjxwYXRoIGQ9Ik02MS4xMSwzLjY4IEExNC41LDE0LjUgMCAwIDEgNjEuMTEsMjIuMzIiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzlDQkRGRiIgc3Ryb2tlLXdpZHRoPSIyLjYiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgLz48L2c+PGNpcmNsZSBjeD0iNTAiIGN5PSIxMyIgcj0iMy42IiBmaWxsPSIjRjZGNEVFIiBzdHJva2U9IiM5Q0JERkYiIHN0cm9rZS13aWR0aD0iMS4yIi8+PC9nPjxyZWN0IHg9IjE4IiB5PSIyOCIgd2lkdGg9IjY0IiBoZWlnaHQ9IjU2IiByeD0iMjAiIGZpbGw9InVybCgjb2c4NSkiIHN0cm9rZT0iIzlDQkRGRiIgc3Ryb2tlLXdpZHRoPSIzIi8+PHJlY3QgeD0iMjYiIHk9IjM4LjUiIHdpZHRoPSI0OCIgaGVpZ2h0PSIzMSIgcng9IjEzIiBmaWxsPSIjMEEwRTE0Ii8+PHJlY3QgeD0iMjYiIHk9IjM4LjUiIHdpZHRoPSI0OCIgaGVpZ2h0PSIzMSIgcng9IjEzIiBmaWxsPSIjOUNCREZGIiBvcGFjaXR5PSIwLjEyMCIvPjxwYXRoIGQ9Ik0zMCw0NCBRMzEsNDEgMzUsNDEgTDQ4LDQxIiBzdHJva2U9IiNGNkY0RUUiIHN0cm9rZS13aWR0aD0iMS42IiBmaWxsPSJub25lIiBzdHJva2UtbGluZWNhcD0icm91bmQiIG9wYWNpdHk9IjAuMyIvPjxwYXRoIGQ9Ik0zNS44LDU2IFE0MCw0OS40IDQ0LjIsNTYiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzlDQkRGRiIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIC8+PHBhdGggZD0iTTU1LjgsNTYgUTYwLDQ5LjQgNjQuMiw1NiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjOUNCREZGIiBzdHJva2Utd2lkdGg9IjMiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgLz48cGF0aCBkPSJNNDQuOCw3NS41IFE1MCw4My42MCA1NS4yLDc1LjUgWiIgZmlsbD0iI0ZGQTU2NiIvPjwvZz48cG9seWdvbiBwb2ludHM9IjEzLjk2LDI1Ljk2IDEwLjAwLDIzLjc5IDYuMDQsMjUuOTYgOC4yMSwyMi4wMCA2LjA0LDE4LjA0IDEwLjAwLDIwLjIxIDEzLjk2LDE4LjA0IDExLjc5LDIyLjAwIiBmaWxsPSIjRkZBNTY2IiBvcGFjaXR5PSIxLjAwIi8+PHBvbHlnb24gcG9pbnRzPSI5MS44NywyNy41MiA4OS40MCwyNC40NSA4NS40OCwyNC44NyA4OC41NSwyMi40MCA4OC4xMywxOC40OCA5MC42MCwyMS41NSA5NC41MiwyMS4xMyA5MS40NSwyMy42MCIgZmlsbD0iIzlDQkRGRiIgb3BhY2l0eT0iMC43MSIvPjxwb2x5Z29uIHBvaW50cz0iMTEuMjAsODIuMDAgOC43Miw4Mi43MiA4LjAwLDg1LjIwIDcuMjgsODIuNzIgNC44MCw4Mi4wMCA3LjI4LDgxLjI4IDguMDAsNzguODAgOC43Miw4MS4yOCIgZmlsbD0iI0Y2RjRFRSIgb3BhY2l0eT0iMC4wMCIvPjxwb2x5Z29uIHBvaW50cz0iOTYuNTIsODQuODcgOTIuNjAsODQuNDUgOTAuMTMsODcuNTIgOTAuNTUsODMuNjAgODcuNDgsODEuMTMgOTEuNDAsODEuNTUgOTMuODcsNzguNDggOTMuNDUsODIuNDAiIGZpbGw9IiNGRkE1NjYiIG9wYWNpdHk9IjAuNzEiLz48L3N2Zz4K", "orro-content": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiB2aWV3Qm94PSIwIDAgMTAwIDEwMCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJvZzE1IiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAiIHkxPSIyOCIgeDI9IjAiIHkyPSI4NCI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjMTMyNTRBIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjMTExQTJDIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMCAtMC41MCkgcm90YXRlKDMuMDAgNTAgNjApIj48cmVjdCB4PSIxMSIgeT0iNDUiIHdpZHRoPSI5IiBoZWlnaHQ9IjE5IiByeD0iNC41IiBmaWxsPSIjRkZBNTY2Ii8+PHJlY3QgeD0iODAiIHk9IjQ1IiB3aWR0aD0iOSIgaGVpZ2h0PSIxOSIgcng9IjQuNSIgZmlsbD0iIzlDQkRGRiIvPjxnIHRyYW5zZm9ybT0icm90YXRlKDAuMDAgNTAgMjgpIj48cGF0aCBkPSJNNTAsMjggTDUwLDE4IiBmaWxsPSJub25lIiBzdHJva2U9IiM5Q0JERkYiIHN0cm9rZS13aWR0aD0iMy4yIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIC8+PGcgb3BhY2l0eT0iMSI+PHBhdGggZD0iTTQ1LjQwLDE2Ljg2IEE2LDYgMCAwIDEgNDUuNDAsOS4xNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjRkZBNTY2IiBzdHJva2Utd2lkdGg9IjMuMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiAvPjxwYXRoIGQ9Ik01NC42MCw5LjE0IEE2LDYgMCAwIDEgNTQuNjAsMTYuODYiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzlDQkRGRiIgc3Ryb2tlLXdpZHRoPSIzLjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgLz48L2c+PGcgb3BhY2l0eT0iMSI+PHBhdGggZD0iTTQxLjU3LDIwLjA3IEExMSwxMSAwIDAgMSA0MS41Nyw1LjkzIiBmaWxsPSJub25lIiBzdHJva2U9IiNGRkE1NjYiIHN0cm9rZS13aWR0aD0iMy4yIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIC8+PHBhdGggZD0iTTU4LjQzLDUuOTMgQTExLDExIDAgMCAxIDU4LjQzLDIwLjA3IiBmaWxsPSJub25lIiBzdHJva2U9IiM5Q0JERkYiIHN0cm9rZS13aWR0aD0iMy4yIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIC8+PC9nPjxnIG9wYWNpdHk9IjAuMzAwIj48cGF0aCBkPSJNNDAuMjMsMjEuMjAgQTEyLjc1LDEyLjc1IDAgMCAxIDQwLjIzLDQuODAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0ZGQTU2NiIgc3Ryb2tlLXdpZHRoPSIyLjYiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgLz48cGF0aCBkPSJNNTkuNzcsNC44MCBBMTIuNzUsMTIuNzUgMCAwIDEgNTkuNzcsMjEuMjAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzlDQkRGRiIgc3Ryb2tlLXdpZHRoPSIyLjYiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgLz48L2c+PGNpcmNsZSBjeD0iNTAiIGN5PSIxMyIgcj0iMy42IiBmaWxsPSIjRjZGNEVFIiBzdHJva2U9IiM5Q0JERkYiIHN0cm9rZS13aWR0aD0iMS4yIi8+PC9nPjxyZWN0IHg9IjE4IiB5PSIyOCIgd2lkdGg9IjY0IiBoZWlnaHQ9IjU2IiByeD0iMjAiIGZpbGw9InVybCgjb2cxNSkiIHN0cm9rZT0iIzlDQkRGRiIgc3Ryb2tlLXdpZHRoPSIzIi8+PHJlY3QgeD0iMjYiIHk9IjM4LjUiIHdpZHRoPSI0OCIgaGVpZ2h0PSIzMSIgcng9IjEzIiBmaWxsPSIjMEEwRTE0Ii8+PHJlY3QgeD0iMjYiIHk9IjM4LjUiIHdpZHRoPSI0OCIgaGVpZ2h0PSIzMSIgcng9IjEzIiBmaWxsPSIjOUNCREZGIiBvcGFjaXR5PSIwLjA4MCIvPjxwYXRoIGQ9Ik0zMCw0NCBRMzEsNDEgMzUsNDEgTDQ4LDQxIiBzdHJva2U9IiNGNkY0RUUiIHN0cm9rZS13aWR0aD0iMS42IiBmaWxsPSJub25lIiBzdHJva2UtbGluZWNhcD0icm91bmQiIG9wYWNpdHk9IjAuMyIvPjxwYXRoIGQ9Ik0zNS44LDU2IFE0MCw0OS40IDQ0LjIsNTYiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzlDQkRGRiIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIC8+PHBhdGggZD0iTTU1LjgsNTYgUTYwLDQ5LjQgNjQuMiw1NiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjOUNCREZGIiBzdHJva2Utd2lkdGg9IjMiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgLz48cGF0aCBkPSJNNDUuNSw3Ni41IFE1MCw4MS43NSA1NC41LDc2LjUiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0ZGQTU2NiIgc3Ryb2tlLXdpZHRoPSIyLjQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgLz48L2c+PC9zdmc+Cg==", "orro-error": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiB2aWV3Qm94PSIwIDAgMTAwIDEwMCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJvZzExMyIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiIHgxPSIwIiB5MT0iMjgiIHgyPSIwIiB5Mj0iODQiPjxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iIzEzMjU0QSIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzExMUEyQyIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDAgMC4wMCkgcm90YXRlKDAuMDAgNTAgNjApIj48cmVjdCB4PSIxMSIgeT0iNDUiIHdpZHRoPSI5IiBoZWlnaHQ9IjE5IiByeD0iNC41IiBmaWxsPSIjRkZBNTY2Ii8+PHJlY3QgeD0iODAiIHk9IjQ1IiB3aWR0aD0iOSIgaGVpZ2h0PSIxOSIgcng9IjQuNSIgZmlsbD0iIzlDQkRGRiIvPjxnIHRyYW5zZm9ybT0icm90YXRlKDAuMDAgNTAgMjgpIj48cGF0aCBkPSJNNTAsMjggTDUwLDE4IiBmaWxsPSJub25lIiBzdHJva2U9IiM0RjVCNzAiIHN0cm9rZS13aWR0aD0iMy4yIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIC8+PGcgb3BhY2l0eT0iMSI+PHBhdGggZD0iTTQ1LjQwLDE2Ljg2IEE2LDYgMCAwIDEgNDUuNDAsOS4xNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNEY1QjcwIiBzdHJva2Utd2lkdGg9IjMuMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiAvPjxwYXRoIGQ9Ik01NC42MCw5LjE0IEE2LDYgMCAwIDEgNTQuNjAsMTYuODYiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzRGNUI3MCIgc3Ryb2tlLXdpZHRoPSIzLjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgLz48L2c+PGcgb3BhY2l0eT0iMSI+PHBhdGggZD0iTTQxLjU3LDIwLjA3IEExMSwxMSAwIDAgMSA0MS41Nyw1LjkzIiBmaWxsPSJub25lIiBzdHJva2U9IiM0RjVCNzAiIHN0cm9rZS13aWR0aD0iMy4yIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIC8+PHBhdGggZD0iTTU4LjQzLDUuOTMgQTExLDExIDAgMCAxIDU4LjQzLDIwLjA3IiBmaWxsPSJub25lIiBzdHJva2U9IiM0RjVCNzAiIHN0cm9rZS13aWR0aD0iMy4yIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIC8+PC9nPjxjaXJjbGUgY3g9IjUwIiBjeT0iMTMiIHI9IjMuNiIgZmlsbD0iIzRGNUI3MCIgc3Ryb2tlPSIjNEY1QjcwIiBzdHJva2Utd2lkdGg9IjEuMiIvPjwvZz48cmVjdCB4PSIxOCIgeT0iMjgiIHdpZHRoPSI2NCIgaGVpZ2h0PSI1NiIgcng9IjIwIiBmaWxsPSJ1cmwoI29nMTEzKSIgc3Ryb2tlPSIjQjQyMzJDIiBzdHJva2Utd2lkdGg9IjMiLz48cmVjdCB4PSIyNiIgeT0iMzguNSIgd2lkdGg9IjQ4IiBoZWlnaHQ9IjMxIiByeD0iMTMiIGZpbGw9IiMwQTBFMTQiLz48cmVjdCB4PSIyNiIgeT0iMzguNSIgd2lkdGg9IjQ4IiBoZWlnaHQ9IjMxIiByeD0iMTMiIGZpbGw9IiM5Q0JERkYiIG9wYWNpdHk9IjAuMDMwIi8+PHBhdGggZD0iTTMwLDQ0IFEzMSw0MSAzNSw0MSBMNDgsNDEiIHN0cm9rZT0iI0Y2RjRFRSIgc3Ryb2tlLXdpZHRoPSIxLjYiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgb3BhY2l0eT0iMC4zIi8+PHJlY3QgeD0iMzYuODAiIHk9IjQ5LjUwIiB3aWR0aD0iNi40IiBoZWlnaHQ9IjExLjAwIiByeD0iMy4yMCIgZmlsbD0iIzlDQkRGRiIvPjxyZWN0IHg9IjU2LjgwIiB5PSI0OS41MCIgd2lkdGg9IjYuNCIgaGVpZ2h0PSIxMS4wMCIgcng9IjMuMjAiIGZpbGw9IiM5Q0JERkYiLz48cGF0aCBkPSJNMzUuNSw0NyBMNDMsNDQuNSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjOUNCREZGIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgLz48cGF0aCBkPSJNNjQuNSw0NyBMNTcsNDQuNSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjOUNCREZGIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgLz48cGF0aCBkPSJNNDYsNzguNiBRNTAsNzUuMjAgNTQsNzguNiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjRkZBNTY2IiBzdHJva2Utd2lkdGg9IjIuMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiAvPjwvZz48ZyBvcGFjaXR5PSIwLjU1Ij48Y2lyY2xlIGN4PSI4MCIgY3k9IjgyIiByPSI5IiBmaWxsPSIjQjQyMzJDIi8+PHJlY3QgeD0iNzguNiIgeT0iNzYuNSIgd2lkdGg9IjIuOCIgaGVpZ2h0PSI3IiByeD0iMS40IiBmaWxsPSIjZmZmIi8+PGNpcmNsZSBjeD0iODAiIGN5PSI4Ni4yIiByPSIxLjYiIGZpbGw9IiNmZmYiLz48L2c+PC9zdmc+Cg==", "orro-idle": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiB2aWV3Qm94PSIwIDAgMTAwIDEwMCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJvZzEiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIiB4MT0iMCIgeTE9IjI4IiB4Mj0iMCIgeTI9Ijg0Ij48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMxMzI1NEEiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiMxMTFBMkMiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgwIC0wLjQxKSByb3RhdGUoMC4wMCA1MCA2MCkiPjxyZWN0IHg9IjExIiB5PSI0NSIgd2lkdGg9IjkiIGhlaWdodD0iMTkiIHJ4PSI0LjUiIGZpbGw9IiNGRkE1NjYiLz48cmVjdCB4PSI4MCIgeT0iNDUiIHdpZHRoPSI5IiBoZWlnaHQ9IjE5IiByeD0iNC41IiBmaWxsPSIjOUNCREZGIi8+PGcgdHJhbnNmb3JtPSJyb3RhdGUoMC4wMCA1MCAyOCkiPjxwYXRoIGQ9Ik01MCwyOCBMNTAsMTgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzlDQkRGRiIgc3Ryb2tlLXdpZHRoPSIzLjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgLz48ZyBvcGFjaXR5PSIxIj48cGF0aCBkPSJNNDUuNDAsMTYuODYgQTYsNiAwIDAgMSA0NS40MCw5LjE0IiBmaWxsPSJub25lIiBzdHJva2U9IiNGRkE1NjYiIHN0cm9rZS13aWR0aD0iMy4yIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIC8+PHBhdGggZD0iTTU0LjYwLDkuMTQgQTYsNiAwIDAgMSA1NC42MCwxNi44NiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjOUNCREZGIiBzdHJva2Utd2lkdGg9IjMuMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiAvPjwvZz48ZyBvcGFjaXR5PSIxIj48cGF0aCBkPSJNNDEuNTcsMjAuMDcgQTExLDExIDAgMCAxIDQxLjU3LDUuOTMiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0ZGQTU2NiIgc3Ryb2tlLXdpZHRoPSIzLjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgLz48cGF0aCBkPSJNNTguNDMsNS45MyBBMTEsMTEgMCAwIDEgNTguNDMsMjAuMDciIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzlDQkRGRiIgc3Ryb2tlLXdpZHRoPSIzLjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgLz48L2c+PGcgb3BhY2l0eT0iMC4yODAiPjxwYXRoIGQ9Ik00MC41MCwyMC45NyBBMTIuNCwxMi40IDAgMCAxIDQwLjUwLDUuMDMiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0ZGQTU2NiIgc3Ryb2tlLXdpZHRoPSIyLjYiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgLz48cGF0aCBkPSJNNTkuNTAsNS4wMyBBMTIuNCwxMi40IDAgMCAxIDU5LjUwLDIwLjk3IiBmaWxsPSJub25lIiBzdHJva2U9IiM5Q0JERkYiIHN0cm9rZS13aWR0aD0iMi42IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIC8+PC9nPjxjaXJjbGUgY3g9IjUwIiBjeT0iMTMiIHI9IjMuNiIgZmlsbD0iI0Y2RjRFRSIgc3Ryb2tlPSIjOUNCREZGIiBzdHJva2Utd2lkdGg9IjEuMiIvPjwvZz48cmVjdCB4PSIxOCIgeT0iMjgiIHdpZHRoPSI2NCIgaGVpZ2h0PSI1NiIgcng9IjIwIiBmaWxsPSJ1cmwoI29nMSkiIHN0cm9rZT0iIzlDQkRGRiIgc3Ryb2tlLXdpZHRoPSIzIi8+PHJlY3QgeD0iMjYiIHk9IjM4LjUiIHdpZHRoPSI0OCIgaGVpZ2h0PSIzMSIgcng9IjEzIiBmaWxsPSIjMEEwRTE0Ii8+PHJlY3QgeD0iMjYiIHk9IjM4LjUiIHdpZHRoPSI0OCIgaGVpZ2h0PSIzMSIgcng9IjEzIiBmaWxsPSIjOUNCREZGIiBvcGFjaXR5PSIwLjA2NCIvPjxwYXRoIGQ9Ik0zMCw0NCBRMzEsNDEgMzUsNDEgTDQ4LDQxIiBzdHJva2U9IiNGNkY0RUUiIHN0cm9rZS13aWR0aD0iMS42IiBmaWxsPSJub25lIiBzdHJva2UtbGluZWNhcD0icm91bmQiIG9wYWNpdHk9IjAuMyIvPjxyZWN0IHg9IjM2LjgwIiB5PSI0OC41MCIgd2lkdGg9IjYuNCIgaGVpZ2h0PSIxMS4wMCIgcng9IjMuMjAiIGZpbGw9IiM5Q0JERkYiLz48cmVjdCB4PSI1Ni44MCIgeT0iNDguNTAiIHdpZHRoPSI2LjQiIGhlaWdodD0iMTEuMDAiIHJ4PSIzLjIwIiBmaWxsPSIjOUNCREZGIi8+PHBhdGggZD0iTTQ1LjUsNzYuNSBRNTAsODAuODAgNTQuNSw3Ni41IiBmaWxsPSJub25lIiBzdHJva2U9IiNGRkE1NjYiIHN0cm9rZS13aWR0aD0iMi40IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIC8+PC9nPjwvc3ZnPgo=", "orro-listening": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiB2aWV3Qm94PSIwIDAgMTAwIDEwMCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJvZzI5IiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAiIHkxPSIyOCIgeDI9IjAiIHkyPSI4NCI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjMTMyNTRBIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjMTExQTJDIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMCAwLjAwKSByb3RhdGUoMC4wMCA1MCA2MCkiPjxyZWN0IHg9IjExIiB5PSI0NSIgd2lkdGg9IjkiIGhlaWdodD0iMTkiIHJ4PSI0LjUiIGZpbGw9IiNGRkE1NjYiLz48cmVjdCB4PSI4MCIgeT0iNDUiIHdpZHRoPSI5IiBoZWlnaHQ9IjE5IiByeD0iNC41IiBmaWxsPSIjOUNCREZGIi8+PGcgdHJhbnNmb3JtPSJyb3RhdGUoMC4wMCA1MCAyOCkiPjxwYXRoIGQ9Ik01MCwyOCBMNTAsMTgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzlDQkRGRiIgc3Ryb2tlLXdpZHRoPSIzLjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgLz48ZyBvcGFjaXR5PSIxIj48cGF0aCBkPSJNNDUuNDAsMTYuODYgQTYsNiAwIDAgMSA0NS40MCw5LjE0IiBmaWxsPSJub25lIiBzdHJva2U9IiNGRkE1NjYiIHN0cm9rZS13aWR0aD0iMy4yIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIC8+PHBhdGggZD0iTTU0LjYwLDkuMTQgQTYsNiAwIDAgMSA1NC42MCwxNi44NiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjOUNCREZGIiBzdHJva2Utd2lkdGg9IjMuMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiAvPjwvZz48ZyBvcGFjaXR5PSIxIj48cGF0aCBkPSJNNDEuNTcsMjAuMDcgQTExLDExIDAgMCAxIDQxLjU3LDUuOTMiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0ZGQTU2NiIgc3Ryb2tlLXdpZHRoPSIzLjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgLz48cGF0aCBkPSJNNTguNDMsNS45MyBBMTEsMTEgMCAwIDEgNTguNDMsMjAuMDciIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzlDQkRGRiIgc3Ryb2tlLXdpZHRoPSIzLjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgLz48L2c+PGcgb3BhY2l0eT0iMC43NTAiPjxwYXRoIGQ9Ik00MC4yMywyMS4yMCBBMTIuNzUsMTIuNzUgMCAwIDEgNDAuMjMsNC44MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjRkZBNTY2IiBzdHJva2Utd2lkdGg9IjIuNiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiAvPjxwYXRoIGQ9Ik01OS43Nyw0LjgwIEExMi43NSwxMi43NSAwIDAgMSA1OS43NywyMS4yMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjOUNCREZGIiBzdHJva2Utd2lkdGg9IjIuNiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiAvPjwvZz48Y2lyY2xlIGN4PSI1MCIgY3k9IjEzIiByPSIzLjYiIGZpbGw9IiNGNkY0RUUiIHN0cm9rZT0iIzlDQkRGRiIgc3Ryb2tlLXdpZHRoPSIxLjIiLz48L2c+PHJlY3QgeD0iMTgiIHk9IjI4IiB3aWR0aD0iNjQiIGhlaWdodD0iNTYiIHJ4PSIyMCIgZmlsbD0idXJsKCNvZzI5KSIgc3Ryb2tlPSIjOUNCREZGIiBzdHJva2Utd2lkdGg9IjMiLz48cmVjdCB4PSIyNiIgeT0iMzguNSIgd2lkdGg9IjQ4IiBoZWlnaHQ9IjMxIiByeD0iMTMiIGZpbGw9IiMwQTBFMTQiLz48cmVjdCB4PSIyNiIgeT0iMzguNSIgd2lkdGg9IjQ4IiBoZWlnaHQ9IjMxIiByeD0iMTMiIGZpbGw9IiM5Q0JERkYiIG9wYWNpdHk9IjAuMjAwIi8+PHBhdGggZD0iTTMwLDQ0IFEzMSw0MSAzNSw0MSBMNDgsNDEiIHN0cm9rZT0iI0Y2RjRFRSIgc3Ryb2tlLXdpZHRoPSIxLjYiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgb3BhY2l0eT0iMC4zIi8+PHJlY3QgeD0iMzYuODAiIHk9IjQ3Ljg0IiB3aWR0aD0iNi40IiBoZWlnaHQ9IjEyLjMyIiByeD0iMy4yMCIgZmlsbD0iIzlDQkRGRiIvPjxyZWN0IHg9IjU2LjgwIiB5PSI0Ny44NCIgd2lkdGg9IjYuNCIgaGVpZ2h0PSIxMi4zMiIgcng9IjMuMjAiIGZpbGw9IiM5Q0JERkYiLz48ZWxsaXBzZSBjeD0iNTAiIGN5PSI3NyIgcng9IjIuMjEiIHJ5PSIyLjQyIiBmaWxsPSIjRkZBNTY2Ii8+PC9nPjwvc3ZnPgo=", "orro-sleepy": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiB2aWV3Qm94PSIwIDAgMTAwIDEwMCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJvZzEyNyIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiIHgxPSIwIiB5MT0iMjgiIHgyPSIwIiB5Mj0iODQiPjxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iIzEzMjU0QSIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzExMUEyQyIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDAgMC4yNSkgcm90YXRlKDAuMDAgNTAgNjApIj48cmVjdCB4PSIxMSIgeT0iNDUiIHdpZHRoPSI5IiBoZWlnaHQ9IjE5IiByeD0iNC41IiBmaWxsPSIjRkZBNTY2Ii8+PHJlY3QgeD0iODAiIHk9IjQ1IiB3aWR0aD0iOSIgaGVpZ2h0PSIxOSIgcng9IjQuNSIgZmlsbD0iIzlDQkRGRiIvPjxnIHRyYW5zZm9ybT0icm90YXRlKC00LjAwIDUwIDI4KSI+PHBhdGggZD0iTTUwLDI4IEw1MCwxOCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNEY1QjcwIiBzdHJva2Utd2lkdGg9IjMuMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiAvPjxnIG9wYWNpdHk9IjAuNiI+PHBhdGggZD0iTTQ1LjQwLDE2Ljg2IEE2LDYgMCAwIDEgNDUuNDAsOS4xNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNEY1QjcwIiBzdHJva2Utd2lkdGg9IjMuMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiAvPjxwYXRoIGQ9Ik01NC42MCw5LjE0IEE2LDYgMCAwIDEgNTQuNjAsMTYuODYiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzRGNUI3MCIgc3Ryb2tlLXdpZHRoPSIzLjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgLz48L2c+PGcgb3BhY2l0eT0iMC4zNSI+PHBhdGggZD0iTTQxLjU3LDIwLjA3IEExMSwxMSAwIDAgMSA0MS41Nyw1LjkzIiBmaWxsPSJub25lIiBzdHJva2U9IiM0RjVCNzAiIHN0cm9rZS13aWR0aD0iMy4yIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIC8+PHBhdGggZD0iTTU4LjQzLDUuOTMgQTExLDExIDAgMCAxIDU4LjQzLDIwLjA3IiBmaWxsPSJub25lIiBzdHJva2U9IiM0RjVCNzAiIHN0cm9rZS13aWR0aD0iMy4yIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIC8+PC9nPjxjaXJjbGUgY3g9IjUwIiBjeT0iMTMiIHI9IjMuNiIgZmlsbD0iIzRGNUI3MCIgc3Ryb2tlPSIjNEY1QjcwIiBzdHJva2Utd2lkdGg9IjEuMiIvPjwvZz48cmVjdCB4PSIxOCIgeT0iMjgiIHdpZHRoPSI2NCIgaGVpZ2h0PSI1NiIgcng9IjIwIiBmaWxsPSJ1cmwoI29nMTI3KSIgc3Ryb2tlPSIjOUNCREZGIiBzdHJva2Utd2lkdGg9IjMiLz48cmVjdCB4PSIyNiIgeT0iMzguNSIgd2lkdGg9IjQ4IiBoZWlnaHQ9IjMxIiByeD0iMTMiIGZpbGw9IiMwQTBFMTQiLz48cGF0aCBkPSJNMzAsNDQgUTMxLDQxIDM1LDQxIEw0OCw0MSIgc3Ryb2tlPSIjRjZGNEVFIiBzdHJva2Utd2lkdGg9IjEuNiIgZmlsbD0ibm9uZSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBvcGFjaXR5PSIwLjMiLz48cGF0aCBkPSJNMzYsNTQgUTQwLDU3IDQ0LDU0IiBmaWxsPSJub25lIiBzdHJva2U9IiM5Q0JERkYiIHN0cm9rZS13aWR0aD0iMi42IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIC8+PHBhdGggZD0iTTU2LDU0IFE2MCw1NyA2NCw1NCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjOUNCREZGIiBzdHJva2Utd2lkdGg9IjIuNiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiAvPjxwYXRoIGQ9Ik00OCw3NyBMNTIsNzciIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0ZGQTU2NiIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIC8+PC9nPjxwYXRoIGQ9Ik03NS4yLDIxLjkgbDQuMywwIGwtNC4zLDQuMyBsNC4zLDAiIHN0cm9rZT0iIzlDQkRGRiIgc3Ryb2tlLXdpZHRoPSIxLjgiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgb3BhY2l0eT0iMC40MSIvPjxwYXRoIGQ9Ik04MS4yLDE0LjkgbDUuMywwIGwtNS4zLDUuMyBsNS4zLDAiIHN0cm9rZT0iIzlDQkRGRiIgc3Ryb2tlLXdpZHRoPSIxLjgiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgb3BhY2l0eT0iMC44MCIvPjwvc3ZnPgo=", "orro-success": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiB2aWV3Qm94PSIwIDAgMTAwIDEwMCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJvZzcxIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAiIHkxPSIyOCIgeDI9IjAiIHkyPSI4NCI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjMTMyNTRBIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjMTExQTJDIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMCAtMC4wMCkgcm90YXRlKDAuMDAgNTAgNjApIj48cmVjdCB4PSIxMSIgeT0iNDUiIHdpZHRoPSI5IiBoZWlnaHQ9IjE5IiByeD0iNC41IiBmaWxsPSIjRkZBNTY2Ii8+PHJlY3QgeD0iODAiIHk9IjQ1IiB3aWR0aD0iOSIgaGVpZ2h0PSIxOSIgcng9IjQuNSIgZmlsbD0iIzlDQkRGRiIvPjxnIHRyYW5zZm9ybT0icm90YXRlKDAuMDAgNTAgMjgpIj48cGF0aCBkPSJNNTAsMjggTDUwLDE4IiBmaWxsPSJub25lIiBzdHJva2U9IiM5Q0JERkYiIHN0cm9rZS13aWR0aD0iMy4yIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIC8+PGcgb3BhY2l0eT0iMSI+PHBhdGggZD0iTTQ1LjQwLDE2Ljg2IEE2LDYgMCAwIDEgNDUuNDAsOS4xNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjRkZBNTY2IiBzdHJva2Utd2lkdGg9IjMuMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiAvPjxwYXRoIGQ9Ik01NC42MCw5LjE0IEE2LDYgMCAwIDEgNTQuNjAsMTYuODYiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzlDQkRGRiIgc3Ryb2tlLXdpZHRoPSIzLjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgLz48L2c+PGcgb3BhY2l0eT0iMSI+PHBhdGggZD0iTTQxLjU3LDIwLjA3IEExMSwxMSAwIDAgMSA0MS41Nyw1LjkzIiBmaWxsPSJub25lIiBzdHJva2U9IiNGRkE1NjYiIHN0cm9rZS13aWR0aD0iMy4yIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIC8+PHBhdGggZD0iTTU4LjQzLDUuOTMgQTExLDExIDAgMCAxIDU4LjQzLDIwLjA3IiBmaWxsPSJub25lIiBzdHJva2U9IiM5Q0JERkYiIHN0cm9rZS13aWR0aD0iMy4yIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIC8+PC9nPjxnIG9wYWNpdHk9IjAuNDAwIj48cGF0aCBkPSJNMzguODksMjIuMzIgQTE0LjUsMTQuNSAwIDAgMSAzOC44OSwzLjY4IiBmaWxsPSJub25lIiBzdHJva2U9IiNGRkE1NjYiIHN0cm9rZS13aWR0aD0iMi42IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIC8+PHBhdGggZD0iTTYxLjExLDMuNjggQTE0LjUsMTQuNSAwIDAgMSA2MS4xMSwyMi4zMiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjOUNCREZGIiBzdHJva2Utd2lkdGg9IjIuNiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiAvPjwvZz48Y2lyY2xlIGN4PSI1MCIgY3k9IjEzIiByPSIzLjYiIGZpbGw9IiNGNkY0RUUiIHN0cm9rZT0iIzlDQkRGRiIgc3Ryb2tlLXdpZHRoPSIxLjIiLz48L2c+PHJlY3QgeD0iMTgiIHk9IjI4IiB3aWR0aD0iNjQiIGhlaWdodD0iNTYiIHJ4PSIyMCIgZmlsbD0idXJsKCNvZzcxKSIgc3Ryb2tlPSIjOUNCREZGIiBzdHJva2Utd2lkdGg9IjMiLz48cmVjdCB4PSIyNiIgeT0iMzguNSIgd2lkdGg9IjQ4IiBoZWlnaHQ9IjMxIiByeD0iMTMiIGZpbGw9IiMwQTBFMTQiLz48cmVjdCB4PSIyNiIgeT0iMzguNSIgd2lkdGg9IjQ4IiBoZWlnaHQ9IjMxIiByeD0iMTMiIGZpbGw9IiM5Q0JERkYiIG9wYWNpdHk9IjAuMTAwIi8+PHBhdGggZD0iTTMwLDQ0IFEzMSw0MSAzNSw0MSBMNDgsNDEiIHN0cm9rZT0iI0Y2RjRFRSIgc3Ryb2tlLXdpZHRoPSIxLjYiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgb3BhY2l0eT0iMC4zIi8+PHBhdGggZD0iTTM1LjgsNTYgUTQwLDQ5LjQgNDQuMiw1NiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjOUNCREZGIiBzdHJva2Utd2lkdGg9IjMiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgLz48cGF0aCBkPSJNNTUuOCw1NiBRNjAsNDkuNCA2NC4yLDU2IiBmaWxsPSJub25lIiBzdHJva2U9IiM5Q0JERkYiIHN0cm9rZS13aWR0aD0iMyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiAvPjxwYXRoIGQ9Ik00NC44LDc1LjUgUTUwLDgzLjAwIDU1LjIsNzUuNSBaIiBmaWxsPSIjRkZBNTY2Ii8+PC9nPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDgwIDgyKSBzY2FsZSgxLjAwMCkiPjxjaXJjbGUgcj0iOSIgZmlsbD0iI0ZGQTU2NiIvPjxwYXRoIGQ9Ik0tNCwwIGwzLDMuMiBsNS41LC02IiBmaWxsPSJub25lIiBzdHJva2U9IiMwRDE1MjYiIHN0cm9rZS13aWR0aD0iMi42IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIC8+PC9nPjwvc3ZnPgo=", "orro-surprised": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiB2aWV3Qm94PSIwIDAgMTAwIDEwMCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJvZzU3IiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAiIHkxPSIyOCIgeDI9IjAiIHkyPSI4NCI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjMTMyNTRBIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjMTExQTJDIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMCAtMC4wMCkgcm90YXRlKDAuMDAgNTAgNjApIj48cmVjdCB4PSIxMSIgeT0iNDUiIHdpZHRoPSI5IiBoZWlnaHQ9IjE5IiByeD0iNC41IiBmaWxsPSIjRkZBNTY2Ii8+PHJlY3QgeD0iODAiIHk9IjQ1IiB3aWR0aD0iOSIgaGVpZ2h0PSIxOSIgcng9IjQuNSIgZmlsbD0iIzlDQkRGRiIvPjxnIHRyYW5zZm9ybT0icm90YXRlKDAuMDAgNTAgMjgpIj48cGF0aCBkPSJNNTAsMjggTDUwLDE4IiBmaWxsPSJub25lIiBzdHJva2U9IiM5Q0JERkYiIHN0cm9rZS13aWR0aD0iMy4yIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIC8+PGcgb3BhY2l0eT0iMSI+PHBhdGggZD0iTTQ1LjQwLDE2Ljg2IEE2LDYgMCAwIDEgNDUuNDAsOS4xNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjRkZBNTY2IiBzdHJva2Utd2lkdGg9IjMuMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiAvPjxwYXRoIGQ9Ik01NC42MCw5LjE0IEE2LDYgMCAwIDEgNTQuNjAsMTYuODYiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzlDQkRGRiIgc3Ryb2tlLXdpZHRoPSIzLjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgLz48L2c+PGcgb3BhY2l0eT0iMSI+PHBhdGggZD0iTTQxLjU3LDIwLjA3IEExMSwxMSAwIDAgMSA0MS41Nyw1LjkzIiBmaWxsPSJub25lIiBzdHJva2U9IiNGRkE1NjYiIHN0cm9rZS13aWR0aD0iMy4yIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIC8+PHBhdGggZD0iTTU4LjQzLDUuOTMgQTExLDExIDAgMCAxIDU4LjQzLDIwLjA3IiBmaWxsPSJub25lIiBzdHJva2U9IiM5Q0JERkYiIHN0cm9rZS13aWR0aD0iMy4yIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIC8+PC9nPjxjaXJjbGUgY3g9IjUwIiBjeT0iMTMiIHI9IjMuNiIgZmlsbD0iI0Y2RjRFRSIgc3Ryb2tlPSIjOUNCREZGIiBzdHJva2Utd2lkdGg9IjEuMiIvPjwvZz48cmVjdCB4PSIxOCIgeT0iMjgiIHdpZHRoPSI2NCIgaGVpZ2h0PSI1NiIgcng9IjIwIiBmaWxsPSJ1cmwoI29nNTcpIiBzdHJva2U9IiM5Q0JERkYiIHN0cm9rZS13aWR0aD0iMyIvPjxyZWN0IHg9IjI2IiB5PSIzOC41IiB3aWR0aD0iNDgiIGhlaWdodD0iMzEiIHJ4PSIxMyIgZmlsbD0iIzBBMEUxNCIvPjxyZWN0IHg9IjI2IiB5PSIzOC41IiB3aWR0aD0iNDgiIGhlaWdodD0iMzEiIHJ4PSIxMyIgZmlsbD0iIzlDQkRGRiIgb3BhY2l0eT0iMC4wOTAiLz48cGF0aCBkPSJNMzAsNDQgUTMxLDQxIDM1LDQxIEw0OCw0MSIgc3Ryb2tlPSIjRjZGNEVFIiBzdHJva2Utd2lkdGg9IjEuNiIgZmlsbD0ibm9uZSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBvcGFjaXR5PSIwLjMiLz48Y2lyY2xlIGN4PSI0MCIgY3k9IjU0IiByPSI1LjA0IiBmaWxsPSIjOUNCREZGIi8+PGNpcmNsZSBjeD0iNDEuNTEiIGN5PSI1Mi4yNCIgcj0iMS40MSIgZmlsbD0iI0Y2RjRFRSIgb3BhY2l0eT0iMC44NSIvPjxjaXJjbGUgY3g9IjYwIiBjeT0iNTQiIHI9IjUuMDQiIGZpbGw9IiM5Q0JERkYiLz48Y2lyY2xlIGN4PSI2MS41MSIgY3k9IjUyLjI0IiByPSIxLjQxIiBmaWxsPSIjRjZGNEVFIiBvcGFjaXR5PSIwLjg1Ii8+PGVsbGlwc2UgY3g9IjUwIiBjeT0iNzciIHJ4PSIyLjk0IiByeT0iMy4yMiIgZmlsbD0iI0ZGQTU2NiIvPjwvZz48L3N2Zz4K", "orro-thinking": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiB2aWV3Qm94PSIwIDAgMTAwIDEwMCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJvZzQzIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAiIHkxPSIyOCIgeDI9IjAiIHkyPSI4NCI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjMTMyNTRBIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjMTExQTJDIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMCAwLjAwKSByb3RhdGUoMC4wMCA1MCA2MCkiPjxyZWN0IHg9IjExIiB5PSI0NSIgd2lkdGg9IjkiIGhlaWdodD0iMTkiIHJ4PSI0LjUiIGZpbGw9IiNGRkE1NjYiLz48cmVjdCB4PSI4MCIgeT0iNDUiIHdpZHRoPSI5IiBoZWlnaHQ9IjE5IiByeD0iNC41IiBmaWxsPSIjOUNCREZGIi8+PGcgdHJhbnNmb3JtPSJyb3RhdGUoMS41NSA1MCAyOCkiPjxwYXRoIGQ9Ik01MCwyOCBMNTAsMTgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzlDQkRGRiIgc3Ryb2tlLXdpZHRoPSIzLjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgLz48ZyBvcGFjaXR5PSIxIj48cGF0aCBkPSJNNDUuNDAsMTYuODYgQTYsNiAwIDAgMSA0NS40MCw5LjE0IiBmaWxsPSJub25lIiBzdHJva2U9IiNGRkE1NjYiIHN0cm9rZS13aWR0aD0iMy4yIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIC8+PHBhdGggZD0iTTU0LjYwLDkuMTQgQTYsNiAwIDAgMSA1NC42MCwxNi44NiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjOUNCREZGIiBzdHJva2Utd2lkdGg9IjMuMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiAvPjwvZz48ZyBvcGFjaXR5PSIxIj48cGF0aCBkPSJNNDEuNTcsMjAuMDcgQTExLDExIDAgMCAxIDQxLjU3LDUuOTMiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0ZGQTU2NiIgc3Ryb2tlLXdpZHRoPSIzLjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgLz48cGF0aCBkPSJNNTguNDMsNS45MyBBMTEsMTEgMCAwIDEgNTguNDMsMjAuMDciIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzlDQkRGRiIgc3Ryb2tlLXdpZHRoPSIzLjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgLz48L2c+PGNpcmNsZSBjeD0iNTAiIGN5PSIxMyIgcj0iMy42IiBmaWxsPSIjRjZGNEVFIiBzdHJva2U9IiM5Q0JERkYiIHN0cm9rZS13aWR0aD0iMS4yIi8+PC9nPjxyZWN0IHg9IjE4IiB5PSIyOCIgd2lkdGg9IjY0IiBoZWlnaHQ9IjU2IiByeD0iMjAiIGZpbGw9InVybCgjb2c0MykiIHN0cm9rZT0iIzlDQkRGRiIgc3Ryb2tlLXdpZHRoPSIzIi8+PHJlY3QgeD0iMjYiIHk9IjM4LjUiIHdpZHRoPSI0OCIgaGVpZ2h0PSIzMSIgcng9IjEzIiBmaWxsPSIjMEEwRTE0Ii8+PHJlY3QgeD0iMjYiIHk9IjM4LjUiIHdpZHRoPSI0OCIgaGVpZ2h0PSIzMSIgcng9IjEzIiBmaWxsPSIjOUNCREZGIiBvcGFjaXR5PSIwLjA3MCIvPjxwYXRoIGQ9Ik0zMCw0NCBRMzEsNDEgMzUsNDEgTDQ4LDQxIiBzdHJva2U9IiNGNkY0RUUiIHN0cm9rZS13aWR0aD0iMS42IiBmaWxsPSJub25lIiBzdHJva2UtbGluZWNhcD0icm91bmQiIG9wYWNpdHk9IjAuMyIvPjxyZWN0IHg9IjM4LjUzIiB5PSI0Ni43MCIgd2lkdGg9IjYuNCIgaGVpZ2h0PSIxMS4wMCIgcng9IjMuMjAiIGZpbGw9IiM5Q0JERkYiLz48cmVjdCB4PSI1OC41MyIgeT0iNDYuNzAiIHdpZHRoPSI2LjQiIGhlaWdodD0iMTEuMDAiIHJ4PSIzLjIwIiBmaWxsPSIjOUNCREZGIi8+PHBhdGggZD0iTTQ2LjUsNzcgTDUzLjUsNzYuNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjRkZBNTY2IiBzdHJva2Utd2lkdGg9IjIuMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiAvPjwvZz48Y2lyY2xlIGN4PSI3NSIgY3k9IjIxIiByPSIyLjQiIGZpbGw9IiM5Q0JERkYiIG9wYWNpdHk9IjEuMDAiLz48Y2lyY2xlIGN4PSI4MiIgY3k9IjE0IiByPSIzLjMiIGZpbGw9IiM5Q0JERkYiIG9wYWNpdHk9IjAuMTUiLz48Y2lyY2xlIGN4PSI5MCIgY3k9IjgiIHI9IjQuMiIgZmlsbD0iIzlDQkRGRiIgb3BhY2l0eT0iMC4xNSIvPjwvc3ZnPgo=", "symbol-color-dark": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDgiIGhlaWdodD0iMTA4IiB2aWV3Qm94PSIwIDAgMTA4IDEwOCI+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNCw0KSI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJtZzEiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIiB4MT0iMCIgeTE9IjQiIHgyPSIwIiB5Mj0iOTYiPjxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iI0ZGQjg4NCIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iI0ZGQTU2NiIvPjwvbGluZWFyR3JhZGllbnQ+PGxpbmVhckdyYWRpZW50IGlkPSJtZzIiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIiB4MT0iMTAwIiB5MT0iNCIgeDI9IjEwMCIgeTI9Ijk2Ij48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiNDMkQ2RkYiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiM5Q0JERkYiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cGF0aCBkPSJNNDEuNTIsNjMuNTcgQTE2LDE2IDAgMCAxIDQxLjUyLDM2LjQzIiBmaWxsPSJub25lIiBzdHJva2U9InVybCgjbWcxKSIgc3Ryb2tlLXdpZHRoPSI5LjYiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgLz48cGF0aCBkPSJNNTguNDgsMzYuNDMgQTE2LDE2IDAgMCAxIDU4LjQ4LDYzLjU3IiBmaWxsPSJub25lIiBzdHJva2U9InVybCgjbWcyKSIgc3Ryb2tlLXdpZHRoPSI5LjYiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgLz48cGF0aCBkPSJNMzMuNTcsNzYuMjkgQTMxLDMxIDAgMCAxIDMzLjU3LDIzLjcxIiBmaWxsPSJub25lIiBzdHJva2U9InVybCgjbWcxKSIgc3Ryb2tlLXdpZHRoPSI5LjYiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgLz48cGF0aCBkPSJNNjYuNDMsMjMuNzEgQTMxLDMxIDAgMCAxIDY2LjQzLDc2LjI5IiBmaWxsPSJub25lIiBzdHJva2U9InVybCgjbWcyKSIgc3Ryb2tlLXdpZHRoPSI5LjYiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgLz48cGF0aCBkPSJNMjUuNjIsODkuMDEgQTQ2LDQ2IDAgMCAxIDI1LjYyLDEwLjk5IiBmaWxsPSJub25lIiBzdHJva2U9InVybCgjbWcxKSIgc3Ryb2tlLXdpZHRoPSI5LjYiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgLz48cGF0aCBkPSJNNzQuMzgsMTAuOTkgQTQ2LDQ2IDAgMCAxIDc0LjM4LDg5LjAxIiBmaWxsPSJub25lIiBzdHJva2U9InVybCgjbWcyKSIgc3Ryb2tlLXdpZHRoPSI5LjYiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgLz48Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSI3LjYiIGZpbGw9IiNGNkY0RUUiLz48L2c+PC9zdmc+Cg==", "symbol-color-light": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDgiIGhlaWdodD0iMTA4IiB2aWV3Qm94PSIwIDAgMTA4IDEwOCI+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNCw0KSI+PGRlZnM+PC9kZWZzPjxwYXRoIGQ9Ik00MS41Miw2My41NyBBMTYsMTYgMCAwIDEgNDEuNTIsMzYuNDMiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0I1NTAwRiIgc3Ryb2tlLXdpZHRoPSI5LjYiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgLz48cGF0aCBkPSJNNTguNDgsMzYuNDMgQTE2LDE2IDAgMCAxIDU4LjQ4LDYzLjU3IiBmaWxsPSJub25lIiBzdHJva2U9IiMyRjVGQjMiIHN0cm9rZS13aWR0aD0iOS42IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIC8+PHBhdGggZD0iTTMzLjU3LDc2LjI5IEEzMSwzMSAwIDAgMSAzMy41NywyMy43MSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjQjU1MDBGIiBzdHJva2Utd2lkdGg9IjkuNiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiAvPjxwYXRoIGQ9Ik02Ni40MywyMy43MSBBMzEsMzEgMCAwIDEgNjYuNDMsNzYuMjkiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzJGNUZCMyIgc3Ryb2tlLXdpZHRoPSI5LjYiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgLz48cGF0aCBkPSJNMjUuNjIsODkuMDEgQTQ2LDQ2IDAgMCAxIDI1LjYyLDEwLjk5IiBmaWxsPSJub25lIiBzdHJva2U9IiNCNTUwMEYiIHN0cm9rZS13aWR0aD0iOS42IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIC8+PHBhdGggZD0iTTc0LjM4LDEwLjk5IEE0Niw0NiAwIDAgMSA3NC4zOCw4OS4wMSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMkY1RkIzIiBzdHJva2Utd2lkdGg9IjkuNiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiAvPjxjaXJjbGUgY3g9IjUwIiBjeT0iNTAiIHI9IjcuNiIgZmlsbD0iIzBEMTUyNiIvPjwvZz48L3N2Zz4K", "wordmark-dark": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMzYuODAwMDAwMDAwMDAwMDciIGhlaWdodD0iOTIuNSIgdmlld0JveD0iMCAwIDMzNi44MDAwMDAwMDAwMDAwNyA5Mi41Ij48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgxMCwxMCkiPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDAsNzEuNSkiPjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0id2c1IiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjgwLjciIHkxPSItNzUuMCIgeDI9IjE2Ni42MDAwMDAwMDAwMDAwMiIgeTI9IjAiPjxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iI0ZGQjg4NCIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iI0ZGQTU2NiIvPjwvbGluZWFyR3JhZGllbnQ+PGxpbmVhckdyYWRpZW50IGlkPSJ3ZzYiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIiB4MT0iMjI2LjgiIHkxPSItNzUuMCIgeDI9IjMxNi44MDAwMDAwMDAwMDAwNyIgeTI9IjAiPjxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iI0MyRDZGRiIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzlDQkRGRiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxwYXRoIGQ9Ik00MC40MDAwMDAwMDAwMDAwMDYgMS4xUTI5LjcwMDAwMDAwMDAwMDAwMyAxLjEgMjEuNiAtMy40NVExMy41IC04LjAgOS4wNSAtMTYuMjAwMDAwMDAwMDAwMDAzUTQuNjAwMDAwMDAwMDAwMDAwNSAtMjQuNDAwMDAwMDAwMDAwMDAyIDQuNjAwMDAwMDAwMDAwMDAwNSAtMzUuMzAwMDAwMDAwMDAwMDA0UTQuNjAwMDAwMDAwMDAwMDAwNSAtNDMuNSA3LjE1IC01MC4yUTkuNzAwMDAwMDAwMDAwMDAxIC01Ni45MDAwMDAwMDAwMDAwMDYgMTQuNDUwMDAwMDAwMDAwMDAzIC02MS43UTE5LjIwMDAwMDAwMDAwMDAwMyAtNjYuNSAyNS44IC02OS4wNTAwMDAwMDAwMDAwMVEzMi40IC03MS42MDAwMDAwMDAwMDAwMSA0MC40MDAwMDAwMDAwMDAwMDYgLTcxLjYwMDAwMDAwMDAwMDAxUTUxLjEgLTcxLjYwMDAwMDAwMDAwMDAxIDU5LjE1MDAwMDAwMDAwMDAwNiAtNjcuMTAwMDAwMDAwMDAwMDFRNjcuMiAtNjIuNiA3MS43IC01NC40NVE3Ni4yIC00Ni4zMDAwMDAwMDAwMDAwMDQgNzYuMiAtMzUuMzAwMDAwMDAwMDAwMDA0UTc2LjIgLTI3LjEgNzMuNjUgLTIwLjQwMDAwMDAwMDAwMDAwMlE3MS4xMDAwMDAwMDAwMDAwMSAtMTMuNzAwMDAwMDAwMDAwMDAxIDY2LjM1MDAwMDAwMDAwMDAxIC04Ljg1MDAwMDAwMDAwMDAwMVE2MS42IC00LjAgNTUuMCAtMS40NVE0OC40MDAwMDAwMDAwMDAwMDYgMS4xIDQwLjQwMDAwMDAwMDAwMDAwNiAxLjFaTTQwLjQwMDAwMDAwMDAwMDAwNiAtMTQuM1E0NS43IC0xNC4zIDQ5LjQwMDAwMDAwMDAwMDAwNiAtMTYuOFE1My4xIC0xOS4zIDU1LjEgLTI0LjBRNTcuMSAtMjguNzAwMDAwMDAwMDAwMDAzIDU3LjEgLTM1LjMwMDAwMDAwMDAwMDAwNFE1Ny4xIC00NS4yIDUyLjcgLTUwLjdRNDguMzAwMDAwMDAwMDAwMDA0IC01Ni4yIDQwLjQwMDAwMDAwMDAwMDAwNiAtNTYuMlEzNS4yIC01Ni4yIDMxLjQ1MDAwMDAwMDAwMDAwMyAtNTMuNzVRMjcuNzAwMDAwMDAwMDAwMDAzIC01MS4zMDAwMDAwMDAwMDAwMDQgMjUuNzAwMDAwMDAwMDAwMDAzIC00Ni42NTAwMDAwMDAwMDAwMDZRMjMuNzAwMDAwMDAwMDAwMDAzIC00Mi4wIDIzLjcwMDAwMDAwMDAwMDAwMyAtMzUuMzAwMDAwMDAwMDAwMDA0UTIzLjcwMDAwMDAwMDAwMDAwMyAtMjUuNDAwMDAwMDAwMDAwMDAyIDI4LjEgLTE5Ljg1UTMyLjUgLTE0LjMgNDAuNDAwMDAwMDAwMDAwMDA2IC0xNC4zWiIgZmlsbD0iI0Y2RjRFRSIvPjxwYXRoIGQ9Ik0xOTYuNzAwMDAwMDAwMDAwMDIgMS4xUTE4OC41MDAwMDAwMDAwMDAwMyAxLjEgMTgyLjQwMDAwMDAwMDAwMDAzIC0yLjBRMTc2LjMgLTUuMTAwMDAwMDAwMDAwMDAwNSAxNzIuOTAwMDAwMDAwMDAwMDMgLTEwLjlRMTY5LjUwMDAwMDAwMDAwMDAzIC0xNi43IDE2OS41MDAwMDAwMDAwMDAwMyAtMjQuNlExNjkuNTAwMDAwMDAwMDAwMDMgLTMwLjYgMTcxLjQwMDAwMDAwMDAwMDAzIC0zNS4zNVExNzMuMyAtNDAuMSAxNzYuOTAwMDAwMDAwMDAwMDMgLTQzLjQ1UTE4MC41MDAwMDAwMDAwMDAwMyAtNDYuODAwMDAwMDAwMDAwMDA0IDE4NS41MDAwMDAwMDAwMDAwMyAtNDguNTUwMDAwMDAwMDAwMDA0UTE5MC41MDAwMDAwMDAwMDAwMyAtNTAuMzAwMDAwMDAwMDAwMDA0IDE5Ni43MDAwMDAwMDAwMDAwMiAtNTAuMzAwMDAwMDAwMDAwMDA0UTIwNC45MDAwMDAwMDAwMDAwMyAtNTAuMzAwMDAwMDAwMDAwMDA0IDIxMS4wMDAwMDAwMDAwMDAwMyAtNDcuMlEyMTcuMTAwMDAwMDAwMDAwMDIgLTQ0LjEgMjIwLjQ1MDAwMDAwMDAwMDAyIC0zOC4zNVEyMjMuOCAtMzIuNiAyMjMuOCAtMjQuNlEyMjMuOCAtMTguNyAyMjEuOTAwMDAwMDAwMDAwMDMgLTEzLjg5OTk5OTk5OTk5OTk5OVEyMjAuMDAwMDAwMDAwMDAwMDMgLTkuMSAyMTYuNDUwMDAwMDAwMDAwMDUgLTUuNzVRMjEyLjkwMDAwMDAwMDAwMDAzIC0yLjQwMDAwMDAwMDAwMDAwMDQgMjA3Ljg1MDAwMDAwMDAwMDAyIC0wLjY1MDAwMDAwMDAwMDAwMDFRMjAyLjggMS4xIDE5Ni43MDAwMDAwMDAwMDAwMiAxLjFaTTE5Ni43MDAwMDAwMDAwMDAwMiAtMTIuMFExOTkuNDAwMDAwMDAwMDAwMDMgLTEyLjAgMjAxLjUwMDAwMDAwMDAwMDAzIC0xMy4zNTAwMDAwMDAwMDAwMDFRMjAzLjYwMDAwMDAwMDAwMDAyIC0xNC43MDAwMDAwMDAwMDAwMDEgMjA0Ljc1MDAwMDAwMDAwMDAzIC0xNy40NTAwMDAwMDAwMDAwMDNRMjA1LjkwMDAwMDAwMDAwMDAzIC0yMC4yMDAwMDAwMDAwMDAwMDMgMjA1LjkwMDAwMDAwMDAwMDAzIC0yNC42UTIwNS45MDAwMDAwMDAwMDAwMyAtMzEuMyAyMDMuMyAtMzQuMjVRMjAwLjcwMDAwMDAwMDAwMDAyIC0zNy4yIDE5Ni43MDAwMDAwMDAwMDAwMiAtMzcuMlExOTQuMDAwMDAwMDAwMDAwMDMgLTM3LjIgMTkxLjkwMDAwMDAwMDAwMDAzIC0zNS45MDAwMDAwMDAwMDAwMDZRMTg5LjggLTM0LjYgMTg4LjYwMDAwMDAwMDAwMDAyIC0zMS44NVExODcuNDAwMDAwMDAwMDAwMDMgLTI5LjEgMTg3LjQwMDAwMDAwMDAwMDAzIC0yNC42UTE4Ny40MDAwMDAwMDAwMDAwMyAtMTguMCAxOTAuMDAwMDAwMDAwMDAwMDMgLTE1LjBRMTkyLjYwMDAwMDAwMDAwMDAyIC0xMi4wIDE5Ni43MDAwMDAwMDAwMDAwMiAtMTIuMFoiIGZpbGw9IiNGNkY0RUUiLz48cGF0aCBkPSJNOTUuMCAwLjlROTAuNjAwMDAwMDAwMDAwMDEgMC45IDg4LjI1IC0xLjQwMDAwMDAwMDAwMDAwMDFRODUuOSAtMy43IDg1LjkgLTguMVYtNDEuMlE4NS45IC00NS41IDg4LjE1IC00Ny44UTkwLjQgLTUwLjEgOTQuNjAwMDAwMDAwMDAwMDEgLTUwLjFROTguODAwMDAwMDAwMDAwMDEgLTUwLjEgMTAxLjAgLTQ3LjhRMTAzLjIgLTQ1LjUgMTAzLjIgLTQxLjJWLTM3LjFIMTAyLjJRMTAzLjIgLTQzLjEgMTA3LjM1IC00Ni42UTExMS41IC01MC4xIDExNy43IC01MC4zMDAwMDAwMDAwMDAwMDRRMTIwLjYwMDAwMDAwMDAwMDAxIC01MC40MDAwMDAwMDAwMDAwMDYgMTIyLjA1MDAwMDAwMDAwMDAxIC00OC44NTAwMDAwMDAwMDAwMVExMjMuNSAtNDcuMzAwMDAwMDAwMDAwMDA0IDEyMy42MDAwMDAwMDAwMDAwMSAtNDMuMVExMjMuNjAwMDAwMDAwMDAwMDEgLTM5LjUgMTIyLjEwMDAwMDAwMDAwMDAxIC0zNy40MDAwMDAwMDAwMDAwMDZRMTIwLjYwMDAwMDAwMDAwMDAxIC0zNS4zMDAwMDAwMDAwMDAwMDQgMTE2LjQgLTM0LjlMMTE0LjEgLTM0LjdRMTA4LjgwMDAwMDAwMDAwMDAxIC0zNC4yIDEwNi40IC0zMS43NVExMDQuMCAtMjkuMyAxMDQuMCAtMjQuNVYtOC4xUTEwNC4wIC0zLjcgMTAxLjcgLTEuNDAwMDAwMDAwMDAwMDAwMVE5OS40IDAuOSA5NS4wIDAuOVoiIGZpbGw9InVybCgjd2c1KSIvPjxwYXRoIGQ9Ik0xMzguNCAwLjlRMTM0LjAgMC45IDEzMS42NSAtMS40MDAwMDAwMDAwMDAwMDAxUTEyOS4zIC0zLjcgMTI5LjMgLTguMVYtNDEuMlExMjkuMyAtNDUuNSAxMzEuNTUgLTQ3LjhRMTMzLjggLTUwLjEgMTM4LjAgLTUwLjFRMTQyLjIwMDAwMDAwMDAwMDAyIC01MC4xIDE0NC40MDAwMDAwMDAwMDAwMyAtNDcuOFExNDYuNjAwMDAwMDAwMDAwMDIgLTQ1LjUgMTQ2LjYwMDAwMDAwMDAwMDAyIC00MS4yVi0zNy4xSDE0NS42MDAwMDAwMDAwMDAwMlExNDYuNjAwMDAwMDAwMDAwMDIgLTQzLjEgMTUwLjc1IC00Ni42UTE1NC45IC01MC4xIDE2MS4xMDAwMDAwMDAwMDAwMiAtNTAuMzAwMDAwMDAwMDAwMDA0UTE2NC4wIC01MC40MDAwMDAwMDAwMDAwMDYgMTY1LjQ1IC00OC44NTAwMDAwMDAwMDAwMVExNjYuOSAtNDcuMzAwMDAwMDAwMDAwMDA0IDE2Ny4wIC00My4xUTE2Ny4wIC0zOS41IDE2NS41IC0zNy40MDAwMDAwMDAwMDAwMDZRMTY0LjAgLTM1LjMwMDAwMDAwMDAwMDAwNCAxNTkuOCAtMzQuOUwxNTcuNSAtMzQuN1ExNTIuMjAwMDAwMDAwMDAwMDIgLTM0LjIgMTQ5LjggLTMxLjc1UTE0Ny40IC0yOS4zIDE0Ny40IC0yNC41Vi04LjFRMTQ3LjQgLTMuNyAxNDUuMTAwMDAwMDAwMDAwMDIgLTEuNDAwMDAwMDAwMDAwMDAwMVExNDIuOCAwLjkgMTM4LjQgMC45WiIgZmlsbD0idXJsKCN3ZzUpIi8+PHBhdGggZD0iTTI0Mi41IDAuOVEyMzguMTAwMDAwMDAwMDAwMDIgMC45IDIzNS42NTAwMDAwMDAwMDAwMyAtMS41NVEyMzMuMjAwMDAwMDAwMDAwMDIgLTQuMCAyMzMuMjAwMDAwMDAwMDAwMDIgLTguNlYtNjEuMFEyMzMuMjAwMDAwMDAwMDAwMDIgLTY1LjYwMDAwMDAwMDAwMDAxIDIzNS42NTAwMDAwMDAwMDAwMyAtNjguMDUwMDAwMDAwMDAwMDFRMjM4LjEwMDAwMDAwMDAwMDAyIC03MC41IDI0Mi44IC03MC41SDI3Ni4xUTI3OS43MDAwMDAwMDAwMDAwNSAtNzAuNSAyODEuNSAtNjguN1EyODMuMyAtNjYuOSAyODMuMyAtNjMuNVEyODMuMyAtNjAuMCAyODEuNSAtNTguMTUwMDAwMDAwMDAwMDA2UTI3OS43MDAwMDAwMDAwMDAwNSAtNTYuMzAwMDAwMDAwMDAwMDA0IDI3Ni4xIC01Ni4zMDAwMDAwMDAwMDAwMDRIMjUxLjYwMDAwMDAwMDAwMDAyVi00Mi4xSDI3My45MDAwMDAwMDAwMDAwM1EyNzcuNDAwMDAwMDAwMDAwMDMgLTQyLjEgMjc5LjI1IC00MC4zUTI4MS4xIC0zOC41IDI4MS4xIC0zNS4xUTI4MS4xIC0zMS42IDI3OS4yNSAtMjkuOFEyNzcuNDAwMDAwMDAwMDAwMDMgLTI4LjAgMjczLjkwMDAwMDAwMDAwMDAzIC0yOC4wSDI1MS42MDAwMDAwMDAwMDAwMlYtOC42UTI1MS42MDAwMDAwMDAwMDAwMiAwLjkgMjQyLjUgMC45WiIgZmlsbD0idXJsKCN3ZzYpIi8+PHBhdGggZD0iTTMwMi43MDAwMDAwMDAwMDAwNSAwLjlRMjk4LjUwMDAwMDAwMDAwMDA2IDAuOSAyOTYuMjAwMDAwMDAwMDAwMDUgLTEuNjAwMDAwMDAwMDAwMDAwM1EyOTMuOTAwMDAwMDAwMDAwMDMgLTQuMTAwMDAwMDAwMDAwMDAwNSAyOTMuOTAwMDAwMDAwMDAwMDMgLTguOFYtNDAuNDAwMDAwMDAwMDAwMDA2UTI5My45MDAwMDAwMDAwMDAwMyAtNDUuMSAyOTYuMjAwMDAwMDAwMDAwMDUgLTQ3LjZRMjk4LjUwMDAwMDAwMDAwMDA2IC01MC4xIDMwMi43MDAwMDAwMDAwMDAwNSAtNTAuMVEzMDcuMDAwMDAwMDAwMDAwMDYgLTUwLjEgMzA5LjM1IC00Ny42UTMxMS43MDAwMDAwMDAwMDAwNSAtNDUuMSAzMTEuNzAwMDAwMDAwMDAwMDUgLTQwLjQwMDAwMDAwMDAwMDAwNlYtOC44UTMxMS43MDAwMDAwMDAwMDAwNSAtNC4xMDAwMDAwMDAwMDAwMDA1IDMwOS40MDAwMDAwMDAwMDAwMyAtMS42MDAwMDAwMDAwMDAwMDAzUTMwNy4xIDAuOSAzMDIuNzAwMDAwMDAwMDAwMDUgMC45Wk0zMDIuNzAwMDAwMDAwMDAwMDUgLTU3LjJRMjk4LjAwMDAwMDAwMDAwMDA2IC01Ny4yIDI5NS40NTAwMDAwMDAwMDAwNSAtNTkuNDAwMDAwMDAwMDAwMDA2UTI5Mi45MDAwMDAwMDAwMDAwMyAtNjEuNiAyOTIuOTAwMDAwMDAwMDAwMDMgLTY1LjhRMjkyLjkwMDAwMDAwMDAwMDAzIC02OS45IDI5NS40NTAwMDAwMDAwMDAwNSAtNzIuMVEyOTguMDAwMDAwMDAwMDAwMDYgLTc0LjMgMzAyLjcwMDAwMDAwMDAwMDA1IC03NC4zUTMwNy42IC03NC4zIDMxMC4xIC03Mi4xUTMxMi42IC02OS45IDMxMi42IC02NS44UTMxMi42IC02MS42IDMxMC4xIC01OS40MDAwMDAwMDAwMDAwMDZRMzA3LjYgLTU3LjIgMzAyLjcwMDAwMDAwMDAwMDA1IC01Ny4yWiIgZmlsbD0idXJsKCN3ZzYpIi8+PC9nPjwvZz48L3N2Zz4K", "wordmark-light": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMzYuODAwMDAwMDAwMDAwMDciIGhlaWdodD0iOTIuNSIgdmlld0JveD0iMCAwIDMzNi44MDAwMDAwMDAwMDAwNyA5Mi41Ij48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgxMCwxMCkiPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDAsNzEuNSkiPjxkZWZzPjwvZGVmcz48cGF0aCBkPSJNNDAuNDAwMDAwMDAwMDAwMDA2IDEuMVEyOS43MDAwMDAwMDAwMDAwMDMgMS4xIDIxLjYgLTMuNDVRMTMuNSAtOC4wIDkuMDUgLTE2LjIwMDAwMDAwMDAwMDAwM1E0LjYwMDAwMDAwMDAwMDAwMDUgLTI0LjQwMDAwMDAwMDAwMDAwMiA0LjYwMDAwMDAwMDAwMDAwMDUgLTM1LjMwMDAwMDAwMDAwMDAwNFE0LjYwMDAwMDAwMDAwMDAwMDUgLTQzLjUgNy4xNSAtNTAuMlE5LjcwMDAwMDAwMDAwMDAwMSAtNTYuOTAwMDAwMDAwMDAwMDA2IDE0LjQ1MDAwMDAwMDAwMDAwMyAtNjEuN1ExOS4yMDAwMDAwMDAwMDAwMDMgLTY2LjUgMjUuOCAtNjkuMDUwMDAwMDAwMDAwMDFRMzIuNCAtNzEuNjAwMDAwMDAwMDAwMDEgNDAuNDAwMDAwMDAwMDAwMDA2IC03MS42MDAwMDAwMDAwMDAwMVE1MS4xIC03MS42MDAwMDAwMDAwMDAwMSA1OS4xNTAwMDAwMDAwMDAwMDYgLTY3LjEwMDAwMDAwMDAwMDAxUTY3LjIgLTYyLjYgNzEuNyAtNTQuNDVRNzYuMiAtNDYuMzAwMDAwMDAwMDAwMDA0IDc2LjIgLTM1LjMwMDAwMDAwMDAwMDAwNFE3Ni4yIC0yNy4xIDczLjY1IC0yMC40MDAwMDAwMDAwMDAwMDJRNzEuMTAwMDAwMDAwMDAwMDEgLTEzLjcwMDAwMDAwMDAwMDAwMSA2Ni4zNTAwMDAwMDAwMDAwMSAtOC44NTAwMDAwMDAwMDAwMDFRNjEuNiAtNC4wIDU1LjAgLTEuNDVRNDguNDAwMDAwMDAwMDAwMDA2IDEuMSA0MC40MDAwMDAwMDAwMDAwMDYgMS4xWk00MC40MDAwMDAwMDAwMDAwMDYgLTE0LjNRNDUuNyAtMTQuMyA0OS40MDAwMDAwMDAwMDAwMDYgLTE2LjhRNTMuMSAtMTkuMyA1NS4xIC0yNC4wUTU3LjEgLTI4LjcwMDAwMDAwMDAwMDAwMyA1Ny4xIC0zNS4zMDAwMDAwMDAwMDAwMDRRNTcuMSAtNDUuMiA1Mi43IC01MC43UTQ4LjMwMDAwMDAwMDAwMDAwNCAtNTYuMiA0MC40MDAwMDAwMDAwMDAwMDYgLTU2LjJRMzUuMiAtNTYuMiAzMS40NTAwMDAwMDAwMDAwMDMgLTUzLjc1UTI3LjcwMDAwMDAwMDAwMDAwMyAtNTEuMzAwMDAwMDAwMDAwMDA0IDI1LjcwMDAwMDAwMDAwMDAwMyAtNDYuNjUwMDAwMDAwMDAwMDA2UTIzLjcwMDAwMDAwMDAwMDAwMyAtNDIuMCAyMy43MDAwMDAwMDAwMDAwMDMgLTM1LjMwMDAwMDAwMDAwMDAwNFEyMy43MDAwMDAwMDAwMDAwMDMgLTI1LjQwMDAwMDAwMDAwMDAwMiAyOC4xIC0xOS44NVEzMi41IC0xNC4zIDQwLjQwMDAwMDAwMDAwMDAwNiAtMTQuM1oiIGZpbGw9IiMwRDE1MjYiLz48cGF0aCBkPSJNMTk2LjcwMDAwMDAwMDAwMDAyIDEuMVExODguNTAwMDAwMDAwMDAwMDMgMS4xIDE4Mi40MDAwMDAwMDAwMDAwMyAtMi4wUTE3Ni4zIC01LjEwMDAwMDAwMDAwMDAwMDUgMTcyLjkwMDAwMDAwMDAwMDAzIC0xMC45UTE2OS41MDAwMDAwMDAwMDAwMyAtMTYuNyAxNjkuNTAwMDAwMDAwMDAwMDMgLTI0LjZRMTY5LjUwMDAwMDAwMDAwMDAzIC0zMC42IDE3MS40MDAwMDAwMDAwMDAwMyAtMzUuMzVRMTczLjMgLTQwLjEgMTc2LjkwMDAwMDAwMDAwMDAzIC00My40NVExODAuNTAwMDAwMDAwMDAwMDMgLTQ2LjgwMDAwMDAwMDAwMDAwNCAxODUuNTAwMDAwMDAwMDAwMDMgLTQ4LjU1MDAwMDAwMDAwMDAwNFExOTAuNTAwMDAwMDAwMDAwMDMgLTUwLjMwMDAwMDAwMDAwMDAwNCAxOTYuNzAwMDAwMDAwMDAwMDIgLTUwLjMwMDAwMDAwMDAwMDAwNFEyMDQuOTAwMDAwMDAwMDAwMDMgLTUwLjMwMDAwMDAwMDAwMDAwNCAyMTEuMDAwMDAwMDAwMDAwMDMgLTQ3LjJRMjE3LjEwMDAwMDAwMDAwMDAyIC00NC4xIDIyMC40NTAwMDAwMDAwMDAwMiAtMzguMzVRMjIzLjggLTMyLjYgMjIzLjggLTI0LjZRMjIzLjggLTE4LjcgMjIxLjkwMDAwMDAwMDAwMDAzIC0xMy44OTk5OTk5OTk5OTk5OTlRMjIwLjAwMDAwMDAwMDAwMDAzIC05LjEgMjE2LjQ1MDAwMDAwMDAwMDA1IC01Ljc1UTIxMi45MDAwMDAwMDAwMDAwMyAtMi40MDAwMDAwMDAwMDAwMDA0IDIwNy44NTAwMDAwMDAwMDAwMiAtMC42NTAwMDAwMDAwMDAwMDAxUTIwMi44IDEuMSAxOTYuNzAwMDAwMDAwMDAwMDIgMS4xWk0xOTYuNzAwMDAwMDAwMDAwMDIgLTEyLjBRMTk5LjQwMDAwMDAwMDAwMDAzIC0xMi4wIDIwMS41MDAwMDAwMDAwMDAwMyAtMTMuMzUwMDAwMDAwMDAwMDAxUTIwMy42MDAwMDAwMDAwMDAwMiAtMTQuNzAwMDAwMDAwMDAwMDAxIDIwNC43NTAwMDAwMDAwMDAwMyAtMTcuNDUwMDAwMDAwMDAwMDAzUTIwNS45MDAwMDAwMDAwMDAwMyAtMjAuMjAwMDAwMDAwMDAwMDAzIDIwNS45MDAwMDAwMDAwMDAwMyAtMjQuNlEyMDUuOTAwMDAwMDAwMDAwMDMgLTMxLjMgMjAzLjMgLTM0LjI1UTIwMC43MDAwMDAwMDAwMDAwMiAtMzcuMiAxOTYuNzAwMDAwMDAwMDAwMDIgLTM3LjJRMTk0LjAwMDAwMDAwMDAwMDAzIC0zNy4yIDE5MS45MDAwMDAwMDAwMDAwMyAtMzUuOTAwMDAwMDAwMDAwMDA2UTE4OS44IC0zNC42IDE4OC42MDAwMDAwMDAwMDAwMiAtMzEuODVRMTg3LjQwMDAwMDAwMDAwMDAzIC0yOS4xIDE4Ny40MDAwMDAwMDAwMDAwMyAtMjQuNlExODcuNDAwMDAwMDAwMDAwMDMgLTE4LjAgMTkwLjAwMDAwMDAwMDAwMDAzIC0xNS4wUTE5Mi42MDAwMDAwMDAwMDAwMiAtMTIuMCAxOTYuNzAwMDAwMDAwMDAwMDIgLTEyLjBaIiBmaWxsPSIjMEQxNTI2Ii8+PHBhdGggZD0iTTk1LjAgMC45UTkwLjYwMDAwMDAwMDAwMDAxIDAuOSA4OC4yNSAtMS40MDAwMDAwMDAwMDAwMDAxUTg1LjkgLTMuNyA4NS45IC04LjFWLTQxLjJRODUuOSAtNDUuNSA4OC4xNSAtNDcuOFE5MC40IC01MC4xIDk0LjYwMDAwMDAwMDAwMDAxIC01MC4xUTk4LjgwMDAwMDAwMDAwMDAxIC01MC4xIDEwMS4wIC00Ny44UTEwMy4yIC00NS41IDEwMy4yIC00MS4yVi0zNy4xSDEwMi4yUTEwMy4yIC00My4xIDEwNy4zNSAtNDYuNlExMTEuNSAtNTAuMSAxMTcuNyAtNTAuMzAwMDAwMDAwMDAwMDA0UTEyMC42MDAwMDAwMDAwMDAwMSAtNTAuNDAwMDAwMDAwMDAwMDA2IDEyMi4wNTAwMDAwMDAwMDAwMSAtNDguODUwMDAwMDAwMDAwMDFRMTIzLjUgLTQ3LjMwMDAwMDAwMDAwMDAwNCAxMjMuNjAwMDAwMDAwMDAwMDEgLTQzLjFRMTIzLjYwMDAwMDAwMDAwMDAxIC0zOS41IDEyMi4xMDAwMDAwMDAwMDAwMSAtMzcuNDAwMDAwMDAwMDAwMDA2UTEyMC42MDAwMDAwMDAwMDAwMSAtMzUuMzAwMDAwMDAwMDAwMDA0IDExNi40IC0zNC45TDExNC4xIC0zNC43UTEwOC44MDAwMDAwMDAwMDAwMSAtMzQuMiAxMDYuNCAtMzEuNzVRMTA0LjAgLTI5LjMgMTA0LjAgLTI0LjVWLTguMVExMDQuMCAtMy43IDEwMS43IC0xLjQwMDAwMDAwMDAwMDAwMDFROTkuNCAwLjkgOTUuMCAwLjlaIiBmaWxsPSIjQjU1MDBGIi8+PHBhdGggZD0iTTEzOC40IDAuOVExMzQuMCAwLjkgMTMxLjY1IC0xLjQwMDAwMDAwMDAwMDAwMDFRMTI5LjMgLTMuNyAxMjkuMyAtOC4xVi00MS4yUTEyOS4zIC00NS41IDEzMS41NSAtNDcuOFExMzMuOCAtNTAuMSAxMzguMCAtNTAuMVExNDIuMjAwMDAwMDAwMDAwMDIgLTUwLjEgMTQ0LjQwMDAwMDAwMDAwMDAzIC00Ny44UTE0Ni42MDAwMDAwMDAwMDAwMiAtNDUuNSAxNDYuNjAwMDAwMDAwMDAwMDIgLTQxLjJWLTM3LjFIMTQ1LjYwMDAwMDAwMDAwMDAyUTE0Ni42MDAwMDAwMDAwMDAwMiAtNDMuMSAxNTAuNzUgLTQ2LjZRMTU0LjkgLTUwLjEgMTYxLjEwMDAwMDAwMDAwMDAyIC01MC4zMDAwMDAwMDAwMDAwMDRRMTY0LjAgLTUwLjQwMDAwMDAwMDAwMDAwNiAxNjUuNDUgLTQ4Ljg1MDAwMDAwMDAwMDAxUTE2Ni45IC00Ny4zMDAwMDAwMDAwMDAwMDQgMTY3LjAgLTQzLjFRMTY3LjAgLTM5LjUgMTY1LjUgLTM3LjQwMDAwMDAwMDAwMDAwNlExNjQuMCAtMzUuMzAwMDAwMDAwMDAwMDA0IDE1OS44IC0zNC45TDE1Ny41IC0zNC43UTE1Mi4yMDAwMDAwMDAwMDAwMiAtMzQuMiAxNDkuOCAtMzEuNzVRMTQ3LjQgLTI5LjMgMTQ3LjQgLTI0LjVWLTguMVExNDcuNCAtMy43IDE0NS4xMDAwMDAwMDAwMDAwMiAtMS40MDAwMDAwMDAwMDAwMDAxUTE0Mi44IDAuOSAxMzguNCAwLjlaIiBmaWxsPSIjQjU1MDBGIi8+PHBhdGggZD0iTTI0Mi41IDAuOVEyMzguMTAwMDAwMDAwMDAwMDIgMC45IDIzNS42NTAwMDAwMDAwMDAwMyAtMS41NVEyMzMuMjAwMDAwMDAwMDAwMDIgLTQuMCAyMzMuMjAwMDAwMDAwMDAwMDIgLTguNlYtNjEuMFEyMzMuMjAwMDAwMDAwMDAwMDIgLTY1LjYwMDAwMDAwMDAwMDAxIDIzNS42NTAwMDAwMDAwMDAwMyAtNjguMDUwMDAwMDAwMDAwMDFRMjM4LjEwMDAwMDAwMDAwMDAyIC03MC41IDI0Mi44IC03MC41SDI3Ni4xUTI3OS43MDAwMDAwMDAwMDAwNSAtNzAuNSAyODEuNSAtNjguN1EyODMuMyAtNjYuOSAyODMuMyAtNjMuNVEyODMuMyAtNjAuMCAyODEuNSAtNTguMTUwMDAwMDAwMDAwMDA2UTI3OS43MDAwMDAwMDAwMDAwNSAtNTYuMzAwMDAwMDAwMDAwMDA0IDI3Ni4xIC01Ni4zMDAwMDAwMDAwMDAwMDRIMjUxLjYwMDAwMDAwMDAwMDAyVi00Mi4xSDI3My45MDAwMDAwMDAwMDAwM1EyNzcuNDAwMDAwMDAwMDAwMDMgLTQyLjEgMjc5LjI1IC00MC4zUTI4MS4xIC0zOC41IDI4MS4xIC0zNS4xUTI4MS4xIC0zMS42IDI3OS4yNSAtMjkuOFEyNzcuNDAwMDAwMDAwMDAwMDMgLTI4LjAgMjczLjkwMDAwMDAwMDAwMDAzIC0yOC4wSDI1MS42MDAwMDAwMDAwMDAwMlYtOC42UTI1MS42MDAwMDAwMDAwMDAwMiAwLjkgMjQyLjUgMC45WiIgZmlsbD0iIzJGNUZCMyIvPjxwYXRoIGQ9Ik0zMDIuNzAwMDAwMDAwMDAwMDUgMC45UTI5OC41MDAwMDAwMDAwMDAwNiAwLjkgMjk2LjIwMDAwMDAwMDAwMDA1IC0xLjYwMDAwMDAwMDAwMDAwMDNRMjkzLjkwMDAwMDAwMDAwMDAzIC00LjEwMDAwMDAwMDAwMDAwMDUgMjkzLjkwMDAwMDAwMDAwMDAzIC04LjhWLTQwLjQwMDAwMDAwMDAwMDAwNlEyOTMuOTAwMDAwMDAwMDAwMDMgLTQ1LjEgMjk2LjIwMDAwMDAwMDAwMDA1IC00Ny42UTI5OC41MDAwMDAwMDAwMDAwNiAtNTAuMSAzMDIuNzAwMDAwMDAwMDAwMDUgLTUwLjFRMzA3LjAwMDAwMDAwMDAwMDA2IC01MC4xIDMwOS4zNSAtNDcuNlEzMTEuNzAwMDAwMDAwMDAwMDUgLTQ1LjEgMzExLjcwMDAwMDAwMDAwMDA1IC00MC40MDAwMDAwMDAwMDAwMDZWLTguOFEzMTEuNzAwMDAwMDAwMDAwMDUgLTQuMTAwMDAwMDAwMDAwMDAwNSAzMDkuNDAwMDAwMDAwMDAwMDMgLTEuNjAwMDAwMDAwMDAwMDAwM1EzMDcuMSAwLjkgMzAyLjcwMDAwMDAwMDAwMDA1IDAuOVpNMzAyLjcwMDAwMDAwMDAwMDA1IC01Ny4yUTI5OC4wMDAwMDAwMDAwMDAwNiAtNTcuMiAyOTUuNDUwMDAwMDAwMDAwMDUgLTU5LjQwMDAwMDAwMDAwMDAwNlEyOTIuOTAwMDAwMDAwMDAwMDMgLTYxLjYgMjkyLjkwMDAwMDAwMDAwMDAzIC02NS44UTI5Mi45MDAwMDAwMDAwMDAwMyAtNjkuOSAyOTUuNDUwMDAwMDAwMDAwMDUgLTcyLjFRMjk4LjAwMDAwMDAwMDAwMDA2IC03NC4zIDMwMi43MDAwMDAwMDAwMDAwNSAtNzQuM1EzMDcuNiAtNzQuMyAzMTAuMSAtNzIuMVEzMTIuNiAtNjkuOSAzMTIuNiAtNjUuOFEzMTIuNiAtNjEuNiAzMTAuMSAtNTkuNDAwMDAwMDAwMDAwMDA2UTMwNy42IC01Ny4yIDMwMi43MDAwMDAwMDAwMDAwNSAtNTcuMloiIGZpbGw9IiMyRjVGQjMiLz48L2c+PC9nPjwvc3ZnPgo="};
+let lang='es';
+const x=(e,n)=>lang==='es'?e:n;
+const PW=()=>x('La contraseña se guarda cifrada; la llave queda en tu router y tu teléfono, y el servidor no puede descifrarla.',"Your password is stored encrypted; the key stays on your router and your phone, and our server can't decrypt it.");
+const I=(n,c='')=>`<svg class="ic ${c}" aria-hidden="true"><use href="#i-${n}"/></svg>`;
+const orro=(s,n=48,b=1)=>`<img class="orro${b?' bob':''}" src="${A['orro-'+s]||''}" width="${n}" height="${n}" alt="">`;
+const sb=()=>`<div class="sb"><span>9:41</span><span>5G ▮▮▮</span></div>`;
+const nav=(t,big)=>big?`<div class="nav big"><h2>${t}</h2></div>`:`<div class="nav"><button class="bk" aria-label="${x('Atrás','Back')}">${I('back')}</button><h2>${t}</h2></div>`;
+const tabs=()=>`<div class="tabs"><div>${I('home')}${x('Inicio','Home')}</div><div class="on">${I('wifi')}${x('Servicios','Services')}</div><div>${I('bubble')}${x('Mi gestor','My manager')}</div><div>${I('doc')}${x('Facturas','Bills')}</div><div>${I('person')}${x('Perfil','Profile')}</div></div>`;
+const sw=(on,l)=>`<button class="sw ${on?'on':''}" role="switch" aria-checked="${on}" aria-label="${l}" onclick="this.classList.toggle('on');this.setAttribute('aria-checked',this.classList.contains('on'))"></button>`;
+const phone=(cap,inner,cls='',id='')=>`<figure${id?` id="${id}"`:''}><div class="phone ${cls}">${inner}</div><figcaption>${cap}</figcaption></figure>`;
+const screen=(t,body,o={})=>sb()+nav(t,o.big)+`<div class="body">${body}</div>`+(o.tabs?tabs():'');
+const gate=t=>`<div class="gate" role="note">${I('alert','s')}${t}</div>`;
+const gateLS=()=>gate(x('Pendiente: Legal + Security','Pending: Legal + Security'));
+const gateL=()=>gate(x('Pendiente: Legal','Pending: Legal'));
+const goState=()=>{};
+const notify=`this.textContent=this.dataset.on;this.disabled=true`;
+const remind=()=>`<button class="btn sm" data-on="${x('Te avisaré','I will let you know')}" onclick="${notify}">${I('bell','s')}${x('Avísame','Remind me')}</button>`;
+const ovToggle=`this.closest('.phone').classList.toggle('ovx')`;
+const ovHide=`this.closest('.phone').classList.add('ovx')`;
+const segPick=`[...this.parentNode.children].forEach(c=>c.classList.remove('on'));this.classList.add('on')`;
+/* Etiqueta humana de la señal */
+const sigLbl=d=>d>=-50?x('Excelente','Excellent'):d>=-60?x('Buena','Good'):d>=-70?x('Regular','Fair'):x('Débil','Weak');
+
+/* Datos ficticios */
+const D=()=>[
+ ['Nexa RX-5200','router','Nexa ('+x('ficticio','fictitious')+')',x('Cable · puerta de enlace','Cable · gateway'),'','',1],
+ ['iPhone','mobile','Apple',x('Wi-Fi 5 GHz','Wi-Fi 5 GHz'),'−48 dBm','1,2 GB',1],
+ ['MacBook','laptop','Apple','Wi-Fi 5 GHz','−52 dBm','8,4 GB',1],
+ ['Nuki','lock','Nuki Home Solutions','Wi-Fi 2,4 GHz','−61 dBm','12 MB',1],
+ ['Tapo L530','lamp','TP-Link','Wi-Fi 2,4 GHz','−58 dBm','3 MB',1],
+ [x('TV Salón (gostinaa)','Living-room TV (gostinaa)'),'tv','LG Electronics',x('Cable Ethernet','Ethernet cable'),'','14,2 GB',1],
+ ['living-room','speaker','Sonos','Wi-Fi 5 GHz','−55 dBm','640 MB',1],
+ ['a17','mobile','Xiaomi','Wi-Fi 5 GHz',x('Visto hace 2 h','Seen 2 h ago'),'—',0],
+ [x('Dispositivo de Seb',"Seb's device"),'mobile','Samsung','Wi-Fi 5 GHz','−63 dBm','310 MB',1],
+ [x('Dispositivo desconocido','Unknown device'),'unknown','Espressif Inc. (MAC)','Wi-Fi 2,4 GHz','−67 dBm','1 MB',1],
+ [x('Dispositivo desconocido','Unknown device'),'unknown','Shenzhen Bilian (MAC)','Wi-Fi 2,4 GHz',x('Visto ayer','Seen yesterday'),'—',0]];
+const dev=d=>`<div class="li ${d[6]?'':'off'}"><div class="tile">${I(d[1])}</div><div class="sp"><div class="nm">${d[0]}</div><div class="cap m">${d[2]} · ${d[3]}</div></div><div class="rt"><div class="cap mono ${d[6]?'t2':'m'}">${d[5]}</div><div class="cap ${d[6]?'t2':'m'}">${d[6]?(d[4]||x('En línea','Online')):d[4]}</div></div></div>`;
+const awayBn=()=>`<div class="card" role="status"><div class="row" style="align-items:flex-start">${orro('sleepy',48)}<div class="sp"><b>${x('Estás fuera de casa','You are away from home')}</b><div class="sm t2">${x('Estaré listo cuando vuelvas a casa.','I will be ready when you are back home.')}</div></div>${remind()}</div><div class="cap m" style="margin-top:8px">${x('Mostramos el último dato guardado. Actualizado hace 3 h (hoy, 18:42).','We show the last saved data. Updated 3 h ago (today, 18:42).')}</div></div>`;
+const hdr=off=>off?`<div class="banner er" role="alert">${orro('error',44,0)}<div><b>${x('No veo tu router…','I cannot see your router…')}</b><br><span class="sm">${x('Mostramos los últimos datos de hoy a las 18:42. Comprueba que el router está encendido.','We show today’s last data from 18:42. Check that the router is on.')}</span></div></div>`:'';
+const sum=f=>`<div class="stats"><div class="stat"><span class="hud">${x('Dispositivos','Devices')}</span><b>${f?'—':'11'}</b></div><div class="stat"><span class="hud">${x('Velocidad','Speed')}</span><b>${f?'—':'287<small>/292</small>'}</b><span class="cap m">Mbit/s</span></div><div class="stat"><span class="hud">Ping</span><b>${f?'—':'22<small> ms</small>'}</b></div></div>`;
+const status=(off,away)=>{const reason=off||away?x('Último dato','Last data'):x('Canal con interferencias','Channel with interference');
+ return `<div class="card"><div class="row"><div class="tile ${off?'':'a'}">${I(off?'wifioff':'router')}</div><div class="sp"><div>Nexa RX-5200</div><div class="cap m">${off?x('Último contacto 18:42','Last contact 18:42'):away?x('Actualizado hace 3 h','Updated 3 h ago'):x('Wi-Fi 6 · hace 1 min','Wi-Fi 6 · 1 min ago')}</div></div><span class="pill ${off?'er':away?'':'ok'}">${off?I('x','s')+x('Sin conexión','Offline'):away?x('Último dato','Last data'):'<i class="dot"></i>'+x('Internet OK','Internet OK')}</span></div>
+ <button class="scorebtn" onclick="goState()" aria-label="Wi-Fi 6 ${x('de','out of')} 10. ${reason}. ${x('Ver estado de la red','See network status')}">${orro(off?'error':away?'sleepy':'content',44)}<span class="sp"><span class="hud">Wi-Fi</span><span class="score sm2 ${off||away?'m':''}"><b>6</b><span>${x('de 10','out of 10')}</span></span><span class="cap m" style="display:block">${reason}</span></span><span class="ch" aria-hidden="true">›</span></button></div>`;};
+const opRow=()=>`<button class="card row" style="text-align:left;min-height:56px;width:100%"><div class="tile">${I('doc')}</div><div class="sp"><div>${x('Tu operador','Your operator')}</div><div class="cap m">${x('Ventanilla única · cuenta y averías','One window · account and faults')}</div></div><span class="m">›</span></button>`;
+
+const acts=dis=>`<div class="acts">${[['pause',x('Pausa','Pause')],['power',x('Reiniciar','Restart')],['signal',x('Canal','Channel')],['wifi','Wi-Fi']].map(a=>`<button class="act" ${dis?'disabled aria-disabled="true"':''}>${I(a[0])}${a[1]}</button>`).join('')}</div>${dis?`<div class="cap m" style="text-align:center;margin-top:-4px">${x('Disponible cuando estés en casa','Available when you are home')}</div>`:''}`;
+const main=mode=>{
+ const off=mode==='off',ld=mode==='load',away=mode==='away';
+ let list;
+ if(ld) list=[1,2,3,4,5].map(()=>`<div class="li"><span class="sk" style="width:40px;height:40px;border-radius:12px"></span><div class="sp"><span class="sk" style="width:60%;height:14px;margin-bottom:8px"></span><span class="sk" style="width:85%;height:10px"></span></div></div>`).join('');
+ else list=D().map(dev).join('');
+ const sk=`<div class="card"><div class="row">${orro('thinking',48)}<div class="sp"><b>${x('Estoy mirando tu red…','I am looking at your network…')}</b><span class="sk" style="width:70%;height:10px;margin-top:8px"></span></div></div></div>`;
+ return screen(x('Mi red','My network'),
+  (ld?sk:status(off,away))+(away?awayBn():hdr(off))+(away?'':'')+acts(away)+((off||away)?'':sum(ld))+(ld?'':opRow())+
+  `<div class="row"><span class="hud sp">${x('Dispositivos','Devices')}${ld?'':x(' · 9 en línea',' · 9 online')}</span></div><div class="card" style="padding:4px 16px;flex:1;overflow:hidden"><div class="list">${list}</div></div>`,{big:1,tabs:1});
+};
+
+const detail=()=>screen(x('Dispositivo','Device'),`
+ <div class="row" style="gap:14px"><div class="tile a" style="width:56px;height:56px;border-radius:16px">${I('mobile','l')}</div><div class="sp"><div style="font-size:20px;font-weight:700">iPhone</div><div class="sm m">${x('Apple · en línea','Apple · online')}</div></div><span class="pill ok"><i class="dot"></i>${x('En línea','Online')}</span></div>
+ <div class="card"><div class="list">
+  <div class="li"><span class="sp t2">${x('Conexión','Connection')}</span><span>Wi-Fi 5 GHz</span></div>
+  <div class="li"><span class="sp t2">${x('Señal','Signal')}</span><span class="mono">−48 dBm · ${sigLbl(-48)}</span></div>
+  <div class="li"><span class="sp t2">${x('Tráfico hoy','Traffic today')}</span><span class="mono">↓ 1,2 GB · ↑ 180 MB</span></div>
+  <div class="li"><span class="sp t2">${x('Dirección IP','IP address')}</span><span class="mono">192.168.1.23</span></div>
+  <div class="li"><span class="sp t2">MAC</span><span class="mono">A4:83:E7:••:••:5C</span></div>
+ </div></div>
+ <div class="card"><div class="row"><div class="sp"><div>${x('Control parental','Parental control')}</div><div class="cap m">${x('Sin internet de 22:00 a 07:00','No internet from 22:00 to 07:00')}</div></div>${sw(true,x('Control parental','Parental control'))}</div>
+  <div style="margin-top:12px" class="seg" aria-label="${x('Días','Days')}"><div class="on">${x('Todos','All')}</div><div>${x('L–V','Mon–Fri')}</div><div>${x('Fin de semana','Weekend')}</div></div>
+  <div class="row" style="margin-top:12px"><div class="sp"><span class="lbl">${x('Desde','From')}</span><div class="fm mono">22:00</div></div><div class="sp"><span class="lbl">${x('Hasta','Until')}</span><div class="fm mono">07:00</div></div></div></div>
+ <div style="flex:1"></div>
+ <div class="row"><button class="btn">${I('check')}${x('Es mío','It is mine')}</button><button class="btn d">${I('x')}${x('Bloquear','Block')}</button></div>`);
+
+const lock=()=>`<div class="lock" style="flex:1;display:flex;flex-direction:column;color:#F6F4EE"><div class="sb"><span></span><span>5G ▮▮▮</span></div><div class="clock"><div style="font-size:17px;opacity:.85">${x('miércoles, 16 de diciembre','Wednesday, December 16')}</div><b>21:14</b></div><div style="flex:1"></div>
+ <div class="notif"><div class="nt"><div class="ap"><img src="${A['symbol-color-dark']||''}" alt=""></div><div class="sp"><div style="display:flex;justify-content:space-between"><b style="font-weight:700">OrroFi</b><span class="cap" style="opacity:.85">${x('ahora','now')}</span></div><div style="font-weight:700">${x('Nuevo dispositivo en tu red','New device on your network')}</div><p>${x('«Dispositivo desconocido» (Espressif Inc.) se ha conectado al Wi-Fi 2,4 GHz. ¿Eres tú?','“Unknown device” (Espressif Inc.) joined the 2.4 GHz Wi-Fi. Is it you?')}</p></div></div>
+ <div class="nacts"><button>${x('Es mío','It is mine')}</button><button class="b">${x('Bloquear','Block')}</button></div></div><div style="height:140px"></div></div>`;
+
+const react=()=>screen(x('Nuevo dispositivo','New device'),`
+ <div class="banner w" role="alert">${orro('surprised',44)}<div><b>${x('Nuevo dispositivo en tu red','New device on your network')}</b><br><span class="sm">${x('Conectado hoy a las 21:14','Connected today at 21:14')}</span></div></div>
+ <div class="card" style="text-align:center;padding:28px 16px"><div class="tile" style="width:72px;height:72px;border-radius:20px;margin:0 auto 14px">${I('unknown','l')}</div><div style="font-size:20px;font-weight:700">${x('Dispositivo desconocido','Unknown device')}</div><div class="sm m">Espressif Inc. (MAC) · Wi-Fi 2,4 GHz · −67 dBm</div></div>
+ <div class="card sm t2">${x('Muchos aparatos de casa (enchufes, bombillas, sensores) usan chips Espressif. Si no reconoces este, bloquéalo: lo podrás desbloquear después.','Many home gadgets (plugs, bulbs, sensors) use Espressif chips. If you do not recognise this one, block it: you can unblock it later.')}</div>
+ <div style="flex:1"></div><button class="btn" onclick="${ovToggle}">${I('check')}${x('Es mío','It is mine')}</button><button class="btn d">${I('x')}${x('Bloquear','Block')}</button>`)
+ +`<div class="scrim ov"></div><div class="sheet ov" role="dialog" aria-label="${x('Nombre del dispositivo','Device name')}"><div class="grab"></div><div class="row">${orro('content',44)}<h2 style="font:700 20px var(--fd)">${x('¿Cómo se llama?','What is it called?')}</h2></div><div><span class="lbl">${x('Nombre sugerido','Suggested name')}</span><div class="fm"><span>${x('Enchufe del salón','Living-room plug')}</span>${I('doc','s')}</div></div><button class="btn" onclick="${ovHide}">${x('Guardar','Save')}</button></div>`;
+
+const factorRows=after=>`<div class="list">
+  <div class="li"><div class="tile">${I('signal')}</div><div class="sp">${x('Señal','Signal')}<div class="cap m">${x('Nivel recibido (RSSI)','Received level (RSSI)')}</div></div><span class="mono">−46 dBm · ${sigLbl(-46)}</span></div>
+  <div class="li"><div class="tile">${I('alert')}</div><div class="sp">${x('Interferencias','Interference')}<div class="cap m">${x('Otras redes en tu canal','Other networks on your channel')}</div></div><span class="pill ${after?'ok':'w'}">${after?x('Bajas','Low'):x('Altas','High')}</span></div>
+  <div class="li"><div class="tile">${I('gauge')}</div><div class="sp">${x('Velocidad','Speed')}<div class="cap m">${x('Hacia internet, medida en el router','To the internet, measured at the router')}</div></div><span class="mono">287/292</span></div>
+  <div class="li"><div class="tile">${I('wifi')}</div><div class="sp">${x('Carga del canal','Channel load')}<div class="cap m">${after?x('Canal 44 · 80 MHz','Channel 44 · 80 MHz'):x('Canal 36 · 80 MHz','Channel 36 · 80 MHz')}</div></div><span class="mono">${after?'23 %':'78 %'}</span></div></div>`;
+const stepsHtml=()=>{const L=[x('Buscando canal','Finding channel'),x('Aplicando','Applying'),x('Comprobando','Checking')];
+ return `<div class="steps" role="list" aria-label="${x('Progreso','Progress')}">${L.map((t,i)=>`<div class="step ${i<1?'done':i===1?'cur':''}" role="listitem" ${i===1?'aria-current="step"':''}><i>${i<1?'✓':i+1}</i>${t}</div>`).join('')}</div>`;};
+const stScreen=v=>{
+ const n=v==='done'?9:6, dis=v==='busy'||v==='away'||v==='done';
+ const o={idle:'listening',busy:'thinking',done:'success',away:'sleepy'}[v];
+ return screen(x('Estado de la red','Network status'),`
+ <div class="card"><div class="row" style="gap:14px">${orro(o,72)}<div class="sp"><span class="hud">${x('Calidad del Wi-Fi','Wi-Fi quality')}</span>
+  <div class="score" aria-label="Wi-Fi ${n} ${x('de','out of')} 10"><b style="font-size:64px">${n}</b><span style="font-size:20px">${x('de 10','out of 10')}</span></div></div></div>
+  <div class="cap m" style="margin-top:8px">${x('Suma señal, interferencias, velocidad y carga del canal.','Adds up signal, interference, speed and channel load.')} ${v==='away'?x('Último dato de hoy a las 18:42.','Last data from today at 18:42.'):x('Actualizado hace 1 min.','Updated 1 min ago.')}</div></div>
+ ${v==='busy'?`<div class="card" role="status"><b>${x('Mejorando…','Improving…')}</b><div class="sm t2">${x('Probando un canal más libre. El Wi-Fi se corta unos 30 segundos.','Trying a freer channel. Wi-Fi drops for about 30 seconds.')}</div>${stepsHtml()}</div>`:''}
+ ${v==='done'?`<div class="banner ok" role="status">${I('check')}<div><b>${x('Antes 6 de 10 → Ahora 9 de 10','Before 6 out of 10 → Now 9 out of 10')}</b><br><span class="sm">${x('Qué cambió: canal 36 → 44. Ancho 80 MHz sin cambios.','What changed: channel 36 → 44. Width 80 MHz unchanged.')}</span></div></div>`:''}
+ ${v==='away'?`<div class="card"><div class="row"><div class="sp"><b>${x('Estaré listo cuando vuelvas a casa','I will be ready when you are back home')}</b><div class="cap m">${x('Te aviso o lo hago solo al volver.','I will remind you, or do it myself, when you are back.')}</div></div>${remind()}</div></div>`:''}
+ <div class="card" style="padding:4px 16px">${factorRows(v==='done')}</div>
+ <div style="flex:1"></div>
+ <button class="btn" ${dis?'disabled aria-disabled="true"':''}>${I(v==='busy'?'retry':'bolt')}${v==='busy'?x('Mejorando…','Improving…'):x('Mejorar','Improve')}</button>
+ <div class="cap m" style="text-align:center">${v==='away'?x('Disponible cuando estés en casa','Available when you are home'):v==='done'?x('Orro revisa los canales cada noche','Orro checks the channels every night'):v==='busy'?x('No apagues el router.','Do not switch the router off.'):x('Un toque: OrroFi cambia el canal y el ancho en tu router.','One tap: OrroFi changes the channel and width on your router.')}</div>`);};
+
+/* Ocupación de canales por vecinos (ficticio): [canal, redes vecinas] */
+const CH=[[36,7],[40,4],[44,0],[48,5],[52,3],[56,2],[60,3],[64,1]];
+const chans=()=>screen(x('Canal y vecinos','Channel and neighbours'),`
+ <div class="card"><div class="list"><div class="li"><div class="sp">${x('Canal actual','Current channel')}<div class="cap m">${x('Banda de 5 GHz · ancho 80 MHz','5 GHz band · 80 MHz width')}</div></div><span class="mono">44</span></div></div></div>
+ <div class="card"><div class="hud">${x('Redes vecinas por canal (ficticio)','Neighbouring networks per channel (fictitious)')}</div>
+  <div class="chan" role="img" aria-label="${x('Ocupación de canales: el canal 44 está libre','Channel occupancy: channel 44 is free')}">${CH.map(c=>`<div class="${c[0]===44?'me':'nb'}" style="height:${c[0]===44?8:Math.max(10,c[1]*14)}%"></div>`).join('')}</div>
+  <div class="chan-x">${CH.map(c=>`<span class="${c[0]===44?'me':''}">${c[0]}</span>`).join('')}</div>
+  <div class="cap m" style="margin-top:10px">${x('Tu canal 44 está libre: ninguna red vecina lo usa. Los demás tienen entre 1 y 7 redes.','Your channel 44 is free: no neighbouring network uses it. The others have 1 to 7 networks.')}</div></div>
+ <div class="card"><div class="row"><div class="tile a">${I('globe')}</div><div class="sp"><div>${x('Vecinos con OrroFi: 4 · sin interferencias','Neighbours with OrroFi: 4 · no interference')}</div><div class="cap m">${x('Actualizado esta noche, 03:00','Updated tonight, 03:00')}</div></div></div></div>
+ <div class="card sm t2">${x('Cada noche OrroFi reparte los canales entre los routers cercanos y aplica el mejor para ti. No tienes que escanear nada.','Every night OrroFi shares out the channels among nearby routers and applies the best one for you. You do not need to scan anything.')}</div>
+ <div style="flex:1"></div><div class="cap m" style="text-align:center">${x('¿Quieres mejorarlo ya? Usa «Mejorar» en Estado de la red.','Want to improve it now? Use “Improve” in Network status.')}</div>`);
+
+const sec=()=>screen(x('Seguridad','Security'),`
+ <div class="banner in">${orro('listening',44)}<div><b>${x('Cuidemos tu router','Let us look after your router')}</b><br><span class="sm t2">${x('Te recomendamos dos mejoras para que tu red esté más protegida.','We recommend two improvements to keep your network better protected.')}</span></div></div>
+ <div class="card"><div class="row"><div class="tile">${I('key')}</div><div class="sp"><div>${x('Contraseña del router','Router password')}</div><div class="cap m">${x('Sigue siendo la de fábrica','It is still the factory one')}</div></div><span class="pill w">${x('Recomendado','Recommended')}</span></div><button class="btn g" style="margin-top:14px">${x('Cambiar contraseña del router','Change router password')}</button>
+  <div class="cap m" style="margin-top:10px">${I('lock','s')} ${PW()}</div></div>
+ <div class="card"><div class="row"><div class="tile">${I('shield')}</div><div class="sp"><div>${x('Cifrado del Wi-Fi','Wi-Fi encryption')}</div><div class="cap m">${x('Ahora: WPA2 · Recomendado: WPA3','Now: WPA2 · Recommended: WPA3')}</div></div><span class="pill w">WPA2</span></div>
+ <div class="cap m" style="margin:12px 0">${x('WPA3 protege mejor tu contraseña. Algún dispositivo antiguo (por ejemplo, Tapo L530) podría no conectarse.','WPA3 protects your password better. An older device (for example Tapo L530) might not connect.')}</div><button class="btn">${x('Pasar a WPA3','Switch to WPA3')}</button></div>
+ <div class="card"><div class="row"><div class="tile">${I('check')}</div><div class="sp"><div>${x('Firmware del router','Router firmware')}</div><div class="cap m">${x('Versión instalada: 2.4.1 (ficticia)','Installed version: 2.4.1 (fictitious)')}</div></div><span class="pill ok">${x('Al día','Up to date')}</span></div></div>
+ <div class="card"><div class="hud" style="margin-bottom:12px">${x('Privacidad de tus datos','Your data privacy')}</div>
+  <div class="row"><div class="sp"><div>${x('Ayudar a mejorar el reconocimiento de dispositivos','Help improve device recognition')}</div><div class="cap m">${x('Si lo activas, usaremos el tipo de dispositivo que confirmes y datos técnicos sin identificarte (fabricante, tipo de conexión) para entrenar nuestro modelo de IA. Nunca usamos tu dirección MAC completa, los nombres de tus dispositivos ni tu ubicación. Puedes desactivarlo cuando quieras; la app funciona igual.','If you turn it on, we will use the device type you confirm and technical data that does not identify you (manufacturer, connection type) to train our AI model. We never use your full MAC address, your device names or your location. You can turn it off at any time; the app works the same.')}</div></div>${sw(false,x('Ayudar a mejorar el reconocimiento de dispositivos','Help improve device recognition'))}</div>
+  <div class="row" style="margin-top:16px;padding-top:16px;border-top:1px solid var(--ln)"><div class="sp"><div>${x('Estadísticas anónimas','Anonymous statistics')}</div><div class="cap m">${x('Si lo activas, tus dispositivos se sumarán a estadísticas agregadas por provincia (por ejemplo, “cuántos televisores de cada marca hay en Madrid”), que podremos compartir o vender a terceros. Nunca se comparte ningún dato que permita identificarte a ti o a tu hogar. Puedes desactivarlo cuando quieras.','If you turn it on, your devices will be added to statistics aggregated by province (for example, “how many TVs of each brand there are in Madrid”), which we may share or sell to third parties. No data that could identify you or your household is ever shared. You can turn it off at any time.')}</div></div>${sw(false,x('Estadísticas anónimas','Anonymous statistics'))}</div></div>`);
+
+const hist=()=>`${sb()}${nav(x('Historial y reinicio','History and restart'))}<div class="body">
+ <div class="card"><div class="hud" style="margin-bottom:12px">${x('Últimos 7 días','Last 7 days')}</div><div class="hist">
+  <div class="er"><div>${x('Sin internet · 14 min','No internet · 14 min')}</div><div class="cap m">${x('Mar 15 dic, 03:12 · caída de la fibra','Tue 15 Dec, 03:12 · fibre outage')}</div><button class="lnk">${x('Ver detalles','See details')}</button></div>
+  <div class="w"><div>${x('Wi-Fi inestable · 6 min','Unstable Wi-Fi · 6 min')}</div><div class="cap m">${x('Lun 14 dic, 19:40 · interferencias en 2,4 GHz','Mon 14 Dec, 19:40 · interference on 2.4 GHz')}</div><button class="lnk">${x('Ver detalles','See details')}</button></div>
+  <div><div>${x('Router reiniciado','Router restarted')}</div><div class="cap m">${x('Dom 13 dic, 10:05 · desde la app','Sun 13 Dec, 10:05 · from the app')}</div></div>
+ </div></div>
+ <div class="card"><div class="row"><div class="tile">${I('power')}</div><div class="sp"><div>${x('Reiniciar router','Restart router')}</div><div class="cap m">${x('Tarda unos 2 minutos','Takes about 2 minutes')}</div></div></div></div>
+ </div><div class="scrim"></div>
+ <div class="sheet" role="dialog" aria-label="${x('Confirmar reinicio','Confirm restart')}"><div class="grab"></div><h2 style="font:700 20px var(--fd)">${x('¿Reiniciar el router?','Restart the router?')}</h2><p class="t2 sm">${x('Te quedarás sin internet ni Wi-Fi unos 2 minutos. Las llamadas y las videollamadas se cortarán.','You will have no internet or Wi-Fi for about 2 minutes. Calls and video calls will drop.')}</p><button class="btn d">${I('power')}${x('Reiniciar ahora','Restart now')}</button><button class="btn g">${x('Cancelar','Cancel')}</button></div>`;
+
+/* Hoja de confirmación biométrica */
+const bio=()=>`<div class="scrim ov"></div><div class="sheet ov" role="dialog" aria-label="${x('Confirmar con Face ID','Confirm with Face ID')}"><div class="grab"></div><div class="row" style="gap:14px"><div class="tile a" style="width:48px;height:48px;border-radius:14px">${I('shield','l')}</div><div class="sp"><h2 style="font:700 20px var(--fd)">${x('Confirma con Face ID','Confirm with Face ID')}</h2><div class="cap m">${x('o con tu huella o el código del teléfono','or with your fingerprint or phone passcode')}</div></div></div><p class="t2 sm">${x('Para ver la contraseña necesitamos confirmar que eres tú.','To show the password we need to confirm it is you.')}</p><button class="btn" onclick="${ovHide}">${I('shield')}${x('Usar Face ID','Use Face ID')}</button><button class="btn g" onclick="${ovHide}">${x('Cancelar','Cancel')}</button></div>`;
+const wifi=()=>screen('Wi-Fi',`
+ <div class="card"><span class="lbl">${x('Nombre de la red','Network name')}</span><div class="fm"><span>MIWIFI_4G2X</span>${I('doc','s')}</div>
+ <span class="lbl" style="margin-top:14px">${x('Contraseña','Password')}</span><div class="fm"><span class="mono">••••••••••••</span><button aria-label="${x('Mostrar contraseña (pide Face ID)','Show password (asks for Face ID)')}" style="min-width:44px;min-height:44px;display:grid;place-items:center;margin-right:-12px" onclick="${ovToggle}">${I('eye','s')}</button></div>
+ <div class="cap m" style="margin-top:10px">${x('Mínimo 8 caracteres. Al guardar, todos tus dispositivos tendrán que volver a conectarse.','At least 8 characters. When you save, all your devices will have to reconnect.')}</div>
+ <div class="cap m" style="margin-top:8px">${I('lock','s')} ${PW()}</div></div>
+ <div class="card"><div class="row"><div class="sp"><div>${x('Redes separadas (2,4 y 5 GHz)','Separate networks (2.4 and 5 GHz)')}</div><div class="cap m">${x('Opción avanzada: dos nombres de red, uno por banda','Advanced option: two network names, one per band')}</div></div>${sw(false,x('Redes separadas (2,4 y 5 GHz)','Separate networks (2.4 and 5 GHz)'))}</div></div>
+ <div class="banner w">${I('info')}<span class="sm">${x('Nuki y Tapo tendrán que reconectarse con la contraseña nueva.','Nuki and Tapo will have to reconnect with the new password.')}</span></div>
+ <div style="flex:1"></div><button class="btn">${x('Guardar cambios','Save changes')}</button><button class="btn g">${x('Cancelar','Cancel')}</button>`)+bio();
+
+/* QR ficticio determinista */
+const qrsvg=()=>{let s=7,r=()=>(s=(s*1103515245+12345)&0x7fffffff)/0x7fffffff,c='';const N=25;
+ const fin=(x0,y)=>`<rect x="${x0}" y="${y}" width="7" height="7" fill="#000"/><rect x="${x0+1}" y="${y+1}" width="5" height="5" fill="#fff"/><rect x="${x0+2}" y="${y+2}" width="3" height="3" fill="#000"/>`;
+ for(let y=0;y<N;y++)for(let x0=0;x0<N;x0++){if((x0<8&&y<8)||(x0>16&&y<8)||(x0<8&&y>16))continue;if(r()>.52)c+=`<rect x="${x0}" y="${y}" width="1" height="1" fill="#000"/>`}
+ return `<svg viewBox="0 0 ${N} ${N}" shape-rendering="crispEdges" role="img" aria-label="${x('Código QR de ejemplo (ficticio)','Sample QR code (fictitious)')}">${c}${fin(0,0)}${fin(18,0)}${fin(0,18)}</svg>`};
+const guest=()=>screen(x('Red de invitados','Guest network'),`
+ <div class="card"><div class="row"><div class="sp"><div>${x('Red de invitados','Guest network')}</div><div class="cap m">${x('Activa · separada de tu red de casa','On · separate from your home network')}</div></div>${sw(true,x('Red de invitados','Guest network'))}</div></div>
+ <div class="card" style="text-align:center"><div class="qr">${qrsvg()}</div><div style="margin-top:10px">MIWIFI_INVITADOS</div><div class="mono m sm">${x('Contraseña','Password')}: ••••••••</div><div class="cap m" style="margin-top:6px">${x('Escanea con la cámara para conectarte. QR de ejemplo.','Scan with the camera to connect. Sample QR.')}</div></div>
+ <div class="row"><button class="btn">${I('share')}${x('Compartir','Share')}</button><button class="btn g" onclick="${ovToggle}">${I('key')}${x('Ver contraseña','Show password')}</button></div>
+ <div><span class="lbl">${x('Apagado automático','Auto-off')}</span><div class="seg" role="radiogroup" aria-label="${x('Apagado automático','Auto-off')}"><button role="radio" onclick="${segPick}">4 h</button><button class="on" role="radio" onclick="${segPick}">24 h</button><button role="radio" onclick="${segPick}">${x('No apagar','Never')}</button></div></div>
+ <div class="cap m">${x('Red de invitados aislada: salen a internet, pero no ven tus dispositivos. No es la Wi-Fi OrroFi.','Isolated guest network: guests get internet but cannot see your devices. It is not Wi-Fi OrroFi.')}</div>`)+bio().replace('class="scrim ov"','class="scrim ov"');
+
+const orroNet=()=>screen(x('Wi-Fi OrroFi','Wi-Fi OrroFi'),gateLS()+`
+ <div class="card"><div class="row"><div class="tile">${I('globe')}</div><div class="sp"><div>${x('Wi-Fi OrroFi','Wi-Fi OrroFi')}</div><div class="cap m">${x('Desactivado','Off')}</div></div>${sw(false,'Wi-Fi OrroFi')}</div></div>
+ <div class="card"><div class="list">
+  <div class="li">${I('key')}<span class="sm t2">${x('Tú decides: está apagado hasta que lo actives.','You decide: it stays off until you turn it on.')}</span></div>
+  <div class="li">${I('share')}<span class="sm t2">${x('Al activarlo, tu router comparte una red aparte y tú puedes usar los puntos de otros.','When you turn it on, your router shares a separate network and you can use other people’s points.')}</span></div>
+  <div class="li">${I('gauge')}<span class="sm t2">${x('Tu conexión siempre tiene prioridad; los invitados usan un límite.','Your connection always has priority; guests use a limit.')}</span></div>
+  <div class="li">${I('person')}<span class="sm t2">${x('Solo entran usuarios de la app OrroFi que también tienen su red activada.','Only OrroFi app users who also have their network turned on can join.')}</span></div>
+  <div class="li">${I('shield')}<span class="sm t2">${x('Quien se conecte nunca ve tus dispositivos. Lo apagas cuando quieras.','Whoever connects never sees your devices. You can turn it off whenever you like.')}</span></div></div></div>
+ <div style="flex:1"></div><button class="btn g" disabled aria-disabled="true">${I('map')}${x('Ver puntos en el mapa','See points on the map')}</button><div class="cap m" style="text-align:center">${x('El mapa se activa al encender tu Wi-Fi OrroFi.','The map turns on when you switch on your Wi-Fi OrroFi.')}</div>`);
+
+/* Zonas aproximadas [x,y,radio,libre] — sin dirección exacta */
+const zones=[[262,82,24,1],[222,128,20,0],[160,120,22,1],[96,70,20,0],[130,196,24,1],[72,150,18,0],[214,182,20,0]];
+const mapS=()=>screen(x('Puntos Wi-Fi OrroFi','Wi-Fi OrroFi points'),gateLS()+`
+ <div class="map"><svg viewBox="0 0 300 270" role="img" aria-label="${x('Mapa estilizado de España con zonas aproximadas de puntos Wi-Fi OrroFi','Stylised map of Spain with approximate zones of Wi-Fi OrroFi points')}"><path d="M40 44 L92 32 L150 40 L210 31 L252 46 L272 70 L288 94 L266 122 L242 152 L218 186 L186 218 L150 228 L110 238 L76 228 L54 202 L42 190 L50 150 L34 122 L44 86 Z" fill="var(--ib)" stroke="var(--sep2)" stroke-width="1.2"/><circle cx="275" cy="196" r="7" fill="var(--ib)" stroke="var(--sep2)"/><circle cx="262" cy="214" r="4" fill="var(--ib)" stroke="var(--sep2)"/>
+ ${zones.map(z=>`<circle cx="${z[0]}" cy="${z[1]}" r="${z[2]}" fill="${z[3]?'var(--a)':'var(--m)'}" opacity="${z[3]?.3:.22}" stroke="${z[3]?'var(--a)':'var(--m)'}" stroke-width="1.2" stroke-dasharray="4 3"/>`).join('')}
+ <circle cx="262" cy="82" r="30" fill="none" stroke="var(--t)" stroke-width="1.4"/></svg>
+ <div style="position:absolute;left:12px;top:12px" class="pill">${x('Datos ficticios · zonas aproximadas','Fictitious data · approximate zones')}</div></div>
+ <div class="card"><div class="row"><div class="tile a">${I('pin')}</div><div class="sp"><div>${x('Zona Wi-Fi OrroFi a ~300 m','Wi-Fi OrroFi zone ~300 m away')}</div><div class="cap m">${x('Calonge · zona aproximada · hasta 30 Mbit/s','Calonge · approximate zone · up to 30 Mbit/s')}</div></div><span class="pill ok"><i class="dot"></i>${x('Libre','Free')}</span></div></div>
+ <div class="row sm"><span class="row" style="gap:6px"><i class="dot" style="color:var(--a)"></i>${x('Disponible','Available')}</span><span class="row" style="gap:6px"><i class="dot" style="color:var(--m)"></i>${x('Ocupado','Busy')}</span></div>
+ <button class="btn">${x('Conectarme','Connect')}</button><button class="btn g">${I('alert')}${x('Denunciar o bloquear punto','Report or block point')}</button><div class="cap m" style="text-align:center">${x('Solo con tu Wi-Fi OrroFi activado (reciprocidad).','Only with your Wi-Fi OrroFi turned on (reciprocity).')}</div>`);
+
+const found=()=>screen(x('Conecta tu router','Connect your router'),`
+ <div class="banner ok" role="status">${I('wifi')}<div><b>${x('Estás en el Wi-Fi de casa','You are on your home Wi-Fi')}</b><br><span class="sm">MIWIFI_4G2X</span></div></div>
+ <div class="card"><div class="row"><div class="tile a">${I('router')}</div><div class="sp"><div>${x('Router','Router')} Nexa RX-5200</div><div class="cap m">${x('Encontrado en 192.168.1.1 (ficticio)','Found at 192.168.1.1 (fictitious)')}</div></div><span class="pill ok"><i class="dot"></i>${x('Visible','Visible')}</span></div></div>
+ <div class="card sm t2">${x('Para ver y gestionar tu red, la app necesita la contraseña de administrador del router. La encuentras en la pegatina de abajo del aparato.','To see and manage your network, the app needs the router’s administrator password. You will find it on the sticker underneath the device.')}</div>
+ <div style="flex:1"></div><button class="btn">${x('Continuar','Continue')}</button><div class="cap m" style="text-align:center">${x('Tienes que estar en el Wi-Fi de tu casa.','You must be on your home Wi-Fi.')}</div>`);
+const stickerHtml=()=>`<div class="sticker" aria-label="${x('Ilustración de la pegatina del router (ficticia)','Illustration of the router sticker (fictitious)')}">Nexa RX-5200<br>SN: ••••••••<br><span class="k">${x('Usuario administrador','Administrator user')}</span><span class="pw">••••••</span><br><span class="k">${x('Contraseña de administrador','Administrator password')}</span><span class="pw">••••••••••</span></div>`;
+const pwScreen=state=>screen(x('Contraseña del router','Router password'),`
+ ${stickerHtml()}
+ <div><span class="lbl">${x('Contraseña de administrador','Administrator password')}</span><div class="fm ${state==='err'?'err':''}"><span class="mono">${state==='ok'||state==='err'?'••••••••••':x('Escríbela aquí','Type it here')}</span>${I('eye','s')}<span class="cap m" style="margin-left:8px">${x('Mostrar','Show')}</span></div>
+ ${state==='err'?`<div class="banner er" role="alert" style="margin-top:10px">${I('alert')}<div><b>${x('Contraseña incorrecta','Wrong password')}</b><br><span class="sm">${x('Revisa mayúsculas y guiones en la pegatina y vuelve a intentarlo.','Check capitals and dashes on the sticker and try again.')}</span></div></div>`:''}</div>
+ <div class="cap m">${I('lock','s')} ${PW()}</div>
+ <div style="flex:1"></div><button class="btn">${x('Conectar','Connect')}</button>`);
+const okScr=()=>screen(x('Router conectado','Router connected'),`
+ <div class="card" style="text-align:center;padding:32px 16px"><div class="tile a" style="width:72px;height:72px;border-radius:20px;margin:0 auto 14px">${I('check','l')}</div><div style="font-size:20px;font-weight:700">${x('Router conectado','Router connected')}</div><div class="sm m">Nexa RX-5200 · ${x('11 dispositivos','11 devices')}</div></div>
+ <div class="banner in" role="note">${I('info')}<span class="sm">${x('Para mostrarte quién está en tu red, leemos de tu router la lista de dispositivos conectados (nombre, dirección MAC, tipo de conexión y tráfico). Guardamos la dirección MAC cifrada y solo tú puedes verla. Puedes borrar cualquier dispositivo o todos tus datos en cualquier momento. Más información en la <u>Política de privacidad</u>.','To show you who is on your network, we read the list of connected devices from your router (name, MAC address, connection type and traffic). We store the MAC address encrypted and only you can see it. You can delete any device or all your data at any time. More information in the <u>Privacy policy</u>.')}</span></div>
+ <div class="card sm t2">${x('Cuando estés en casa verás tu red al momento. Fuera de casa, verás el último dato guardado.','When you are at home you will see your network instantly. Away from home, you will see the last saved data.')}</div>
+ <div style="flex:1"></div><button class="btn">${x('Continuar','Continue')}</button>`);
+const protectScr=()=>screen(x('Protege tu router','Protect your router'),`
+ <div class="banner in" role="note">${orro('content',48)}<div><b>${x('Cuidemos tu router','Let us look after your router')}</b><br><span class="sm t2">${x('Te recomendamos dos mejoras para que tu red esté más protegida.','We recommend two improvements to keep your network better protected.')}</span></div></div>
+ <div class="card"><div class="list">
+  <div class="li"><div class="tile">${I('key')}</div><div class="sp">${x('Una contraseña nueva y segura','A new, secure password')}<div class="cap m">${x('La actual es la de la pegatina','The current one is on the sticker')}</div></div></div>
+  <div class="li"><div class="tile">${I('wifi')}</div><div class="sp">${x('Cifrado WPA3','WPA3 encryption')}<div class="cap m">${x('Más seguro que el WPA2 actual','Safer than the current WPA2')}</div></div></div></div></div>
+ <div class="cap m">${I('lock','s')} ${x('Cambiamos la contraseña por una nueva y segura. El Wi-Fi se corta unos 30 segundos.','We replace the password with a new, secure one. Wi-Fi drops for about 30 seconds.')}</div>
+ <div style="flex:1"></div><button class="btn">${I('shield')}${x('Proteger ahora','Protect now')}</button><button class="btn g">${x('Más tarde','Later')}</button>`);
+const protectOk=()=>screen(x('Router protegido','Router protected'),`
+ <div class="card" style="text-align:center;padding:32px 16px"><div class="tile a" style="width:72px;height:72px;border-radius:20px;margin:0 auto 14px">${I('shield','l')}</div><div style="font-size:20px;font-weight:700">${x('Todo listo','All set')}</div><div class="sm m">${x('Contraseña cambiada · WPA3 activado','Password changed · WPA3 on')}</div></div>
+ <div><span class="lbl">${x('Contraseña nueva del router','New router password')}</span><div class="fm"><span class="mono">••••••••••••</span>${I('eye','s')}<span class="cap m" style="margin-left:8px">${x('Ver','Show')}</span></div></div>
+ <div class="cap m">${I('lock','s')} ${PW()}</div>
+ <div style="flex:1"></div><button class="btn">${x('Ver mi red','See my network')}</button>`);
+
+const SCOPE=()=>`<div class="card"><div class="row"><div class="tile">${I('key')}</div><div class="sp"><div>${x('Acceso: solo configuración Wi-Fi · hasta 30/11/2026','Access: Wi-Fi settings only · until 30/11/2026')}</div><div class="cap m">${x('Puedes cambiarlo o retirarlo cuando quieras.','You can change or withdraw it whenever you like.')}</div></div></div></div>`;
+const opScr=done=>screen(x('Tu operador','Your operator'),gateL()+(done?`
+ <div class="banner ok" role="status">${I('check')}<div><b>${x('Consentimiento firmado','Consent signed')}</b><br><span class="sm">${x('20/11/2026, 21:20 · puedes retirarlo cuando quieras.','20/11/2026, 21:20 · you can withdraw it whenever you like.')}</span></div></div>
+ ${SCOPE()}
+ <div class="card"><div class="hud" style="margin-bottom:12px">${x('Lo que Orro hizo por ti','What Orro did for you')}</div><div class="list">
+  <div class="li"><div class="tile">${I('alert')}</div><div class="sp">${x('Avería abierta: sin servicio de fibra','Fault opened: no fibre service')}<div class="cap m">${x('27/11/2026, 09:05','27/11/2026, 09:05')}</div></div></div>
+  <div class="li"><div class="tile">${I('cal')}</div><div class="sp">${x('Cita de técnico solicitada','Technician visit requested')}<div class="cap m">${x('27/11/2026, 09:07','27/11/2026, 09:07')}</div></div></div>
+  <div class="li"><div class="tile">${I('doc')}</div><div class="sp">${x('Consulta del estado de tu línea','Line status checked')}<div class="cap m">${x('22/11/2026, 21:31','22/11/2026, 21:31')}</div></div></div></div></div>
+ <div style="flex:1"></div><button class="btn">${I('doc')}${x('Abrir cabina del operador','Open operator portal')}</button><button class="btn d">${x('Revocar acceso','Revoke access')}</button>`:`
+ <div class="card sm t2">${x('Para atenderte desde OrroFi con tu operador, necesitamos tu consentimiento para consultar y gestionar tu cuenta en su nombre.','To help you through OrroFi with your operator, we need your consent to look up and manage your account on your behalf.')}</div>
+ <div class="card"><div class="row" style="align-items:flex-start;gap:14px"><button class="chk on" role="checkbox" aria-checked="true" aria-label="${x('Acepto','I agree')}">${I('check','s')}</button><div class="sp"><div class="ph">${x('[Texto legal pendiente de OrroFi Legal]','[Legal text pending from OrroFi Legal]')}</div></div></div></div>
+ ${SCOPE()}
+ <div><span class="lbl">${x('Tu firma','Your signature')}</span><div class="sigbox">Ana Ejemplo</div></div>
+ <div style="flex:1"></div><button class="btn">${x('Confirmar y firmar','Confirm and sign')}</button>`));
+
+const buildSet=()=>[
+ [x('0a · Conecta tu router','0a · Connect your router'),found()],[x('0b · Contraseña de la pegatina','0b · Sticker password'),pwScreen('')],[x('0c · Contraseña incorrecta','0c · Wrong password'),pwScreen('err')],[x('0d · Router conectado','0d · Router connected'),okScr()],[x('0e · Protege tu router','0e · Protect your router'),protectScr()],[x('0f · Router protegido','0f · Router protected'),protectOk()],
+ [x('1 · Mi red','1 · My network'),main()],[x('1b · Cargando (esqueleto)','1b · Loading (skeleton)'),main('load')],[x('1c · Router sin conexión','1c · Router offline'),main('off')],[x('1d · Estás fuera de casa','1d · You are away from home'),main('away')],
+ [x('2 · Dispositivo','2 · Device'),detail()],[x('3 · Aviso en bloqueo','3 · Lock-screen alert'),lock(),'lock'],[x('3b · Es mío / Bloquear','3b · It is mine / Block'),react()],
+ [x('4 · Estado de la red (6 de 10)','4 · Network status (6 out of 10)'),stScreen('idle'),'','f-state'],[x('4b · Mejorando…','4b · Improving…'),stScreen('busy')],[x('4c · Antes 6 → Ahora 9','4c · Before 6 → Now 9'),stScreen('done')],[x('4d · Mejorar fuera de casa','4d · Improve while away'),stScreen('away')],[x('5 · Canal y vecinos','5 · Channel and neighbours'),chans()],[x('6 · Seguridad','6 · Security'),sec(),'scroll'],
+ [x('7 · Historial y reinicio','7 · History and restart'),hist()],[x('8 · Wi-Fi','8 · Wi-Fi'),wifi()],[x('9 · Red de invitados','9 · Guest network'),guest(),'ovx'],[x('10 · Wi-Fi OrroFi (opt-in, apagado)','10 · Wi-Fi OrroFi (opt-in, off)'),orroNet()],[x('12 · Tu operador (consentimiento)','12 · Your operator (consent)'),opScr(false)],[x('12b · Tu operador (tras firmar)','12b · Your operator (after signing)'),opScr(true)],[x('11 · Mapa de puntos','11 · Points map'),mapS()]];
+
+/* ===== OrroFi · «Mi red» — prototipo clicable (solo diseño, datos ficticios) ===== */
+const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const RM=matchMedia('(prefers-reduced-motion: reduce)');
+const PH=$('#phones');
+let SET=[],cur=0,back=[],fwd=[],timers=[],lastFocus=null;
+const NS=()=>SET.length;
+const P=i=>PH.children[i];
+/* Estado del prototipo (sobrevive al cambio de idioma) */
+const S={name:{iphone:'',unk:''},blocked:{iphone:false,unk:false},sep:false,orro:false,guest:1,
+ pw:false,wpa3:false,restarted:false,op:{chk:false,strokes:[],auto:false}};
+const code=i=>SET[i][0].split(' · ')[0].trim();
+const nameOf=i=>SET[i][0].split(' · ').slice(1).join(' · ');
+const groups=()=>[[x('Onboarding','Onboarding'),[0,1,2,3,4,5]],[x('Mi red','My network'),[6,7,8,9]],[x('Dispositivos','Devices'),[10,11,12]],
+ [x('Estado de la red','Network status'),[13,14,15,16]],[x('Red y seguridad','Network and security'),[17,18,19]],['Wi-Fi',[20,21]],
+ ['Wi-Fi OrroFi',[22,25]],[x('Tu operador','Your operator'),[23,24]]];
+const ORIG_OV=[19,20,21]; /* pantallas cuyo diálogo de diseño empieza cerrado */
+
+/* ---------- toast ---------- */
+function toast(t){const e=$('#toast');e.textContent=t;e.classList.add('on');clearTimeout(e._t);e._t=setTimeout(()=>e.classList.remove('on'),2200)}
+const later=(f,ms)=>{const t=setTimeout(f,ms);timers.push(t);return t};
+
+/* ---------- hojas (sheets) del prototipo ---------- */
+function sheet(html,label){closeSheet(true);const ph=P(cur);lastFocus=document.activeElement;
+ ph.insertAdjacentHTML('beforeend',`<div class="scrim psh" data-act="closesheet"></div><div class="sheet psh" role="dialog" aria-modal="true" aria-label="${esc(label)}"><div class="grab"></div>${html}</div>`);
+ const f=$('.sheet.psh input',ph)||$('.sheet.psh button',ph);f&&f.focus({preventScroll:true});}
+function closeSheet(silent){const had=$$('.psh',PH);had.forEach(e=>e.remove());if(had.length&&!silent&&lastFocus&&lastFocus.isConnected)lastFocus.focus({preventScroll:true});}
+function openOv(ph){lastFocus=document.activeElement;ph.classList.remove('ovx');const b=$('.sheet.ov button',ph)||$('.sheet button',ph);b&&b.focus({preventScroll:true});}
+function closeOv(ph){ph.classList.add('ovx');if(lastFocus&&lastFocus.isConnected)lastFocus.focus({preventScroll:true});}
+const sheetOpen=()=>$('.psh',PH)||(P(cur)&&ORIG_OV.includes(cur)&&!P(cur).classList.contains('ovx'));
+
+/* ---------- etiquetado de elementos ---------- */
+const tag=(i,sel,txt,act,arg,msg)=>$$(sel,P(i)).forEach(el=>{if(!txt||el.textContent.includes(txt)){el.dataset.act=act;if(arg!=null)el.dataset.arg=arg;if(msg)el.dataset.msg=msg;el.removeAttribute('onclick');}});
+function toButton(el,act,arg,dev){const b=document.createElement('button');b.className=el.className+' lirow';b.innerHTML=el.innerHTML;b.dataset.act=act;b.dataset.arg=arg;if(dev)b.dataset.dev=dev;el.replaceWith(b);return b}
+function setSw(sw,on){sw.classList.toggle('on',on);sw.setAttribute('aria-checked',on)}
+
+function wire(){
+ const T=(es,en)=>x(es,en);
+ /* Onboarding */
+ tag(0,'.btn',T('Continuar','Continue'),'go',1);
+ const fm=$('.fm',P(1));fm.innerHTML=`<input class="pin" type="password" autocomplete="off" placeholder="${esc(T('Escríbela aquí','Type it here'))}" aria-label="${esc(T('Contraseña de administrador','Administrator password'))}"><button class="peek" data-act="peek" aria-pressed="false">${I('eye','s')}${T('Mostrar','Show')}</button>`;
+ tag(1,'.btn',T('Conectar','Connect'),'go',2);
+ tag(2,'.btn',T('Conectar','Connect'),'go',3);
+ tag(3,'.btn',T('Continuar','Continue'),'go',4);
+ tag(4,'.btn',T('Proteger ahora','Protect now'),'go',5);
+ tag(4,'.btn',T('Más tarde','Later'),'go',6);
+ tag(5,'.btn',T('Ver mi red','See my network'),'go',6);
+ /* Home y sus estados */
+ for(const k of [6,8,9]){const p=P(k);
+  tag(k,'.scorebtn','','go',k===9?16:13);
+  const a=$$('.act',p);a[0].dataset.act='pause';[19,17,20].forEach((t,j)=>{a[j+1].dataset.act='go';a[j+1].dataset.arg=t});
+  tag(k,'button.card','','go',23);
+  $('.nav.big',p).insertAdjacentHTML('beforeend',`<button class="navic" data-act="go" data-arg="18" aria-label="${esc(T('Seguridad','Security'))}">${I('shield')}</button>`);
+  const rows=$$('.list .li',p);toButton(rows[1],'go',10,'iphone');toButton(rows[9],'go',12,'unk');
+ }
+ tag(9,'button[data-on]','','remind');tag(16,'button[data-on]','','remind');
+ /* Dispositivo */
+ tag(10,'.btn',T('Es mío','It is mine'),'name','iphone');tag(10,'.btn',T('Bloquear','Block'),'block','iphone');
+ const na=$$('.nacts button',P(11));na[0].dataset.act='lockmine';na[1].dataset.act='lockblock';
+ P(12).classList.add('ovx');
+ tag(12,'.body .btn',T('Es mío','It is mine'),'name','unk');tag(12,'.body .btn',T('Bloquear','Block'),'block','unk');
+ /* Estado de la red */
+ tag(13,'.btn',T('Mejorar','Improve'),'go',14);
+ const done=$('.body > .btn',P(15));done.disabled=false;done.removeAttribute('aria-disabled');done.innerHTML=I('check')+T('Listo','Done');done.dataset.act='home';
+ /* Seguridad */
+ tag(18,'.btn',T('Cambiar contraseña','Change router password'),'pwchange');
+ tag(18,'.btn',T('Pasar a WPA3','Switch to WPA3'),'wpa3');
+ /* Historial y reinicio */
+ const h=P(19);$('.scrim',h).classList.add('ov');$('.sheet',h).classList.add('ov');
+ tag(19,'.sheet .btn',T('Reiniciar ahora','Restart now'),'restartgo');tag(19,'.sheet .btn',T('Cancelar','Cancel'),'closeov');
+ const rc=$$('.body > .card',h)[1];$('.row',rc).insertAdjacentHTML('beforeend',`<button class="btn sm" data-act="restart">${I('power','s')}${T('Reiniciar','Restart')}</button>`);
+ $$('.lnk',h).forEach((l,j)=>{l.dataset.act='incident';l.dataset.arg=j});
+ /* Wi-Fi */
+ tag(20,'.fm button','','bio','wifi');
+ for(const k of [20,21]){tag(k,'.sheet .btn',T('Usar Face ID','Use Face ID'),'bioyes');tag(k,'.sheet .btn',T('Cancelar','Cancel'),'closeov');}
+ tag(20,'.body .btn',T('Guardar cambios','Save changes'),'savewifi');tag(20,'.body > .btn.g',T('Cancelar','Cancel'),'back');
+ tag(20,'.sw','','sep');
+ /* Invitados */
+ tag(21,'.body .btn',T('Ver contraseña','Show password'),'bio','guest');
+ tag(21,'.body .btn',T('Compartir','Share'),'toast',null,T('Hoja de compartir del teléfono (demo)','Phone share sheet (demo)'));
+ $$('.seg button',P(21)).forEach((b,j)=>{b.removeAttribute('onclick');b.dataset.act='auto';b.dataset.arg=j});
+ /* Wi-Fi OrroFi y mapa */
+ tag(22,'.sw','','orro');tag(22,'.body > .btn','','go',25);
+ tag(25,'.btn',T('Conectarme','Connect'),'toast',null,T('Conectando a la zona Wi-Fi OrroFi… (demo)','Connecting to the Wi-Fi OrroFi zone… (demo)'));
+ tag(25,'.btn',T('Denunciar','Report'),'report');
+ /* Operador */
+ const op=P(23);const ck=$('.chk',op);ck.dataset.act='chk';
+ const sg=$('.sigbox',op);sg.innerHTML=`<canvas class="sigc" width="706" height="144" tabindex="0" role="button" aria-label="${esc(T('Zona de firma: dibuja con el dedo o el ratón, o toca para firmar','Signature area: draw with finger or mouse, or tap to sign'))}"></canvas><span class="sigph">${T('Dibuja tu firma o toca para firmar','Draw your signature or tap to sign')}</span>`;
+ sg.insertAdjacentHTML('afterend',`<div class="sigrow"><span class="cap m" id="sighint"></span><button class="lnk" data-act="sigclear" style="margin:0">${T('Borrar firma','Clear signature')}</button></div>`);
+ tag(23,'.btn',T('Confirmar y firmar','Confirm and sign'),'sign');
+ sigInit($('.sigc',op));
+ tag(24,'.btn',T('Abrir cabina','Open operator'),'toast',null,T('Abre la web de tu operador (demo)','Opens your operator site (demo)'));
+ tag(24,'.btn',T('Revocar acceso','Revoke access'),'revoke');
+ /* Atrás dentro del teléfono */
+ $$('.bk',PH).forEach(b=>b.dataset.act='back');$('.bk',P(15)).dataset.act='home';
+}
+
+/* ---------- aplicar estado ---------- */
+function applyState(){
+ const def={iphone:'iPhone',unk:x('Dispositivo desconocido','Unknown device')};
+ for(const d of ['iphone','unk']){const nm=S.name[d]||def[d];
+  $$(`[data-dev="${d}"]`,PH).forEach(r=>{$('.nm',r).textContent=nm;r.classList.toggle('blk',S.blocked[d]);r.classList.toggle('off',S.blocked[d]);
+   const c=$$('.rt .cap',r)[1];if(c){c.dataset.o??=c.textContent;c.textContent=S.blocked[d]?x('Bloqueado','Blocked'):c.dataset.o}});
+  const ttl=d==='iphone'?$('.body > .row div[style*="font-size:20px"]',P(10)):$('.body .card div[style*="font-size:20px"]',P(12));if(ttl)ttl.textContent=nm;
+  const bb=$$('[data-act="block"]',P(d==='iphone'?10:12))[0];if(bb){bb.disabled=S.blocked[d];bb.innerHTML=I('x')+(S.blocked[d]?x('Bloqueado','Blocked'):x('Bloquear','Block'))}
+ }
+ /* Wi-Fi: redes separadas */
+ const w=P(20),ws=$('.sw',w);setSw(ws,S.sep);$('.sepx',w)?.remove();
+ if(S.sep)ws.closest('.card').insertAdjacentHTML('beforeend',`<div class="sepx"><div class="fm"><span>MIWIFI_4G2X_2G</span><span class="cap m">2,4 GHz</span></div><div class="fm"><span>MIWIFI_4G2X_5G</span><span class="cap m">5 GHz</span></div></div>`);
+ /* Invitados: apagado automático */
+ $$('.seg button',P(21)).forEach((b,j)=>{b.classList.toggle('on',j===S.guest);b.setAttribute('aria-checked',j===S.guest)});
+ /* Wi-Fi OrroFi */
+ const g=P(22),gs=$('.sw',g);setSw(gs,S.orro);$('.card .cap.m',g).textContent=S.orro?x('Activado','On'):x('Desactivado','Off');
+ const mb=$('.body > .btn',g);mb.disabled=!S.orro;mb.setAttribute('aria-disabled',!S.orro);mb.classList.toggle('g',!S.orro);
+ $('.body > .cap.m:last-child',g).textContent=S.orro?x('Wi-Fi OrroFi activado: ya puedes ver el mapa.','Wi-Fi OrroFi is on: you can now see the map.'):x('El mapa se activa al encender tu Wi-Fi OrroFi.','The map turns on when you switch on your Wi-Fi OrroFi.');
+ /* Seguridad */
+ const sp=$$('.body > .card',P(18));
+ if(S.pw){const pl=$('.pill',sp[0]);pl.className='pill ok';pl.textContent=x('Cambiada','Changed');$('.cap.m',sp[0]).textContent=x('Cambiada hoy desde la app','Changed today from the app')}
+ if(S.wpa3){const pl=$('.pill',sp[1]);pl.className='pill ok';pl.textContent='WPA3';$('.cap.m',sp[1]).textContent=x('Ahora: WPA3','Now: WPA3')}
+ /* Historial */
+ const hl=$('.hist',P(19));$('.hnew',hl)?.remove();
+ if(S.restarted)hl.insertAdjacentHTML('afterbegin',`<div class="hnew"><div>${x('Router reiniciado','Router restarted')}</div><div class="cap m">${x('Hoy, ahora · desde la app','Today, just now · from the app')}</div></div>`);
+ applyOp();
+}
+
+/* ---------- firma (canvas) ---------- */
+let sigCv=null;
+function sigColor(){return getComputedStyle(P(23)).getPropertyValue('--t').trim()||'#F6F4EE'}
+function sigDraw(){if(!sigCv)return;const c=sigCv,k=c.getContext('2d');k.clearRect(0,0,c.width,c.height);k.strokeStyle=k.fillStyle=sigColor();k.lineWidth=4;k.lineCap=k.lineJoin='round';
+ if(S.op.auto){k.font='italic 58px Georgia,serif';k.textAlign='center';k.textBaseline='middle';k.fillText('Ana Ejemplo',c.width/2,c.height/2+4)}
+ for(const s of S.op.strokes){k.beginPath();s.forEach((p,j)=>j?k.lineTo(p[0],p[1]):k.moveTo(p[0],p[1]));if(s.length===1)k.lineTo(s[0][0]+.1,s[0][1]);k.stroke()}}
+function sigInit(c){sigCv=c;let st=null,moved=0;
+ const pt=e=>{const r=c.getBoundingClientRect();return[(e.clientX-r.left)*c.width/r.width,(e.clientY-r.top)*c.height/r.height]};
+ c.addEventListener('pointerdown',e=>{e.preventDefault();c.setPointerCapture?.(e.pointerId);st=[pt(e)];moved=0});
+ c.addEventListener('pointermove',e=>{if(!st)return;const p=pt(e),q=st[st.length-1];moved+=Math.hypot(p[0]-q[0],p[1]-q[1]);st.push(p);if(moved>8){if(!S.op.strokes.includes(st)){S.op.auto=false;S.op.strokes.push(st)}sigDraw()}});
+ const up=()=>{if(!st)return;if(moved<=8&&!S.op.strokes.includes(st)){S.op.auto=true;S.op.strokes=[]}st=null;sigDraw();applyOp()};
+ c.addEventListener('pointerup',up);c.addEventListener('pointercancel',up);
+ c.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();e.stopPropagation();S.op.auto=true;S.op.strokes=[];sigDraw();applyOp()}});}
+function applyOp(){const p=P(23);if(!p)return;const ck=$('.chk',p);ck.classList.toggle('on',S.op.chk);ck.setAttribute('aria-checked',S.op.chk);
+ const has=S.op.auto||S.op.strokes.length>0;$('.sigbox',p).classList.toggle('done',has);sigDraw();
+ const b=$('[data-act="sign"]',p);b.disabled=!(S.op.chk&&has);b.setAttribute('aria-disabled',b.disabled);
+ $('#sighint').textContent=S.op.chk&&has?x('Listo para firmar','Ready to sign'):!S.op.chk&&!has?x('Marca la casilla y firma','Tick the box and sign'):!S.op.chk?x('Falta marcar la casilla','Tick the box'):x('Falta tu firma','Your signature is missing');}
+
+/* ---------- navegación ---------- */
+function show(i,push=true){
+ i=Math.max(0,Math.min(NS()-1,i));
+ if(push&&i!==cur){back.push(cur);fwd=[]}
+ timers.forEach(clearTimeout);timers=[];closeSheet(true);$('#toast').classList.remove('on');
+ ORIG_OV.forEach(k=>P(k).classList.add('ovx'));
+ cur=i;[...PH.children].forEach((p,k)=>{p.classList.toggle('cur',k===i);p.toggleAttribute('inert',k!==i);p.setAttribute('aria-hidden',k!==i)});
+ $$('.body',P(i)).forEach(b=>b.scrollTop=0);
+ if(i===14)runImprove();
+ if(i===23)sigDraw();
+ chrome();
+ try{history.replaceState(null,'','#'+code(i))}catch(e){}
+}
+const go=i=>show(i,true);
+function goBack(){if(back.length){fwd.push(cur);show(back.pop(),false)}else if(cur>0){fwd.push(cur);show(cur-1,false)}}
+function goFwd(){if(fwd.length){back.push(cur);show(fwd.pop(),false)}else if(cur<NS()-1)show(cur+1,true)}
+function runImprove(){const st=$$('.step',P(14));
+ const set=k=>st.forEach((s,j)=>{s.className='step '+(j<k?'done':j===k?'cur':'');$('i',s).textContent=j<k?'✓':j+1;j===k?s.setAttribute('aria-current','step'):s.removeAttribute('aria-current')});
+ set(0);later(()=>set(1),1000);later(()=>set(2),2000);
+ later(()=>{show(15,false);toast(x('Listo: canal 36 → 44','Done: channel 36 → 44'))},3000);}
+
+/* ---------- acciones ---------- */
+const H={
+ go:el=>go(+el.dataset.arg), back:()=>goBack(), home:()=>go(6),
+ toast:el=>toast(el.dataset.msg),
+ closesheet:()=>closeSheet(), closeov:el=>closeOv(el.closest('.phone')),
+ peek:el=>{const i=el.parentNode.querySelector('input');i.type=i.type==='password'?'text':'password';el.setAttribute('aria-pressed',i.type==='text')},
+ pick:el=>{[...el.parentNode.children].forEach(c=>{c.classList.remove('on');c.setAttribute('aria-checked','false')});el.classList.add('on');el.setAttribute('aria-checked','true')},
+ pause:()=>sheet(`<div class="row">${orro('sleepy',44)}<h2 class="sht">${x('Pausar internet','Pause internet')}</h2></div>
+  <p class="t2 sm">${x('Todos los dispositivos se quedan sin internet. El Wi-Fi sigue encendido.','All devices lose internet. Wi-Fi stays on.')}</p>
+  <div class="seg" role="radiogroup" aria-label="${x('Duración','Duration')}"><button role="radio" aria-checked="false" data-act="pick">30 min</button><button class="on" role="radio" aria-checked="true" data-act="pick">1 h</button><button role="radio" aria-checked="false" data-act="pick">${x('Hasta mañana','Until tomorrow')}</button></div>
+  <button class="btn" data-act="pausego">${I('pause')}${x('Pausar','Pause')}</button><button class="btn g" data-act="closesheet">${x('Cancelar','Cancel')}</button>`,x('Pausar internet','Pause internet')),
+ pausego:el=>{const v=$('.seg .on',el.closest('.sheet')).textContent;closeSheet();toast(x(`Internet en pausa · ${v} (demo)`,`Internet paused · ${v} (demo)`))},
+ name:el=>nameSheet(el.dataset.arg), block:el=>blockSheet(el.dataset.arg),
+ lockmine:()=>{go(12);nameSheet('unk')}, lockblock:()=>{go(12);blockSheet('unk')},
+ savename:el=>{const d=el.dataset.arg,inp=$('input',el.closest('.sheet')),v=inp.value.trim();
+  if(!v){inp.classList.add('err');inp.setAttribute('aria-invalid','true');inp.focus();return}
+  S.name[d]=v;S.blocked[d]=false;closeSheet();applyState();toast(x(`Guardado: «${v}»`,`Saved: “${v}”`))},
+ blockyes:el=>{const d=el.dataset.arg;S.blocked[d]=true;closeSheet();applyState();toast(x('Dispositivo bloqueado · lo puedes desbloquear después','Device blocked · you can unblock it later'))},
+ remind:el=>{el.textContent=el.dataset.on;el.disabled=true;toast(x('Te avisaré cuando vuelvas a casa','I will let you know when you are back home'))},
+ pwchange:()=>sheet(`<div class="row">${orro('content',44)}<h2 class="sht">${x('Contraseña nueva del router','New router password')}</h2></div>
+  <p class="t2 sm">${x('OrroFi genera una contraseña nueva y segura para tu router.','OrroFi generates a new, secure password for your router.')}</p>
+  <div><span class="lbl">${x('Contraseña nueva (generada, oculta)','New password (generated, hidden)')}</span><div class="fm"><span class="mono">••••••••••••••</span>${I('lock','s')}</div></div>
+  <div class="banner in" role="note">${I('lock')}<span class="sm">${PW()}</span></div>
+  <button class="btn" data-act="pwgo">${I('key')}${x('Cambiar contraseña','Change password')}</button><button class="btn g" data-act="closesheet">${x('Cancelar','Cancel')}</button>`,x('Cambiar contraseña del router','Change router password')),
+ pwgo:()=>{S.pw=true;closeSheet();applyState();toast(x('Contraseña del router cambiada (demo)','Router password changed (demo)'))},
+ wpa3:()=>{S.wpa3=true;applyState();toast(x('WPA3 activado (demo)','WPA3 switched on (demo)'))},
+ restart:el=>openOv(P(19)),
+ restartgo:el=>{const h=P(19);closeOv(h);const rb=$('[data-act="restart"]',h);rb.disabled=true;const card=rb.closest('.card');
+  card.insertAdjacentHTML('beforeend',`<div class="prog" role="status"><div class="bar"><i style="width:0%"></i></div><div class="cap m">${x('Reiniciando… el Wi-Fi vuelve en unos 2 min (demo: 3 s)','Restarting… Wi-Fi is back in about 2 min (demo: 3 s)')}</div></div>`);
+  const bar=$('.prog .bar i',card);let n=0;const tick=()=>{n+=4;bar.style.width=Math.min(100,n)+'%';if(n<100)later(tick,120);else{$('.prog',card).remove();rb.disabled=false;S.restarted=true;applyState();toast(x('Router reiniciado · todo vuelve a funcionar','Router restarted · everything is back'))}};later(tick,120)},
+ incident:el=>{const j=+el.dataset.arg;const D2=[
+   [x('Sin internet · 14 min','No internet · 14 min'),x('Mar 15 dic, 03:12 – 03:26','Tue 15 Dec, 03:12 – 03:26'),x('Caída de la fibra en tu zona (datos ficticios). Tu router y tu Wi-Fi funcionaban bien.','Fibre outage in your area (fictitious data). Your router and Wi-Fi were working fine.'),x('Orro comprobó el router y la conexión volvió sola. No tienes que hacer nada.','Orro checked the router and the connection came back on its own. Nothing to do.')],
+   [x('Wi-Fi inestable · 6 min','Unstable Wi-Fi · 6 min'),x('Lun 14 dic, 19:40 – 19:46','Mon 14 Dec, 19:40 – 19:46'),x('Interferencias en 2,4 GHz: muchas redes vecinas en el mismo canal.','Interference on 2.4 GHz: many neighbouring networks on the same channel.'),x('Esa noche Orro pasó tu red a un canal más libre.','That night Orro moved your network to a freer channel.')]][j];
+  sheet(`<div class="row">${orro('thinking',44)}<div class="sp"><h2 class="sht">${D2[0]}</h2><div class="cap m">${D2[1]}</div></div></div>
+   <div class="card"><div class="hud" style="margin-bottom:6px">${x('Qué pasó','What happened')}</div><div class="sm t2">${D2[2]}</div></div>
+   <div class="card"><div class="hud" style="margin-bottom:6px">${x('Qué hizo Orro','What Orro did')}</div><div class="sm t2">${D2[3]}</div></div>
+   <button class="btn g" data-act="closesheet">${x('Cerrar','Close')}</button>`,D2[0])},
+ bio:el=>{const ph=el.closest('.phone');if(ph.dataset.rev==='1'){hidePw(ph);return}openOv(ph)},
+ bioyes:el=>{const ph=el.closest('.phone'),o=el.innerHTML;el.disabled=true;el.innerHTML=x('Comprobando Face ID…','Checking Face ID…');
+  later(()=>{el.disabled=false;el.innerHTML=o;closeOv(ph);revealPw(ph)},RM.matches?150:700)},
+ savewifi:()=>{goBack();toast(x('Cambios guardados (demo)','Changes saved (demo)'))},
+ sep:()=>{S.sep=!S.sep;applyState();toast(S.sep?x('Redes separadas: 2,4 y 5 GHz','Separate networks: 2.4 and 5 GHz'):x('Una sola red para las dos bandas','One network for both bands'))},
+ auto:el=>{S.guest=+el.dataset.arg;applyState();toast(x('Apagado automático: ','Auto-off: ')+el.textContent)},
+ orro:()=>{S.orro=!S.orro;applyState();toast(S.orro?x('Wi-Fi OrroFi activado (demo)','Wi-Fi OrroFi on (demo)'):x('Wi-Fi OrroFi apagado','Wi-Fi OrroFi off'))},
+ report:()=>sheet(`<div class="row">${orro('listening',44)}<h2 class="sht">${x('Denunciar o bloquear punto','Report or block point')}</h2></div>
+  <p class="t2 sm">${x('Zona aproximada · Calonge. No mostramos la dirección del vecino.','Approximate zone · Calonge. We never show the neighbour’s address.')}</p>
+  <button class="btn g" data-act="sheetmsg" data-msg="${esc(x('Gracias: lo revisaremos (demo)','Thanks: we will review it (demo)'))}">${I('alert')}${x('Denunciar un problema','Report a problem')}</button>
+  <button class="btn d" data-act="sheetmsg" data-msg="${esc(x('Punto bloqueado: no te conectarás a él (demo)','Point blocked: you will not connect to it (demo)'))}">${I('x')}${x('Bloquear este punto','Block this point')}</button>
+  <button class="btn g" data-act="closesheet">${x('Cancelar','Cancel')}</button>`,x('Denunciar o bloquear punto','Report or block point')),
+ sheetmsg:el=>{const m=el.dataset.msg;closeSheet();toast(m)},
+ chk:()=>{S.op.chk=!S.op.chk;applyOp()},
+ sigclear:()=>{S.op.strokes=[];S.op.auto=false;applyOp()},
+ sign:()=>{S.op={chk:false,strokes:[],auto:false};go(24);applyOp();toast(x('Consentimiento firmado (demo)','Consent signed (demo)'))},
+ revoke:()=>sheet(`<div class="row">${orro('surprised',44)}<h2 class="sht">${x('¿Revocar el acceso?','Revoke access?')}</h2></div>
+  <p class="t2 sm">${x('OrroFi dejará de gestionar tu cuenta con el operador. Puedes volver a firmar cuando quieras.','OrroFi will stop managing your account with the operator. You can sign again whenever you like.')}</p>
+  <button class="btn d" data-act="revokego">${x('Revocar acceso','Revoke access')}</button><button class="btn g" data-act="closesheet">${x('Cancelar','Cancel')}</button>`,x('Revocar acceso','Revoke access')),
+ revokego:()=>{closeSheet();go(23);toast(x('Acceso revocado','Access revoked'))},
+};
+function nameSheet(d){const v=S.name[d]||(d==='iphone'?x('iPhone de Ana','Ana’s iPhone'):x('Enchufe del salón','Living-room plug'));
+ sheet(`<div class="row">${orro('content',44)}<h2 class="sht">${x('¿Cómo se llama?','What is it called?')}</h2></div>
+  <label><span class="lbl">${x('Nombre sugerido','Suggested name')}</span><input class="fm" maxlength="32" value="${esc(v)}" data-enter="savename"></label>
+  <button class="btn" data-act="savename" data-arg="${d}">${I('check')}${x('Guardar','Save')}</button><button class="btn g" data-act="closesheet">${x('Cancelar','Cancel')}</button>`,x('Nombre del dispositivo','Device name'))}
+function blockSheet(d){sheet(`<div class="row">${orro('surprised',44)}<h2 class="sht">${x('¿Bloquear este dispositivo?','Block this device?')}</h2></div>
+  <p class="t2 sm">${x('Se desconectará de tu Wi-Fi y no podrá volver a entrar. Lo puedes desbloquear después en Mi red.','It will be disconnected from your Wi-Fi and cannot join again. You can unblock it later in My network.')}</p>
+  <button class="btn d" data-act="blockyes" data-arg="${d}">${I('x')}${x('Bloquear','Block')}</button><button class="btn g" data-act="closesheet">${x('Cancelar','Cancel')}</button>`,x('Bloquear dispositivo','Block device'))}
+const FAKE={20:'Faro-Lima-2731',21:'Sol-Playa-58'}; /* contraseñas Wi-Fi ficticias de ejemplo */
+function revealPw(ph){const i=+ph.dataset.i;ph.dataset.rev='1';
+ if(i===20){$('.fm .mono',ph).textContent=FAKE[20];const b=$('.fm button',ph);b.setAttribute('aria-label',x('Ocultar contraseña','Hide password'))}
+ else{const m=$('.card .mono.m',ph);m.textContent=x('Contraseña','Password')+': '+FAKE[21];const b=$('[data-act="bio"]',ph);b.innerHTML=I('key')+x('Ocultar contraseña','Hide password')}
+ toast(x('Face ID confirmado · contraseña de ejemplo (ficticia)','Face ID confirmed · sample password (fictitious)'))}
+function hidePw(ph){const i=+ph.dataset.i;ph.dataset.rev='';
+ if(i===20){$('.fm .mono',ph).textContent='••••••••••••';$('.fm button',ph).setAttribute('aria-label',x('Mostrar contraseña (pide Face ID)','Show password (asks for Face ID)'))}
+ else{$('.card .mono.m',ph).textContent=x('Contraseña','Password')+': ••••••••';$('[data-act="bio"]',ph).innerHTML=I('key')+x('Ver contraseña','Show password')}}
+
+PH.addEventListener('click',e=>{const el=e.target.closest('[data-act]');
+ if(el&&PH.contains(el)){if(el.disabled)return;e.preventDefault();const f=H[el.dataset.act];f&&f(el);return}
+ const b=e.target.closest('button');
+ if(b&&!b.disabled&&!b.hasAttribute('onclick')&&!b.closest('.chk'))toast(x('Solo diseño: acción de ejemplo','Design only: sample action'));});
+PH.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.dataset&&e.target.dataset.enter){e.preventDefault();e.stopPropagation();const b=$(`.sheet [data-act="${e.target.dataset.enter}"]`,P(cur));b&&b.click()}});
+PH.addEventListener('input',e=>{if(e.target.classList.contains('err')&&e.target.value.trim()){e.target.classList.remove('err');e.target.removeAttribute('aria-invalid')}});
+
+/* ---------- shell ---------- */
+const toc=$('#toc');
+function chrome(){
+ $('#ttl').textContent=nameOf(cur);
+ const g=groups().find(g=>g[1].includes(cur));$('#code').textContent=`${code(cur)} · ${g?g[0]:''}`;
+ $('#cnt').textContent=`${cur+1} / ${NS()}`;
+ $('#prev').disabled=!back.length&&cur===0;$('#next').disabled=!fwd.length&&cur===NS()-1;
+ $$('.cell').forEach(c=>c.classList.toggle('cur',+c.dataset.j===cur));
+}
+function shellText(){
+ document.documentElement.lang=lang;
+ document.title='OrroFi · '+x('Mi red — prototipo clicable','My network — clickable prototype');
+ const l=document.body.dataset.theme==='light';
+ $('#tg').innerHTML=I(l?'spark':'moon','s')+`<span class="lbl2">${l?x('Tema: claro','Theme: light'):x('Tema: oscuro','Theme: dark')}</span>`;
+ $('#tg').setAttribute('aria-label',x('Cambiar tema (oscuro / claro)','Switch theme (dark / light)'));$('#tg').setAttribute('aria-pressed',l);
+ const on=document.body.classList.contains('showlinks');
+ $('#lk').innerHTML=I('grid','s')+`<span class="lbl2">${x('Zonas táctiles','Tap areas')}</span>`;$('#lk').setAttribute('aria-label',x('Resaltar zonas táctiles','Highlight tap areas'));$('#lk').setAttribute('aria-pressed',on);
+ $('#tocb').innerHTML=I('list','s')+`<span class="lbl2">${x('Todas las pantallas','All screens')}</span>`;$('#tocb').setAttribute('aria-label',x('Todas las pantallas','All screens'));
+ $('#prev').innerHTML='← '+x('Atrás','Back');$('#next').innerHTML=x('Adelante','Forward')+' →';
+ $('#hint').textContent=x('Toca los botones del móvil · ← → o Retroceso en el teclado','Tap the buttons in the phone · ← → or Backspace on the keyboard');
+ $('#toch').textContent=x('Todas las pantallas de «Mi red»','All «My network» screens');
+ $('#tocsub').textContent=x(`${NS()} pantallas · datos ficticios · toca una para ir`,`${NS()} screens · fictitious data · tap one to open`);
+ $('#tocx').textContent='✕ '+x('Cerrar','Close');
+ $('#l-es').setAttribute('aria-pressed',lang==='es');$('#l-en').setAttribute('aria-pressed',lang==='en');
+ chrome();
+}
+function render(){
+ SET=buildSet();
+ PH.innerHTML=SET.map((s,i)=>`<div class="phone ${s[2]||''}" data-i="${i}" role="region" aria-label="${esc(s[0])}">${s[1]}</div>`).join('');
+ wire();applyState();shellText();show(cur,false);if(!toc.hidden)buildToc();
+}
+function buildToc(){let h='';
+ for(const [g,ids] of groups()){h+=`<h3 class="grp">${esc(g)}</h3><div class="cells">`+ids.map(i=>`<button class="cell${i===cur?' cur':''}" data-j="${i}"><span class="th" aria-hidden="true"><span class="thi"></span></span><span><small>${esc(code(i))}</small>${esc(nameOf(i))}</span></button>`).join('')+'</div>'}
+ $('#cells').innerHTML=h;
+ $$('#cells .cell').forEach(c=>{const ph=P(+c.dataset.j).cloneNode(true);ph.classList.remove('cur');ph.removeAttribute('role');ph.removeAttribute('aria-label');ph.removeAttribute('aria-hidden');
+  ph.querySelectorAll('[id]').forEach(e=>e.removeAttribute('id'));ph.querySelectorAll('canvas').forEach(e=>e.remove());ph.setAttribute('inert','');$('.thi',c).appendChild(ph);
+  const th=$('.th',c);const w=th.clientWidth||126;th.style.setProperty('--ts',w/393);});
+}
+function openToc(){closeSheet(true);buildToc();toc.hidden=false;lastFocus=document.activeElement;$('#tocx').focus()}
+function closeToc(){toc.hidden=true;$('#tocb').focus()}
+$('#tocb').onclick=openToc;$('#tocx').onclick=closeToc;
+$('#cells').onclick=e=>{const c=e.target.closest('.cell');if(c){closeToc();go(+c.dataset.j)}};
+$('#prev').onclick=goBack;$('#next').onclick=goFwd;
+$('#lk').onclick=()=>{document.body.classList.toggle('showlinks');shellText()};
+$('#tg').onclick=()=>{document.body.dataset.theme=document.body.dataset.theme==='dark'?'light':'dark';shellText();sigDraw()};
+$('#l-es').onclick=()=>{if(lang!=='es'){lang='es';render()}};
+$('#l-en').onclick=()=>{if(lang!=='en'){lang='en';render()}};
+document.addEventListener('keydown',e=>{
+ if(e.key==='Escape'){if(!toc.hidden){closeToc();return}if($('.psh',PH)){closeSheet();return}const p=P(cur);if(ORIG_OV.includes(cur)&&!p.classList.contains('ovx')){closeOv(p);return}return}
+ const t=e.target;if(t.closest&&t.closest('input,textarea,select,[contenteditable]'))return;
+ if(!toc.hidden||e.altKey||e.ctrlKey||e.metaKey)return;
+ if(e.key==='ArrowLeft'||e.key==='Backspace'){e.preventDefault();goBack()}else if(e.key==='ArrowRight'){e.preventDefault();goFwd()}});
+addEventListener('hashchange',()=>{const h=decodeURIComponent(location.hash.slice(1));const i=SET.findIndex((s,k)=>code(k)===h);if(i>=0&&i!==cur)go(i)});
+function fit(){const s=$('#stage');const k=Math.min((s.clientHeight-28)/852,(s.clientWidth-24)/393,1.15);$('#pw').style.transform=`translate(-50%,-50%) scale(${Math.max(.2,k)})`}
+addEventListener('resize',fit);
+$('#wmd').src=A['wordmark-dark']||'';$('#wml').src=A['wordmark-light']||'';
+SET=buildSet();{const h=decodeURIComponent(location.hash.slice(1));const i=SET.findIndex((s,k)=>code(k)===h);cur=i>=0?i:0;}
+render();fit();
+
+</script></body></html>
