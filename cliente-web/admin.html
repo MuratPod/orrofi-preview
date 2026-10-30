@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="referrer" content="no-referrer">
+<link rel="icon" href="data:,"><title>GhoFi AI — administración</title><link rel="stylesheet" href="style.css"></head>
+<body class="admin">
+<div class="loginwrap" id="loginwrap">
+  <form id="login" class="pn login">
+    <h1 id="lh">GhoFi AI</h1>
+    <input id="email" type="email" autocomplete="username" required>
+    <input id="pw" type="password" autocomplete="current-password" required>
+    <input id="tenant" type="number" min="1" value="1" title="tenant">
+    <div class="row2"><button id="enter" class="btn bp"></button><span id="lslot"><select id="lang" class="lang" aria-label="Language"></select></span></div>
+    <p id="lerr" class="err" role="alert"></p>
+    <a class="privacy link" target="_blank" rel="noopener noreferrer" hidden></a>
+  </form>
+</div>
+<div class="app" id="app" hidden>
+  <aside class="side">
+    <span class="wm"><b>GhoFi</b></span>
+    <div class="ten"><small>Tenant</small><b id="tenname"></b></div>
+    <nav id="tabs"></nav>
+  </aside>
+  <main class="main">
+    <div class="top"><h1 id="h1"></h1><div class="me" id="who"></div><span id="tslot"></span></div>
+    <div class="ro" id="ro" hidden role="status"><span id="roicon"></span><span id="rotxt"></span></div>
+    <div id="view"></div>
+    <footer class="foot"><a class="privacy link" target="_blank" rel="noopener noreferrer" hidden></a></footer>
+  </main>
+</div>
+<script src="admin-i18n.js"></script>
+<script src="config.js"></script>
+<script src="admin.js"></script>
+</body></html>

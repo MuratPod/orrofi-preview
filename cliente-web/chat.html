@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="referrer" content="no-referrer">
+<link rel="icon" href="data:,"><title>GhoFi — chat</title><link rel="stylesheet" href="style.css"></head>
+<body class="chat">
+<main class="widget">
+  <header class="ch">
+    <span class="av" id="av" aria-hidden="true"></span>
+    <div class="t"><h1 id="h1"></h1><small id="sub"></small></div>
+    <select id="lang" class="lang" aria-label="Language"></select>
+  </header>
+  <button type="button" id="human" class="human"><span id="humantxt"></span></button>
+  <div class="hrs" id="hrs"></div>
+  <div class="sess" id="sess" hidden><span class="pill p-ok" id="sessbadge"></span><button type="button" id="logout" class="link"></button></div>
+  <div id="banner" class="bar" hidden role="status"><span class="ib w" id="bannericon"></span><div><b id="bannerT"></b><small id="bannertxt"></small></div><button type="button" id="retry" class="btn bg sm"></button></div>
+  <div id="log" class="msgs" aria-live="polite"></div>
+  <form id="f" class="comp"><textarea id="m" class="inp" aria-label="Message" rows="1"></textarea>
+    <div class="cr"><span class="cnt" id="counter"></span><span class="hint" id="limhint"></span><button id="send" class="send" type="submit"></button></div></form>
+  <div class="legal" id="legal"></div>
+  <div class="legal" id="safe"></div>
+  <div class="legal"><a id="privacy" class="link" target="_blank" rel="noopener noreferrer" hidden></a></div>
+</main>
+<script src="chat-i18n.js"></script>
+<script src="config.js"></script>
+<script src="chat.js"></script>
+</body></html>
