@@ -225,7 +225,7 @@
     if (path.startsWith("/v1/admin/")) {
       const a = checkAuth(o); if (a) return a;
       const ro = RO || /^Bearer ro\./.test((o.headers || {}).Authorization || ""), p = path.slice(9);
-      if (p === "/tenant") return json(200, {id: 1, name: "GhoFi (demo)", canWrite: !ro, me: {id: 1, email: ro ? "partner@example.test" : "admin@example.test", role: ro ? "partner_readonly" : (Q.get("role") === "user" ? "company_user" : "company_admin")}});
+      if (p === "/tenant") return json(200, {id: 1, name: "OrroFi (demo)", canWrite: !ro, me: {id: 1, email: ro ? "partner@example.test" : "admin@example.test", role: ro ? "partner_readonly" : (Q.get("role") === "user" ? "company_user" : "company_admin")}});
       if (p === "/settings") return json(200, {hours: {timezone: "Europe/Madrid", days: [1, 2, 3, 4, 5], from: "09:00", to: "20:00"}, humanLed: false, summaryEmail: "e***@example.test", summaryLang: "es"});
       if (FAIL === "queue" && (p === "/handoffs" || p === "/summaries")) return err(500, "internal_error", "Error simulado del servidor");
       if (p === "/handoffs") return json(200, {handoffs: EMPTY ? [] : LEGACY ? db.handoffs.map(({handoverId, status, assignedTo, ...rest}) => rest) : db.handoffs});
@@ -235,7 +235,7 @@
       if (p === "/conversations") return json(200, {conversations: db.conversations});
       m = p.match(/^\/conversations\/(\d+)$/); if (m && FAIL === "conversation") return err(500, "internal_error", "Error simulado del servidor");
       if (m) return json(200, detail(Number(m[1])));
-      if (p === "/agent") return json(200, {name: "Mi gestor", greeting: "Hola, soy el asistente de GhoFi.", tenantPrompt: "", personality: "Cercano y claro", behavior: "Responde solo con información aprobada.", version: 3});
+      if (p === "/agent") return json(200, {name: "Mi gestor", greeting: "Hola, soy el asistente de OrroFi.", tenantPrompt: "", personality: "Cercano y claro", behavior: "Responde solo con información aprobada.", version: 3});
       return err(404, "not_found", "mock: " + p);
     }
     return null;

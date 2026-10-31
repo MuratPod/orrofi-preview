@@ -1,13 +1,23 @@
-<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Cliente web — vista previa (demo)</title><link rel="icon" type="image/png" href="../icons/ios/AppIcon-60.png"><style>body{margin:0;font-family:Nunito,system-ui,-apple-system,Segoe UI,sans-serif;background:#0A0E14;color:#F6F4EE}
-header{padding:48px 6vw 32px;background:linear-gradient(135deg,#1C3A78 0%,#13254A 45%,#0A0E14 100%)}
-h1{margin:0 0 8px;font-size:36px}p{color:#A3AFC3;line-height:1.45;max-width:820px}a{color:#9CBDFF}main{padding:24px 6vw 64px}
-.note{background:#111A2C;border:1px solid #1B2740;border-radius:16px;padding:14px 18px;max-width:820px}.note b{color:#FFA566}
-.btns{display:flex;flex-wrap:wrap;gap:14px;margin:24px 0}.btn{display:inline-block;padding:14px 22px;border-radius:14px;background:#FFA566;color:#0A0E14;font-weight:700;text-decoration:none}
-.btn.sec{background:transparent;color:#FFA566;border:2px solid #FFA566}</style></head><body>
-<header><h1>Cliente web — vista previa (demo)</h1><p>Demo estática con datos ficticios, sin backend real (servidor simulado en el navegador). Estado <b>anterior al rebranding</b>: todavía con la marca GhoFi y 5 idiomas — el rebranding a OrroFi se hace por separado.</p></header>
-<main>
-<div class="note"><p>Para entrar en el chat usa un teléfono español válido (p. ej. <b>+34612345678</b>) y el código SMS de demo: <b>123456</b></p></div>
-<div class="btns"><a class="btn" href="chat.html?mock=1">Chat Mi gestor (demo)</a><a class="btn sec" href="admin.html?mock=1">Cola del personal / admin (demo)</a></div>
-<p><a href="../index.html">← Volver</a></p>
-</main></body></html>
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex">
+<title>OrroFi</title><link rel="icon" type="image/png" href="../icons/ios/AppIcon-60.png"><link rel="stylesheet" href="landing.css"></head>
+<body data-title="title">
+<a class="skip" href="#main" data-i="skip">Saltar al contenido</a>
+<header class="hero"><div class="wrap"><div class="bar"><a href="index.html"><img src="../logo/lockup-h-dark.svg" alt="OrroFi" height="36"></a><div class="r"><a class="signin" href="entrar.html" data-i="enter">Entrar</a><div class="lang" role="group" data-al="langLabel" aria-label="Idioma"><button type="button" data-l="es" aria-pressed="true">ES</button><button type="button" data-l="en" aria-pressed="false">EN</button></div></div></div>
+<h1 data-i="heroH">Tu wifi, como oro en paño.</h1><p data-i="heroP"></p><div class="stores"><a class="store" href="#" aria-disabled="true"><small data-i="soon">Muy pronto</small><span data-i="appStore">App Store</span></a><a class="store" href="#" aria-disabled="true"><small data-i="soon">Muy pronto</small><span data-i="googlePlay">Google Play</span></a></div>
+<form class="wl" id="wl" novalidate><label for="wlm" data-i="mailLabel">Tu correo</label><input id="wlm" type="email" disabled data-ph="mailPh" placeholder="tu@correo.com"><button type="button" disabled data-i="mailBtn">Avisarme</button><p class="note" data-i="mailNote"></p></form>
+</div></header>
+<main id="main">
+<section class="pain"><div class="wrap"><h2 data-i="painH"></h2>
+<div class="mock" role="img" aria-label="Mi red"><b data-i="mockTitle">Mi red</b><div class="sc" data-i="mockScore">8 de 10</div><div class="sub" data-i="mockScoreSub"></div><div class="dev"><b data-i="mockNew"></b><span data-i="mockDev"></span><div class="row" style="margin-top:10px"><span class="y" data-i="mine"></span><span class="n" data-i="kick"></span></div></div></div></div></section>
+<section><div class="wrap"><h2 data-i="pillarsH"></h2><div class="grid">
+<div class="card"><p class="k" data-i="p1k"></p><h3 data-i="p1h"></h3><p data-i="p1p"></p></div>
+<div class="card"><p class="k" data-i="p2k"></p><h3 data-i="p2h"></h3><p data-i="p2p"></p></div>
+<div class="card"><p class="k" data-i="p3k"></p><h3 data-i="p3h"></h3><p data-i="p3p"></p><span class="stub" data-i="p3stub"></span></div></div></div></section>
+<section><div class="wrap"><h2 data-i="howH"></h2><ol class="steps"><li><h3 data-i="s1h"></h3><p data-i="s1p"></p></li><li><h3 data-i="s2h"></h3><p data-i="s2p"></p></li><li><h3 data-i="s3h"></h3><p data-i="s3p"></p></li></ol></div></section>
+<section class="trust"><div class="wrap"><h2 data-i="trustH"></h2><span class="stub" data-i="trustStub"></span></div></section>
+<section><div class="wrap"><h2 data-i="faqH"></h2>
+<details><summary data-i="q1"></summary><p data-i="a1"></p></details><details><summary data-i="q2"></summary><p data-i="a2"></p></details><details><summary data-i="q3"></summary><p data-i="a3"></p></details><details><summary data-i="q4"></summary><p data-i="a4"></p></details></div></section>
+<section class="cta"><div class="wrap"><h2 data-i="ctaH"></h2><div class="stores"><a class="store" href="#" aria-disabled="true"><small data-i="soon">Muy pronto</small><span data-i="appStore">App Store</span></a><a class="store" href="#" aria-disabled="true"><small data-i="soon">Muy pronto</small><span data-i="googlePlay">Google Play</span></a></div></div></section>
+</main>
+<footer><div class="wrap"><a href="#" data-i="fLegal"></a><a href="#" data-i="fPriv"></a><a href="#" data-i="fCook"></a><span data-i="fNote"></span><br><span class="badge" data-i="preview"></span></div></footer>
+<script src="landing-i18n.js"></script><script src="landing.js"></script></body></html>
