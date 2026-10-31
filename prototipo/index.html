@@ -363,10 +363,10 @@ const D=()=>[
  ['MacBook','laptop','Apple','Wi-Fi 5 GHz','−52 dBm','8,4 GB',1],
  ['Nuki','lock','Nuki Home Solutions','Wi-Fi 2,4 GHz','−61 dBm','12 MB',1],
  ['Tapo L530','lamp','TP-Link','Wi-Fi 2,4 GHz','−58 dBm','3 MB',1],
- [x('TV Salón (gostinaa)','Living-room TV (gostinaa)'),'tv','LG Electronics',x('Cable Ethernet','Ethernet cable'),'','14,2 GB',1],
+ [x('TV Salón','Living-room TV '),'tv','LG Electronics',x('Cable Ethernet','Ethernet cable'),'','14,2 GB',1],
  ['living-room','speaker','Sonos','Wi-Fi 5 GHz','−55 dBm','640 MB',1],
  ['a17','mobile','Xiaomi','Wi-Fi 5 GHz',x('Visto hace 2 h','Seen 2 h ago'),'—',0],
- [x('Dispositivo de Seb',"Seb's device"),'mobile','Samsung','Wi-Fi 5 GHz','−63 dBm','310 MB',1],
+ [x('Dispositivo de Ana',"Seb's device"),'mobile','Samsung','Wi-Fi 5 GHz','−63 dBm','310 MB',1],
  [x('Dispositivo desconocido','Unknown device'),'unknown','Espressif Inc. (MAC)','Wi-Fi 2,4 GHz','−67 dBm','1 MB',1],
  [x('Dispositivo desconocido','Unknown device'),'unknown','Shenzhen Bilian (MAC)','Wi-Fi 2,4 GHz',x('Visto ayer','Seen yesterday'),'—',0]];
 const dev=d=>`<div class="li ${d[6]?'':'off'}"><div class="tile">${I(d[1])}</div><div class="sp"><div class="nm">${d[0]}</div><div class="cap m">${d[2]} · ${d[3]}</div></div><div class="rt"><div class="cap mono ${d[6]?'t2':'m'}">${d[5]}</div><div class="cap ${d[6]?'t2':'m'}">${d[6]?(d[4]||x('En línea','Online')):d[4]}</div></div></div>`;
@@ -476,7 +476,7 @@ const hist=()=>`${sb()}${nav(x('Historial y reinicio','History and restart'))}<d
 /* Hoja de confirmación biométrica */
 const bio=()=>`<div class="scrim ov"></div><div class="sheet ov" role="dialog" aria-label="${x('Confirmar con Face ID','Confirm with Face ID')}"><div class="grab"></div><div class="row" style="gap:14px"><div class="tile a" style="width:48px;height:48px;border-radius:14px">${I('shield','l')}</div><div class="sp"><h2 style="font:700 20px var(--fd)">${x('Confirma con Face ID','Confirm with Face ID')}</h2><div class="cap m">${x('o con tu huella o el código del teléfono','or with your fingerprint or phone passcode')}</div></div></div><p class="t2 sm">${x('Para ver la contraseña necesitamos confirmar que eres tú.','To show the password we need to confirm it is you.')}</p><button class="btn" onclick="${ovHide}">${I('shield')}${x('Usar Face ID','Use Face ID')}</button><button class="btn g" onclick="${ovHide}">${x('Cancelar','Cancel')}</button></div>`;
 const wifi=()=>screen('Wi-Fi',`
- <div class="card"><span class="lbl">${x('Nombre de la red','Network name')}</span><div class="fm"><span>MIWIFI_4G2X</span>${I('doc','s')}</div>
+ <div class="card"><span class="lbl">${x('Nombre de la red','Network name')}</span><div class="fm"><span>MIMiCasa_5G</span>${I('doc','s')}</div>
  <span class="lbl" style="margin-top:14px">${x('Contraseña','Password')}</span><div class="fm"><span class="mono">••••••••••••</span><button aria-label="${x('Mostrar contraseña (pide Face ID)','Show password (asks for Face ID)')}" style="min-width:44px;min-height:44px;display:grid;place-items:center;margin-right:-12px" onclick="${ovToggle}">${I('eye','s')}</button></div>
  <div class="cap m" style="margin-top:10px">${x('Mínimo 8 caracteres. Al guardar, todos tus dispositivos tendrán que volver a conectarse.','At least 8 characters. When you save, all your devices will have to reconnect.')}</div>
  <div class="cap m" style="margin-top:8px">${I('lock','s')} ${PW()}</div></div>
@@ -518,7 +518,7 @@ const mapS=()=>screen(x('Puntos Wi-Fi OrroFi','Wi-Fi OrroFi points'),gateLS()+`
  <button class="btn">${x('Conectarme','Connect')}</button><button class="btn g">${I('alert')}${x('Denunciar o bloquear punto','Report or block point')}</button><div class="cap m" style="text-align:center">${x('Solo con tu Wi-Fi OrroFi activado (reciprocidad).','Only with your Wi-Fi OrroFi turned on (reciprocity).')}</div>`);
 
 const found=()=>screen(x('Conecta tu router','Connect your router'),`
- <div class="banner ok" role="status">${I('wifi')}<div><b>${x('Estás en el Wi-Fi de casa','You are on your home Wi-Fi')}</b><br><span class="sm">MIWIFI_4G2X</span></div></div>
+ <div class="banner ok" role="status">${I('wifi')}<div><b>${x('Estás en el Wi-Fi de casa','You are on your home Wi-Fi')}</b><br><span class="sm">MIMiCasa_5G</span></div></div>
  <div class="card"><div class="row"><div class="tile a">${I('router')}</div><div class="sp"><div>${x('Router','Router')} Nexa RX-5200</div><div class="cap m">${x('Encontrado en 192.168.1.1 (ficticio)','Found at 192.168.1.1 (fictitious)')}</div></div><span class="pill ok"><i class="dot"></i>${x('Visible','Visible')}</span></div></div>
  <div class="card sm t2">${x('Para ver y gestionar tu red, la app necesita la contraseña de administrador del router. La encuentras en la pegatina de abajo del aparato.','To see and manage your network, the app needs the router’s administrator password. You will find it on the sticker underneath the device.')}</div>
  <div style="flex:1"></div><button class="btn">${x('Continuar','Continue')}</button><div class="cap m" style="text-align:center">${x('Tienes que estar en el Wi-Fi de tu casa.','You must be on your home Wi-Fi.')}</div>`);
@@ -680,7 +680,7 @@ function applyState(){
  }
  /* Wi-Fi: redes separadas */
  const w=P(21),ws=$('.sw',w);setSw(ws,S.sep);$('.sepx',w)?.remove();
- if(S.sep)ws.closest('.card').insertAdjacentHTML('beforeend',`<div class="sepx"><div class="fm"><span>MIWIFI_4G2X_2G</span><span class="cap m">2,4 GHz</span></div><div class="fm"><span>MIWIFI_4G2X_5G</span><span class="cap m">5 GHz</span></div></div>`);
+ if(S.sep)ws.closest('.card').insertAdjacentHTML('beforeend',`<div class="sepx"><div class="fm"><span>MIMiCasa_5G_2G</span><span class="cap m">2,4 GHz</span></div><div class="fm"><span>MIMiCasa_5G_5G</span><span class="cap m">5 GHz</span></div></div>`);
  /* Invitados: apagado automático */
  $$('.seg button',P(22)).forEach((b,j)=>{b.classList.toggle('on',j===S.guest);b.setAttribute('aria-checked',j===S.guest)});
  /* Wi-Fi OrroFi */
