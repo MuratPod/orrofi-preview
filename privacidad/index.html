@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Política de privacidad · OrroFi</title>
+<link rel="icon" type="image/png" href="../icons/ios/AppIcon-60.png">
+<link rel="stylesheet" href="../cliente-web/landing.css">
+<style>
+main.priv{padding:56px 0 96px;min-height:50vh}
+main.priv h1{font-size:clamp(28px,5vw,40px)}
+main.priv p{font-size:18px;max-width:560px}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<header class="hero" style="padding-bottom:20px"><div class="wrap"><div class="bar">
+<a href="../cliente-web/index.html"><img src="../logo/lockup-h-dark.svg" alt="OrroFi" height="36"></a>
+<div class="r"><div class="lang" role="group" aria-label="Idioma"><button type="button" data-l="es" aria-pressed="true">ES</button><button type="button" data-l="en" aria-pressed="false">EN</button></div></div>
+</div></div></header>
+<main class="priv"><div class="wrap">
+<div lang="es" data-l="es"><h1>Política de privacidad</h1><p>La política de privacidad de OrroFi está en preparación y se publicará en esta página antes del lanzamiento.</p></div>
+<div lang="en" data-l="en" hidden><h1>Privacy policy</h1><p>OrroFi's privacy policy is being prepared and will be published on this page before launch.</p></div>
+</div></main>
+<script>
+(function(){
+  var T={es:"Política de privacidad · OrroFi",en:"Privacy policy · OrroFi"};
+  function get(){try{return localStorage.getItem("orrofi.lang")}catch(e){return null}}
+  function set(l){try{localStorage.setItem("orrofi.lang",l)}catch(e){}}
+  var l=get();
+  if(l!=="es"&&l!=="en"){l=(navigator.language||"es").slice(0,2).toLowerCase();if(l!=="en")l="es"}
+  function apply(l){
+    document.documentElement.lang=l;document.title=T[l];
+    [].forEach.call(document.querySelectorAll("div[data-l]"),function(d){d.hidden=d.getAttribute("data-l")!==l});
+    [].forEach.call(document.querySelectorAll("button[data-l]"),function(b){b.setAttribute("aria-pressed",String(b.getAttribute("data-l")===l))});
+  }
+  [].forEach.call(document.querySelectorAll("button[data-l]"),function(b){b.addEventListener("click",function(){var n=b.getAttribute("data-l");set(n);apply(n)})});
+  apply(l);
+})();
+</script>
+</body>
+</html>
