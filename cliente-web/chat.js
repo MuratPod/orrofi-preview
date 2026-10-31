@@ -1,6 +1,6 @@
-// Chat web GhoFi "Mi gestor" (diseño v5). Tokens y conversación solo en memoria de la pestaña. Todo texto del servidor se pinta con textContent.
+// Chat web OrroFi "Mi gestor" (diseño v5). Tokens y conversación solo en memoria de la pestaña. Todo texto del servidor se pinta con textContent.
 // Modo de vista previa sin servidor: ?mock=1 carga mock-api.js (datos ficticios).
-const MAX = 2000, WARN_AT = 1800, LANGS = {es: "Español", ca: "Català", en: "English", fr: "Français", ru: "Русский"};
+const MAX = 2000, WARN_AT = 1800, LANGS = {es: "Español", en: "English"};
 const $ = (id) => document.getElementById(id);
 const Q = new URLSearchParams(location.search);
 // Web-2: solo con GHOFI_WEB.mock === true en config.js (por defecto false); un ?mock=1 suelto no activa nada.
@@ -535,7 +535,7 @@ function paintSession() {
 // ---- pintado estático e inicial ----
 function paintStatic() {
   document.documentElement.lang = lang;
-  document.title = `GhoFi — ${t("title")}`;
+  document.title = `OrroFi — ${t("title")}`;
   $("h1").textContent = t("title"); $("sub").textContent = t("subtitle");
   $("humantxt").textContent = t("human"); $("send").setAttribute("aria-label", t("send")); $("lang").setAttribute("aria-label", t("language"));
   $("legal").textContent = t("v5_legal"); $("safe").textContent = t("hint");

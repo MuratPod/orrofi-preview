@@ -1,5 +1,5 @@
 // Administración mínima. Todo el contenido que viene del servidor (conversaciones, conocimiento, diffs) se pinta con textContent.
-// Textos en 5 idiomas: window.I18N (admin-i18n.js). El idioma se recuerda en localStorage si está disponible.
+// Textos en es y en: window.I18N (admin-i18n.js). El idioma se recuerda en localStorage si está disponible.
 let tok = null, refreshTok = null, refreshing = null, lerrKey = null, tenant = 1, me = null, current = "agent", queueData = null, qSel = null, qCleanup = null; // queueData: último dato de la cola (para el estado sin conexión); qSel: conversación abierta
 const $ = (id) => document.getElementById(id);
 // Vista previa sin servidor: ?mock=1 carga mock-api.js (datos ficticios). F = fetch que espera a que el simulador esté listo.
@@ -32,7 +32,7 @@ const F = async (path, opt = {}) => {
   if (TEN && !Object.keys(h).some((k) => k.toLowerCase() === "x-tenant-id")) h["X-Tenant-Id"] = TEN;
   return fetch(typeof path === "string" && path[0] === "/" ? BASE + path : path, {...opt, headers: h, credentials: "omit", referrerPolicy: "no-referrer"});
 }; // </cfg>
-const LANGS = {es: "Español", ca: "Català", en: "English", fr: "Français", ru: "Русский"};
+const LANGS = {es: "Español", en: "English"};
 let lang = "es";
 try { lang = localStorage.getItem("ghofi.admin.lang") || ""; } catch (e) { /* sin almacenamiento */ }
 if (!LANGS[lang]) lang = LANGS[(navigator.language || "es").slice(0, 2)] ? (navigator.language || "es").slice(0, 2) : "es";
