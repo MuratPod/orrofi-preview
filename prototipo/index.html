@@ -347,7 +347,6 @@ const sw=(on,l)=>`<button class="sw ${on?'on':''}" role="switch" aria-checked="$
 const phone=(cap,inner,cls='',id='')=>`<figure${id?` id="${id}"`:''}><div class="phone ${cls}">${inner}</div><figcaption>${cap}</figcaption></figure>`;
 const screen=(t,body,o={})=>sb()+nav(t,o.big,o.right)+`<div class="body">${body}</div>`+(o.tabs?tabs():'');
 const gate=t=>`<div class="gate" role="note">${I('alert','s')}${t}</div>`;
-const gateS=()=>gate(x('Pendiente: Security','Pending: Security'));
 const goPause=()=>{const e=document.getElementById('f-pause');e&&e.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth',block:'center'})};
 const goState=()=>{};
 const notify=`this.textContent=this.dataset.on;this.disabled=true`;
@@ -501,12 +500,12 @@ const goPriv=()=>{const e=document.getElementById('f-priv');e&&e.scrollIntoView(
 /* 9b · Ajustes > Privacidad (Perfil > Ajustes > Privacidad): copia cifrada de la contraseña del router + hoja de confirmación */
 const privScr=()=>screen(x('Privacidad','Privacy'),`
  <div class="cap m">${x('Perfil > Ajustes > Privacidad','Profile > Settings > Privacy')}</div>
- <div class="card"><div class="row"><div class="tile">${I('key')}</div><div class="sp"><div>${x('Copia cifrada de la contraseña del router','Encrypted copy of the router password')}</div><div class="cap m">${x('Guardada en servidores de la UE','Stored on EU servers')}</div></div><button class="btn sm er-t" onclick="${ovToggle}">${x('Borrar','Delete')}</button></div>
+ <div class="card"><div class="row"><div class="tile">${I('key')}</div><div class="sp"><div>${x('Copia cifrada de la contraseña del router','Encrypted copy of the router password')}</div><div class="cap m">${x('Guardada en servidores de la UE','Stored on EU servers')}</div></div><button class="btn sm d" onclick="${ovToggle}">${x('Borrar','Delete')}</button></div>
   <div class="cap m" style="margin-top:10px">${PW()}</div></div>
  <div class="card"><div class="hud" style="margin-bottom:12px">${x('Privacidad de tus datos','Your data privacy')}</div>
   <div class="list"><div class="li"><div class="sp">${x('Descargar los datos de mi red','Download my network data')}</div><span class="ch" aria-hidden="true">›</span></div>
   <div class="li"><div class="sp er-t">${x('Borrar todos los datos de mi red','Delete all my network data')}</div><span class="ch" aria-hidden="true">›</span></div></div></div>
- <div class="scrim ov"></div><div class="sheet ov" role="dialog" aria-label="${x('Confirmar borrado','Confirm deletion')}"><div class="grab"></div><h2 style="font:700 20px var(--fd)">${x('¿Borrar la copia?','Delete the copy?')}</h2><p class="t2 sm">${x('Tendrás que volver a introducir la contraseña en otro dispositivo.','You will need to enter the password again on another device.')}</p><button class="btn er-t" onclick="${ovHide}">${x('Borrar','Delete')}</button><button class="btn g" onclick="${ovHide}">${x('Cancelar','Cancel')}</button></div>`);
+ <div class="scrim ov"></div><div class="sheet ov" role="dialog" aria-label="${x('Confirmar borrado','Confirm deletion')}"><div class="grab"></div><h2 style="font:700 20px var(--fd)">${x('¿Borrar la copia?','Delete the copy?')}</h2><p class="t2 sm">${x('Tendrás que volver a introducir la contraseña en otro dispositivo.','You will need to enter the password again on another device.')}</p><button class="btn d" onclick="${ovHide}">${x('Borrar','Delete')}</button><button class="btn g" onclick="${ovHide}">${x('Cancelar','Cancel')}</button></div>`);
 
 const hist=()=>`${sb()}${nav(x('Historial y reinicio','History and restart'))}<div class="body">
  <div class="card"><div class="hud" style="margin-bottom:12px">${x('Últimos 7 días','Last 7 days')}</div><div class="hist">
@@ -567,7 +566,7 @@ const mapS=(ver=true)=>screen(x('Puntos Wi-Fi OrroFi','Wi-Fi OrroFi points'),gat
  <div class="card"><div class="row"><div class="tile a">${I('pin')}</div><div class="sp"><div>${x('Zona OrroFi · a menos de 1 km','OrroFi zone · less than 1 km away')}</div><div class="cap m">${x('Zona aproximada · hasta 30 Mbit/s','Approximate zone · up to 30 Mbit/s')}</div></div></div>${dnote(x('zona mínima ≈ 1 km de celda; no se muestran zonas con menos de 20 puntos; el centro del círculo es el centro de la celda, no el del punto.','minimum zone ≈ 1 km cell; zones with fewer than 20 points are not shown; the circle centre is the centre of the cell, not of the point.'))}</div>
  ${dpMapa()}
  <div class="card"><div class="row">${I('shield')}<span class="sm t2 sp">${x('Solo te conectamos a puntos verificados por OrroFi.','We only connect you to points verified by OrroFi.')}</span>${ver?`<span class="pill ok"><i class="dot"></i>${x('Punto verificado','Verified point')}</span>`:`<span class="pill er"><i class="dot"></i>${x('No verificado','Not verified')}</span>`}</div>${ver?'':`<div class="sm er-t" role="alert" style="margin-top:8px">${x('No hemos podido verificar este punto','We could not verify this point')}</div>`}${dnote(x('«Punto verificado» solo aparece tras una comprobación correcta del certificado del punto; si falla, se muestra «No hemos podido verificar este punto» y «Conectarme» queda desactivado.','«Verified point» appears only after the point’s certificate check succeeds; if it fails, «We could not verify this point» is shown and «Connect» stays disabled.'))}</div>
- <button class="btn" disabled aria-disabled="true" ${ver?'data-needs-dp':''}>${I('shield')}${x('Conectarme','Connect')}</button><button class="btn g">${I('alert')}${x('Denunciar o bloquear punto','Report or block point')}</button><div class="cap m" style="text-align:center">${x('Solo con tu Wi-Fi OrroFi activado (reciprocidad).','Only with your Wi-Fi OrroFi turned on (reciprocity).')}</div>`+locSheet());
+ <button class="btn" disabled aria-disabled="true" ${ver?'data-needs-dp':''}>${I('shield')}${x('Conectarme','Connect')}</button><button class="btn g">${I('alert')}${x('Denunciar o bloquear punto','Report or block point')}</button><div class="cap m" style="text-align:center">${x('Solo con tu Wi-Fi OrroFi activado (reciprocidad).','Only with your Wi-Fi OrroFi turned on (reciprocity).')}</div><button class="lnk" onclick="${ovToggle}">${x('Ver aviso de ubicación','Show location notice')}</button>`+locSheet());
 
 const found=()=>screen(x('Conecta tu router','Connect your router'),`
  <div class="banner ok" role="status">${I('wifi')}<div><b>${x('Estás en el Wi-Fi de casa','You are on your home Wi-Fi')}</b><br><span class="sm">MiCasa_5G</span></div></div>
@@ -649,7 +648,7 @@ const buildSet=()=>[
  [x('1 · Mi red','1 · My network'),main()],[x('1b · Cargando (esqueleto)','1b · Loading (skeleton)'),main('load')],[x('1c · Router sin conexión','1c · Router offline'),main('off')],[x('1d · Estás fuera de casa','1d · You are away from home'),main('away')],[x('1e · Pausa','1e · Pause'),main('pause'),'','f-pause'],
  [x('2 · Dispositivo','2 · Device'),detail()],[x('3 · Aviso en bloqueo','3 · Lock-screen alert'),lock(),'lock'],[x('3b · Es mío / Bloquear','3b · It is mine / Block'),react()],
  [x('4 · Estado de la red (6 de 10)','4 · Network status (6 out of 10)'),stScreen('idle'),'','f-state'],[x('4b · Mejorando…','4b · Improving…'),stScreen('busy')],[x('4c · Antes 6 → Ahora 9','4c · Before 6 → Now 9'),stScreen('done')],[x('4d · Mejorar fuera de casa','4d · Improve while away'),stScreen('away')],[x('5 · Canal y vecinos','5 · Channel and neighbours'),chans()],[x('6 · Seguridad','6 · Security'),sec(),'scroll'],
- [x('7 · Historial y reinicio','7 · History and restart'),hist()],[x('8 · Wi-Fi','8 · Wi-Fi'),wifi()],[x('9 · Red de invitados','9 · Guest network'),guest(),'ovx'],[x('9b · Ajustes > Privacidad','9b · Settings > Privacy'),privScr(),'ovx','f-priv'],[x('10 · Wi-Fi OrroFi (opt-in, apagado)','10 · Wi-Fi OrroFi (opt-in, off)'),orroNet()],[x('12 · Tu operador (consentimiento)','12 · Your operator (consent)'),opScr(false)],[x('12b · Tu operador (tras firmar)','12b · Your operator (after signing)'),opScr(true)],[x('11 · Mapa de puntos','11 · Points map'),mapS()],[x('11b · Mapa: punto no verificado','11b · Map: unverified point'),mapS(false)]];
+ [x('7 · Historial y reinicio','7 · History and restart'),hist()],[x('8 · Wi-Fi','8 · Wi-Fi'),wifi()],[x('9 · Red de invitados','9 · Guest network'),guest(),'ovx'],[x('9b · Ajustes > Privacidad','9b · Settings > Privacy'),privScr(),'ovx','f-priv'],[x('10 · Wi-Fi OrroFi (opt-in, apagado)','10 · Wi-Fi OrroFi (opt-in, off)'),orroNet()],[x('12 · Tu operador (consentimiento)','12 · Your operator (consent)'),opScr(false)],[x('12b · Tu operador (tras firmar)','12b · Your operator (after signing)'),opScr(true)],[x('11 · Mapa de puntos','11 · Points map'),mapS(),'ovx'],[x('11b · Mapa: punto no verificado','11b · Map: unverified point'),mapS(false)]];
 
 /* ===== OrroFi · «Mi red» — prototipo clicable (solo diseño, datos ficticios) ===== */
 const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
@@ -749,6 +748,11 @@ function wire(){
  tag(N('10'),'.sw','','orro');tag(N('10'),'.btn',T('Ver puntos en el mapa','See points on the map'),'go',N('11'));tag(N('10'),'.btn',T('Ver quién se ha conectado','See who has connected'),'toast',null,T('Lista de conexiones a tu Wi-Fi OrroFi (demo)','List of connections to your Wi-Fi OrroFi (demo)'));
  tag(N('11'),'.btn',T('Conectarme','Connect'),'toast',null,T('Conectando a la zona Wi-Fi OrroFi… (demo)','Connecting to the Wi-Fi OrroFi zone… (demo)'));
  tag(N('11'),'.btn',T('Denunciar','Report'),'report');
+ /* 11 → 11b: la zona de la lista abre el detalle del punto (estado no verificado) */
+ {const z=$$('.card .row',P(N('11'))).find(r=>r.textContent.includes(T('Zona OrroFi','OrroFi zone')));if(z){const b=toButton(z,'go',N('11b'));b.setAttribute('aria-label',T('Abrir punto: Zona OrroFi a menos de 1 km','Open point: OrroFi zone less than 1 km away'));}}
+ /* 11 · «Ver aviso de ubicación» abre la hoja de ubicación */
+ tag(N('11'),'.lnk',T('Ver aviso de ubicación','Show location notice'),'openloc');
+ tag(N('11'),'.sheet .btn','','closeov');
  /* 9b · Ajustes > Privacidad */
  tag(N('6'),'.lnk',T('Privacidad de tus datos','Your data privacy'),'go',N('9b'));
  tag(N('9b'),'.card .btn.sm',T('Borrar','Delete'),'privdel');
@@ -856,7 +860,7 @@ const H={
  pwgo:()=>{S.pw=true;closeSheet();applyState();toast(x('Contraseña del router cambiada (demo)','Router password changed (demo)'))},
  wpa3:()=>{S.wpa3=true;applyState();toast(x('WPA3 activado (demo)','WPA3 switched on (demo)'))},
  restart:el=>openOv(P(N('7'))),
- privdel:()=>openOv(P(N('9b'))), privyes:el=>{closeOv(el.closest('.phone'));toast(x('Copia cifrada borrada (demo)','Encrypted copy deleted (demo)'))},
+ privdel:()=>openOv(P(N('9b'))), openloc:el=>openOv(el.closest('.phone')), privyes:el=>{closeOv(el.closest('.phone'));toast(x('Copia cifrada borrada (demo)','Encrypted copy deleted (demo)'))},
  restartgo:el=>{const h=P(N('7'));closeOv(h);const rb=$('[data-act="restart"]',h);rb.disabled=true;const card=rb.closest('.card');
   card.insertAdjacentHTML('beforeend',`<div class="prog" role="status"><div class="bar"><i style="width:0%"></i></div><div class="cap m">${x('Reiniciando… el Wi-Fi vuelve en unos 2 min (demo: 3 s)','Restarting… Wi-Fi is back in about 2 min (demo: 3 s)')}</div></div>`);
   const bar=$('.prog .bar i',card);let n=0;const tick=()=>{n+=4;bar.style.width=Math.min(100,n)+'%';if(n<100)later(tick,120);else{$('.prog',card).remove();rb.disabled=false;S.restarted=true;applyState();toast(x('Router reiniciado · todo vuelve a funcionar','Router restarted · everything is back'))}};later(tick,120)},
@@ -938,7 +942,7 @@ function shellText(){
  chrome();
 }
 function render(){
- SET=ordSet(buildSet());ORIG_OV=[N('7'),N('8'),N('9'),N('9b')];
+ SET=ordSet(buildSet());ORIG_OV=[N('7'),N('8'),N('9'),N('9b'),N('11')];
  PH.innerHTML=SET.map((s,i)=>`<div class="phone ${s[2]||''}" data-i="${i}" role="region" aria-label="${esc(s[0])}">${s[1]}</div>`).join('');
  wire();applyState();shellText();show(cur,false);if(!toc.hidden)buildToc();
 }
